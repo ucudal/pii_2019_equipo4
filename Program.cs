@@ -71,8 +71,8 @@ namespace Person
             this.ID = id;
         }
 
-        public string _name;
-        public string _id;
+        private string _name;
+        private string _id;
 
         public string Name
         {
