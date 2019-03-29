@@ -1,54 +1,14 @@
+//GRUPO 4
+//Christian Perez
+//
+//
+//
+
 using System;
 using System.Linq;
 
 namespace Person
 {
-    public class Person
-    {
-        public Person(string name, string id)
-        {
-            this.Name = name;
-            this.ID = id;
-        }
-        public string Name
-        {
-        get
-        {
-            return this.Name;
-        }
-        set
-        {
-            if(Name.Length>0)
-            {
-                this.Name= Name;
-            }
-        }
-        }
-
-        public string ID
-        {
-        get
-        {
-            return this.ID;
-        }
-
-        set{
-            if(IdUtils.IdIsValid(ID)==true)
-            {
-                this.ID = ID;
-            }
-            else
-            {
-                value=Name;
-            }
-            
-        }
-        }
-        public void IntroduceYourself()
-        {
-            Console.WriteLine($"Soy {this.Name} y mi cedula es {this.ID}");
-        }
-    }
     public class IdUtils
     {
         /// <summary>
@@ -103,12 +63,57 @@ namespace Person
         }
     }
 
-    class Program
+    public class Person
+    {
+        public Person(String name, String id)
+        {
+            this.Name = name;
+            this.ID = id;
+        }
+
+        public string _name;
+        public string _id;
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    _name = value;
+            }
+        }
+
+        public string ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (IdUtils.IdIsValid(value))
+                    _id = value;
+            }
+        }
+
+        public void IntroduceYourself()
+        {
+            Console.WriteLine($"Soy {this.Name} y mi cedula es {this.ID}");
+        }
+
+    }
+
+    class Program2
     {
         static void Main(string[] args)
         {
             Person john = new Person("John Doe", "1.234.567-2");
             Person jane = new Person("Jane Doe", "8.765.432-7");
+            
             john.IntroduceYourself();
             jane.IntroduceYourself();
         }
