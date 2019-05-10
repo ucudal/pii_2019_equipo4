@@ -1,7 +1,7 @@
 # Primera Entrega
 
 ### Poster
-![Poster]((https://github.com/ucudal/pii_2019_equipo4/blob/master/Posters/Poster.jpeg))
+![Poster](https://github.com/ucudal/pii_2019_equipo4/blob/master/Posters/Poster.jpeg)
 
 ## Resumen ejecutivo
 
