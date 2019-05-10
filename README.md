@@ -19,4 +19,4 @@
 
 ### **Herramientas**
 
-Para desarrollar la aplicación, utilizaremos el lenguaje de programación C# y el framework Razor. También utilizaremos conceptos trabajados en clase, como los de patrones GRASP y principios SOLID.
+>Para desarrollar la aplicación, utilizaremos el lenguaje de programación C# y el framework Razor. También utilizaremos conceptos trabajados en clase, como los de patrones GRASP y principios SOLID.
