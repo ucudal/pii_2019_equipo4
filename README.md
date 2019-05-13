@@ -22,11 +22,11 @@
 >Para desarrollar la aplicación, utilizaremos el lenguaje de programación C# y el framework Razor. También utilizaremos conceptos trabajados en clase, como los de patrones GRASP y principios SOLID.
 
 
-Patrones y principios: Los patrones GRASP y principios SOLID nos ayudan a poder solucionar y evitar problemas recurrentes al momento de diseñar o programar una aplicación.
+>Patrones y principios: Los patrones GRASP y principios SOLID nos ayudan a poder solucionar y evitar problemas recurrentes al momento de diseñar o programar una aplicación.
 
-Algunos de los ejemplos de nuestro proyecto son:
+>Algunos de los ejemplos de nuestro proyecto son:
 La clase Proyectos, Postulantes, Filtros y DBContext utilizarán el patrón Expert, ya que son los expertos en los datos correspondientes y deberán cumplir con determinadas responsabilidades; por ejemplo la clase Postulantes se encarga de postular a los técnicos.
 
-También aplicamos el DIP (Inversión de dependencias) a través de diferentes interfaces como IPage, IFiltro e IPersona. Las mismas se implementarán para que los detalles dependan de las abstracciones.
+>También aplicamos el DIP (Inversión de dependencias) a través de diferentes interfaces como IPage, IFiltro e IPersona. Las mismas se implementarán para que los detalles dependan de las abstracciones.
 
-Otro ejemplo que podemos ver es el uso del SRP (Principio de responsabilidad única) en las clases Proyectos, Postulantes y Técnicos, las cuales tienen una única razón de cambio. 
+>Otro ejemplo que podemos ver es el uso del SRP (Principio de responsabilidad única) en las clases Proyectos, Postulantes y Técnicos, las cuales tienen una única razón de cambio. 
