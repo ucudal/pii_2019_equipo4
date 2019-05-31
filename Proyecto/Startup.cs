@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Project.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Proyecto
 {
@@ -31,7 +32,8 @@ namespace Proyecto
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddDbContext<TechnicianRoleContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
