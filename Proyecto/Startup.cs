@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Proyecto.Models;
 
 namespace Proyecto
 {
@@ -30,7 +32,9 @@ namespace Proyecto
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+        
+            services.AddDbContext<ProjectContext>(options =>
+        options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -52,7 +56,7 @@ namespace Proyecto
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
