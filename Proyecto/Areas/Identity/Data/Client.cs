@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Proyecto 
 {
-    public class Technician : IdentityUser
+    public class Client : IdentityUser
     {
         
         
