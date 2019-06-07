@@ -22,6 +22,9 @@ namespace Proyecto.Data
         //public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
         //public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Project> Project { get; set; }
-        
+
+        public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
+        public DbSet<Proyecto.Models.Role> Role {get;set;}
+
     }
 }
