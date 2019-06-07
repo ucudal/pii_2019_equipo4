@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
+using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto.Models
 {
@@ -26,13 +27,8 @@ namespace Proyecto.Models
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime EndDate{get;set;}
-/*
-        internal static Task<IQueryable<Project>> ToListAsync()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IList<postulants> postulants = new IList<postulants>();
-*/
+        //public IList<postulants> postulants = new IList<postulants>();
+
     }
 }
