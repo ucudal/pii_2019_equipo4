@@ -19,9 +19,8 @@ namespace Proyecto.Data
         */
         
         public DbSet<Technician> Technician {get;set;}
-        
-
-
+        public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
+        public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Project> Project { get; set; }
         
     }
