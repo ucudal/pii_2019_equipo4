@@ -1,10 +1,13 @@
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using Proyecto.Areas.Identity.Data;
+@inject SignInManager<Technician> SignInManager
+@inject UserManager<Technician> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    @inject SignInManager<Technician> SignInManager
+    @inject UserManager<Technician> UserManager
     <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
     </li>
