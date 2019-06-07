@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Models;
+using Proyecto.Data;
 
 namespace Proyecto.Pages.Roles
 {
     public class EditModel : PageModel
     {
-        private readonly Proyecto.Models.ProjectContext _context;
+        private readonly ProjectContext _context;
 
-        public EditModel(Proyecto.Models.ProjectContext context)
+        public EditModel(ProjectContext context)
         {
             _context = context;
         }

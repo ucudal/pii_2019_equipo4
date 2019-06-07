@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Proyecto.Data;
 using Proyecto.Models;
 
 namespace Proyecto.Pages.Roles
 {
     public class CreateModel : PageModel
     {
-        private readonly Proyecto.Models.ProjectContext _context;
+        private readonly ProjectContext _context;
 
-        public CreateModel(Proyecto.Models.ProjectContext context)
+        public CreateModel(ProjectContext context)
         {
             _context = context;
         }
