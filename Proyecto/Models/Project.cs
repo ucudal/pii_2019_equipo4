@@ -26,13 +26,13 @@ namespace Proyecto.Models
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime EndDate{get;set;}
-
+/*
         internal static Task<IQueryable<Project>> ToListAsync()
         {
             throw new NotImplementedException();
         }
 
-        //public IList<postulants> postulants = new IList<postulants>();
-
+        public IList<postulants> postulants = new IList<postulants>();
+*/
     }
 }
