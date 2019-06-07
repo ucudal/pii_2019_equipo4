@@ -79,7 +79,7 @@ Gets or sets a flag indicating if two factor authentication is enabled for this 
 
 Gets or sets the user name for this user.
 
-ToString()
+>ToString()
 
 
 ## Migraciones
