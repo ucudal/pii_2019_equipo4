@@ -11,9 +11,9 @@ namespace Proyecto.Pages.Projects
 {
     public class IndexModel : PageModel
     {
-        private readonly Proyecto.Models.ProjectContext _context;
+        private readonly Proyecto.Data.ProjectContext _context;
 
-        public IndexModel(Proyecto.Models.ProjectContext context)
+        public IndexModel(Proyecto.Data.ProjectContext context)
         {
             _context = context;
         }

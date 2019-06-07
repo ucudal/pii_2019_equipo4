@@ -6,32 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Proyecto.Models;
+using Proyecto.Areas.Identity.Data;
 
-namespace Proyecto.Pages.Projects
+namespace Proyecto.Areas.Identity.Pages.Techinician
 {
     public class EditModel : PageModel
     {
-        private readonly Proyecto.Data.ProjectContext _context;
+        private readonly Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext _context;
 
-        public EditModel(Proyecto.Data.ProjectContext context)
+        public EditModel(Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Project Project { get; set; }
+        public Technician Technician { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Project == null)
+            if (Technician == null)
             {
                 return NotFound();
             }
@@ -45,7 +45,7 @@ namespace Proyecto.Pages.Projects
                 return Page();
             }
 
-            _context.Attach(Project).State = EntityState.Modified;
+            _context.Attach(Technician).State = EntityState.Modified;
 
             try
             {
@@ -53,7 +53,7 @@ namespace Proyecto.Pages.Projects
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(Project.ProjectID))
+                if (!TechnicianExists(Technician.Id))
                 {
                     return NotFound();
                 }
@@ -66,9 +66,9 @@ namespace Proyecto.Pages.Projects
             return RedirectToPage("./Index");
         }
 
-        private bool ProjectExists(int id)
+        private bool TechnicianExists(string id)
         {
-            return _context.Project.Any(e => e.ProjectID == id);
+            return _context.Technician.Any(e => e.Id == id);
         }
     }
 }

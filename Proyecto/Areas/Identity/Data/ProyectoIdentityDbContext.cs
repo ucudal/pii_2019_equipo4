@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Proyecto.Areas.Identity.Data;
 
-namespace Proyecto.Data
+namespace Proyecto.Areas.Identity.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ProyectoIdentityDbContext : IdentityDbContext<Technician>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ProyectoIdentityDbContext(DbContextOptions<ProyectoIdentityDbContext> options)
             : base(options)
         {
         }
@@ -22,5 +23,7 @@ namespace Proyecto.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+        public DbSet<Technician> Technician {get;set;}
+        
     }
 }

@@ -5,50 +5,50 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Proyecto.Models;
+using Proyecto.Areas.Identity.Data;
 
-namespace Proyecto.Pages.Projects
+namespace Proyecto.Areas.Identity.Pages.Techinician
 {
     public class DeleteModel : PageModel
     {
-        private readonly Proyecto.Data.ProjectContext _context;
+        private readonly Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext _context;
 
-        public DeleteModel(Proyecto.Data.ProjectContext context)
+        public DeleteModel(Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Project Project { get; set; }
+        public Technician Technician { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Project == null)
+            if (Technician == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Project = await _context.Project.FindAsync(id);
+            Technician = await _context.Technician.FindAsync(id);
 
-            if (Project != null)
+            if (Technician != null)
             {
-                _context.Project.Remove(Project);
+                _context.Technician.Remove(Technician);
                 await _context.SaveChangesAsync();
             }
 
