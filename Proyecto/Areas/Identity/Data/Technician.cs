@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Proyecto.Areas.Identity.Data
 {
+
     // Add profile data for application users by adding properties to the Technician class
     public class Technician : IdentityUser
     {
