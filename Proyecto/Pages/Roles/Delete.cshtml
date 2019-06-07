@@ -1,0 +1,34 @@
+@page
+@model Proyecto.Pages.Roles.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Role</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.RolDsc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role.RolDsc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role.level.RolLvlDsc)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Role.RoleId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
