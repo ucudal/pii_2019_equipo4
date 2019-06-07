@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Models;
+using Proyecto.Data;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto
 {
@@ -35,8 +37,11 @@ namespace Proyecto
         
             services.AddDbContext<ProjectContext>(options =>
         options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
+            services.AddDbContext<ProyectoIdentityDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

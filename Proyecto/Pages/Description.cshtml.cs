@@ -4,16 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Proyecto.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Proyecto.Pages.Projects
+namespace Proyecto.Pages
 {
-    public class DetailsModel : PageModel
+    public class DescriptionModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
-
-        public DetailsModel(Proyecto.Data.ProjectContext context)
+        public DescriptionModel(Proyecto.Data.ProjectContext context)
         {
             _context = context;
         }
@@ -22,12 +21,15 @@ namespace Proyecto.Pages.Projects
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+        
             if (id == null)
             {
-                return NotFound();
+                Project = await _context.Project.FirstOrDefaultAsync();
             }
-
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            else
+            {
+                Project = await _context.Project.FirstOrDefaultAsync(p => p.ProjectID == id);
+            }
 
             if (Project == null)
             {
