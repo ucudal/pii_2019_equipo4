@@ -93,4 +93,5 @@ dotnet ef database update --context ProyectoIdentityDbContext
 dotnet ef database update --context ProjectContext
 
 dotnet ef migrations remove --context ProjectContext
+
 dotnet ef mirations remove --context ProyectoIndentityDbContext
