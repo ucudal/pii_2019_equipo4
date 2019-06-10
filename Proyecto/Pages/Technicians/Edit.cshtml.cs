@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Proyecto.Areas.Identity.Data;
+using Proyecto.Data;
+using Proyecto.Models;
 
-namespace Proyecto.Areas.Identity.Pages.Techinician
+namespace Proyecto.Pages.Technicians
 {
     public class EditModel : PageModel
     {
-        private readonly Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext _context;
+        private readonly Proyecto.Data.ProjectContext _context;
 
-        public EditModel(Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext context)
+        public EditModel(Proyecto.Data.ProjectContext context)
         {
             _context = context;
         }
@@ -22,14 +23,14 @@ namespace Proyecto.Areas.Identity.Pages.Techinician
         [BindProperty]
         public Technician Technician { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(bool? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.Id == id);
+            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.AwardedBestActor == id);
 
             if (Technician == null)
             {
@@ -53,7 +54,7 @@ namespace Proyecto.Areas.Identity.Pages.Techinician
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TechnicianExists(Technician.Id))
+                if (!TechnicianExists(Technician.AwardedBestActor))
                 {
                     return NotFound();
                 }
@@ -66,9 +67,9 @@ namespace Proyecto.Areas.Identity.Pages.Techinician
             return RedirectToPage("./Index");
         }
 
-        private bool TechnicianExists(string id)
+        private bool TechnicianExists(bool id)
         {
-            return _context.Technician.Any(e => e.Id == id);
+            return _context.Technician.Any(e => e.AwardedBestActor == id);
         }
     }
 }

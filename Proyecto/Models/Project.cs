@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -26,7 +27,7 @@ namespace Proyecto.Models
         [DataType(DataType.Date)]
         public DateTime EndDate{get;set;}
 
-        //public IList<postulants> postulants = new IList<postulants>();
+        public IList<Postulation> Postulation{get;set;}
 
     }
 }

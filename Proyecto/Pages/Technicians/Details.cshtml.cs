@@ -5,29 +5,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Proyecto.Areas.Identity.Data;
+using Proyecto.Data;
+using Proyecto.Models;
 
-namespace Proyecto.Areas.Identity.Pages.Techinician
+namespace Proyecto.Pages.Technicians
 {
     public class DetailsModel : PageModel
     {
-        private readonly Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext _context;
+        private readonly Proyecto.Data.ProjectContext _context;
 
-        public DetailsModel(Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext context)
+        public DetailsModel(Proyecto.Data.ProjectContext context)
         {
             _context = context;
         }
 
         public Technician Technician { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(bool? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.Id == id);
+            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.AwardedBestActor == id);
 
             if (Technician == null)
             {

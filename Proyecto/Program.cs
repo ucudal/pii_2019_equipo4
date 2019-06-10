@@ -29,7 +29,7 @@ namespace Proyecto
                     var context=services.
                         GetRequiredService<ProjectContext>();
                     context.Database.Migrate();
-                    SeedData.Initialize(services);
+                    SeedDataProject.Initialize(services);
                 }
                 catch (Exception ex)
                 {

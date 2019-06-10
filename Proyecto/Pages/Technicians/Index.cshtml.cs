@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Proyecto.Areas.Identity.Data;
+using Proyecto.Data;
+using Proyecto.Models;
 
-namespace Proyecto.Areas.Identity.Pages.Techinician
+namespace Proyecto.Pages.Technicians
 {
     public class IndexModel : PageModel
     {
-        private readonly Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext _context;
+        private readonly Proyecto.Data.ProjectContext _context;
 
-        public IndexModel(Proyecto.Areas.Identity.Data.ProyectoIdentityDbContext context)
+        public IndexModel(Proyecto.Data.ProjectContext context)
         {
             _context = context;
         }
