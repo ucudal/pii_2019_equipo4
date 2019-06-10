@@ -9,7 +9,7 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Areas.Identity.Data
 {
-    public class ProyectoIdentityDbContext : IdentityDbContext<Technician>
+    public class ProyectoIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
         public ProyectoIdentityDbContext(DbContextOptions<ProyectoIdentityDbContext> options)
             : base(options)
@@ -23,7 +23,7 @@ namespace Proyecto.Areas.Identity.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-        public DbSet<Technician> Technician {get;set;}
+        public DbSet<ApplicationUser> ApplicationUser {get;set;}
         
     }
 }

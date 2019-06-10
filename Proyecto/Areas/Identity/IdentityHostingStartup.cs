@@ -21,7 +21,7 @@ namespace Proyecto.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 
 
-                services.AddDefaultIdentity<Technician>().AddRoles<IdentityRole>()
+                services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ProyectoIdentityDbContext>();
             });
         }
