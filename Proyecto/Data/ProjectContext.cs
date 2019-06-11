@@ -29,5 +29,7 @@ namespace Proyecto.Data
         public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Technician> Technician{get;set;}
          public DbSet<Proyecto.Models.Postulation> Postulation{get;set;}
+
+         public DbSet<Proyecto.Models.HiringCost> HiringCost{get;set;}
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages.HiringCosts
 {
     public class CreateModel : PageModel
     {
@@ -21,11 +21,12 @@ namespace Proyecto.Pages.Technicians
 
         public IActionResult OnGet()
         {
+        ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
             return Page();
         }
 
         [BindProperty]
-        public Technician Technician { get; set; }
+        public HiringCost HiringCost { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -34,7 +35,7 @@ namespace Proyecto.Pages.Technicians
                 return Page();
             }
 
-            _context.Technician.Add(Technician);
+            _context.HiringCost.Add(HiringCost);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto.Data;
 
-namespace Proyecto.Migrations.Project
+namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20190611234618_nuevocreate")]
+    partial class nuevocreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +60,26 @@ namespace Proyecto.Migrations.Project
                     b.ToTable("ApplicationUser");
                 });
 
+            modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
+                {
+                    b.Property<int>("HirCosId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float>("HirCosAdditional");
+
+                    b.Property<float>("HirCosFull");
+
+                    b.Property<float>("HirCosHourly");
+
+                    b.Property<int>("RolLvlId");
+
+                    b.HasKey("HirCosId");
+
+                    b.HasIndex("RolLvlId");
+
+                    b.ToTable("HiringCost");
+                });
+
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
                 {
                     b.Property<int>("TechnicianID");
@@ -66,15 +88,11 @@ namespace Proyecto.Migrations.Project
 
                     b.Property<int>("ProjectID1");
 
-                    b.Property<bool>("TechnicianAwardedBestActor");
-
                     b.HasKey("TechnicianID", "ProjectID");
 
                     b.HasAlternateKey("ProjectID", "TechnicianID");
 
                     b.HasIndex("ProjectID1");
-
-                    b.HasIndex("TechnicianAwardedBestActor");
 
                     b.ToTable("Postulants");
                 });
@@ -132,31 +150,40 @@ namespace Proyecto.Migrations.Project
 
             modelBuilder.Entity("Proyecto.Models.Technician", b =>
                 {
-                    b.Property<bool>("AwardedBestActor");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("BirthDate");
-
-                    b.Property<int>("ID");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.HasKey("AwardedBestActor");
+                    b.Property<int>("TechnicianId");
+
+                    b.HasKey("ID");
 
                     b.ToTable("Technician");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
+                {
+                    b.HasOne("Proyecto.Models.RoleLevel", "level")
+                        .WithMany()
+                        .HasForeignKey("RolLvlId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
                 {
                     b.HasOne("Proyecto.Models.Project", "Project")
-                        .WithMany()
+                        .WithMany("Postulation")
                         .HasForeignKey("ProjectID1")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Proyecto.Models.Technician", "Technician")
-                        .WithMany("Appereances")
-                        .HasForeignKey("TechnicianAwardedBestActor")
+                        .WithMany("Postulants")
+                        .HasForeignKey("TechnicianID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
