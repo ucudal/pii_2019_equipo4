@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages.HiringCosts
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,12 @@ namespace Proyecto.Pages.Technicians
             _context = context;
         }
 
-        public IList<Technician> Technician { get;set; }
+        public IList<HiringCost> HiringCost { get;set; }
 
         public async Task OnGetAsync()
         {
-            Technician = await _context.Technician.ToListAsync();
+            HiringCost = await _context.HiringCost
+                .Include(h => h.level).ToListAsync();
         }
     }
 }

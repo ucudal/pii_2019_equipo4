@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages.HiringCosts
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace Proyecto.Pages.Technicians
         }
 
         [BindProperty]
-        public Technician Technician { get; set; }
+        public HiringCost HiringCost { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +30,14 @@ namespace Proyecto.Pages.Technicians
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+            HiringCost = await _context.HiringCost
+                .Include(h => h.level).FirstOrDefaultAsync(m => m.HirCosId == id);
 
-            if (Technician == null)
+            if (HiringCost == null)
             {
                 return NotFound();
             }
+           ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
             return Page();
         }
 
@@ -46,7 +48,7 @@ namespace Proyecto.Pages.Technicians
                 return Page();
             }
 
-            _context.Attach(Technician).State = EntityState.Modified;
+            _context.Attach(HiringCost).State = EntityState.Modified;
 
             try
             {
@@ -54,7 +56,7 @@ namespace Proyecto.Pages.Technicians
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TechnicianExists(Technician.ID))
+                if (!HiringCostExists(HiringCost.HirCosId))
                 {
                     return NotFound();
                 }
@@ -67,9 +69,9 @@ namespace Proyecto.Pages.Technicians
             return RedirectToPage("./Index");
         }
 
-        private bool TechnicianExists(int id)
+        private bool HiringCostExists(int id)
         {
-            return _context.Technician.Any(e => e.ID == id);
+            return _context.HiringCost.Any(e => e.HirCosId == id);
         }
     }
 }

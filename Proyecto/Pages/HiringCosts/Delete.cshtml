@@ -1,0 +1,46 @@
+@page
+@model Proyecto.Pages.HiringCosts.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>HiringCost</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HiringCost.level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HiringCost.level.RolLvlDsc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HiringCost.HirCosHourly)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HiringCost.HirCosHourly)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HiringCost.HirCosAdditional)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HiringCost.HirCosAdditional)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HiringCost.HirCosFull)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HiringCost.HirCosFull)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="HiringCost.HirCosId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

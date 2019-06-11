@@ -70,49 +70,43 @@ namespace Proyecto.Models
                 {
                     Name = "Billy Crystal",
                     BirthDate = DateTime.Parse("1948-3-14"),
-                    AwardedBestActor = true
+                    
                 },
 
                 new Technician
                 {
                     Name = "Meg Ryan",
-                    BirthDate = DateTime.Parse("1961-11-19"),
-                    AwardedBestActor = true
+                    BirthDate = DateTime.Parse("1961-11-19")
                 },
 
                 new Technician
                 {
                     Name = "Bill Murray",
-                    BirthDate = DateTime.Parse("1950-9-21"),
-                    AwardedBestActor = true
+                    BirthDate = DateTime.Parse("1950-9-21")
                 },
 
                 new Technician
                 {
                     Name = "Dan Aykroyd",
-                    BirthDate = DateTime.Parse("1952-7-1"),
-                    AwardedBestActor = false
+                    BirthDate = DateTime.Parse("1952-7-1")
                 },
 
                 new Technician
                 {
                     Name = "Sigourney Weaver",
-                    BirthDate = DateTime.Parse("1949-10-8"),
-                    AwardedBestActor = false
+                    BirthDate = DateTime.Parse("1949-10-8")
                 },
 
                 new Technician
                 {
                     Name = "John Wayne",
-                    BirthDate = DateTime.Parse("1907-5-26"),
-                    AwardedBestActor = false
+                    BirthDate = DateTime.Parse("1907-5-26")
                 },
 
                 new Technician
                 {
                     Name = "Dean Martin",
-                    BirthDate = DateTime.Parse("1917-7-7"),
-                    AwardedBestActor = false
+                    BirthDate = DateTime.Parse("1917-7-7")
                 }
             );
             context.SaveChanges();

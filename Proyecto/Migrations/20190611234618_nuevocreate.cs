@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Proyecto.Migrations.Project
+namespace Proyecto.Migrations
 {
-    public partial class project : Migration
+    public partial class nuevocreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,14 +67,37 @@ namespace Proyecto.Migrations.Project
                 name: "Technician",
                 columns: table => new
                 {
-                    AwardedBestActor = table.Column<bool>(nullable: false),
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false)
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    TechnicianId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Technician", x => x.AwardedBestActor);
+                    table.PrimaryKey("PK_Technician", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HiringCost",
+                columns: table => new
+                {
+                    HirCosId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RolLvlId = table.Column<int>(nullable: false),
+                    HirCosHourly = table.Column<float>(nullable: false),
+                    HirCosAdditional = table.Column<float>(nullable: false),
+                    HirCosFull = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HiringCost", x => x.HirCosId);
+                    table.ForeignKey(
+                        name: "FK_HiringCost_RoleLevel_RolLvlId",
+                        column: x => x.RolLvlId,
+                        principalTable: "RoleLevel",
+                        principalColumn: "RolLvlId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,7 +126,6 @@ namespace Proyecto.Migrations.Project
                 {
                     TechnicianID = table.Column<int>(nullable: false),
                     ProjectID = table.Column<int>(nullable: false),
-                    TechnicianAwardedBestActor = table.Column<bool>(nullable: false),
                     ProjectID1 = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -117,22 +139,22 @@ namespace Proyecto.Migrations.Project
                         principalColumn: "ProjectID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Postulants_Technician_TechnicianAwardedBestActor",
-                        column: x => x.TechnicianAwardedBestActor,
+                        name: "FK_Postulants_Technician_TechnicianID",
+                        column: x => x.TechnicianID,
                         principalTable: "Technician",
-                        principalColumn: "AwardedBestActor",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HiringCost_RolLvlId",
+                table: "HiringCost",
+                column: "RolLvlId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Postulants_ProjectID1",
                 table: "Postulants",
                 column: "ProjectID1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Postulants_TechnicianAwardedBestActor",
-                table: "Postulants",
-                column: "TechnicianAwardedBestActor");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Role_RolLvlId",
@@ -144,6 +166,9 @@ namespace Proyecto.Migrations.Project
         {
             migrationBuilder.DropTable(
                 name: "ApplicationUser");
+
+            migrationBuilder.DropTable(
+                name: "HiringCost");
 
             migrationBuilder.DropTable(
                 name: "Postulants");

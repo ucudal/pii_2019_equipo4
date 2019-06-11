@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages.HiringCosts
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Proyecto.Pages.Technicians
             _context = context;
         }
 
-        public Technician Technician { get; set; }
+        public HiringCost HiringCost { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,10 @@ namespace Proyecto.Pages.Technicians
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+            HiringCost = await _context.HiringCost
+                .Include(h => h.level).FirstOrDefaultAsync(m => m.HirCosId == id);
 
-            if (Technician == null)
+            if (HiringCost == null)
             {
                 return NotFound();
             }
