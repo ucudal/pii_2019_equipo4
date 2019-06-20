@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Proyecto.Areas.Identity.Data;
+using Proyecto.Data;
 
 namespace Proyecto.Migrations
 {
-    [DbContext(typeof(ProyectoIdentityDbContext))]
-    [Migration("20190620031116_identity")]
-    partial class identity
+    [DbContext(typeof(ProjectContext))]
+    partial class ProjectContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,6 +183,114 @@ namespace Proyecto.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
+                {
+                    b.Property<int>("HirCosId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float>("HirCosAdditional");
+
+                    b.Property<float>("HirCosFull");
+
+                    b.Property<float>("HirCosHourly");
+
+                    b.Property<int>("RolLvlId");
+
+                    b.HasKey("HirCosId");
+
+                    b.HasIndex("RolLvlId");
+
+                    b.ToTable("HiringCost");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Postulation", b =>
+                {
+                    b.Property<int>("TechnicianID");
+
+                    b.Property<int>("ProjectID");
+
+                    b.Property<int>("ProjectID1");
+
+                    b.HasKey("TechnicianID", "ProjectID");
+
+                    b.HasAlternateKey("ProjectID", "TechnicianID");
+
+                    b.HasIndex("ProjectID1");
+
+                    b.ToTable("Postulants");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Project", b =>
+                {
+                    b.Property<int>("ProjectID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(180);
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("ProjectID");
+
+                    b.ToTable("Project");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RolDsc")
+                        .IsRequired();
+
+                    b.Property<int>("RolLvlId");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex("RolLvlId");
+
+                    b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
+                {
+                    b.Property<int>("RolLvlId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RolLvlDsc")
+                        .IsRequired();
+
+                    b.HasKey("RolLvlId");
+
+                    b.ToTable("RoleLevel");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Technician", b =>
+                {
+                    b.Property<int>("TechnicianID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("BirthDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.Property<int?>("ProjectID");
+
+                    b.HasKey("TechnicianID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Technician");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -228,6 +334,42 @@ namespace Proyecto.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
+                {
+                    b.HasOne("Proyecto.Models.RoleLevel", "level")
+                        .WithMany()
+                        .HasForeignKey("RolLvlId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Postulation", b =>
+                {
+                    b.HasOne("Proyecto.Models.Project", "Project")
+                        .WithMany("Postulants")
+                        .HasForeignKey("ProjectID1")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Proyecto.Models.Technician", "Technician")
+                        .WithMany("Postulants")
+                        .HasForeignKey("TechnicianID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Role", b =>
+                {
+                    b.HasOne("Proyecto.Models.RoleLevel", "level")
+                        .WithMany()
+                        .HasForeignKey("RolLvlId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Technician", b =>
+                {
+                    b.HasOne("Proyecto.Models.Project")
+                        .WithMany("Technician")
+                        .HasForeignKey("ProjectID");
                 });
 #pragma warning restore 612, 618
         }
