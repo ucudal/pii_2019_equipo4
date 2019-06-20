@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto.Data;
 
-namespace Proyecto.Migrations
+namespace Proyecto.Migrations.Project
 {
     [DbContext(typeof(ProjectContext))]
     partial class ProjectContextModelSnapshot : ModelSnapshot
@@ -15,48 +15,6 @@ namespace Proyecto.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
-
-            modelBuilder.Entity("Proyecto.Areas.Identity.Data.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<DateTime>("DOB");
-
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicationUser");
-                });
 
             modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
                 {
@@ -148,7 +106,7 @@ namespace Proyecto.Migrations
 
             modelBuilder.Entity("Proyecto.Models.Technician", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("TechnicianID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("BirthDate");
@@ -157,9 +115,11 @@ namespace Proyecto.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<int>("TechnicianId");
+                    b.Property<int?>("ProjectID");
 
-                    b.HasKey("ID");
+                    b.HasKey("TechnicianID");
+
+                    b.HasIndex("ProjectID");
 
                     b.ToTable("Technician");
                 });
@@ -175,7 +135,7 @@ namespace Proyecto.Migrations
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
                 {
                     b.HasOne("Proyecto.Models.Project", "Project")
-                        .WithMany("Postulation")
+                        .WithMany("Postulants")
                         .HasForeignKey("ProjectID1")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -191,6 +151,13 @@ namespace Proyecto.Migrations
                         .WithMany()
                         .HasForeignKey("RolLvlId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Technician", b =>
+                {
+                    b.HasOne("Proyecto.Models.Project")
+                        .WithMany("Technician")
+                        .HasForeignKey("ProjectID");
                 });
 #pragma warning restore 612, 618
         }

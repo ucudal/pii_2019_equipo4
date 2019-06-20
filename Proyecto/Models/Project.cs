@@ -27,7 +27,9 @@ namespace Proyecto.Models
         [DataType(DataType.Date)]
         public DateTime EndDate{get;set;}
 
-        public IList<Postulation> Postulation{get;set;}
+        public IList<Postulation> Postulants{get;set;}
+        
+        public ICollection<Technician> Technician{get;set;}
 
     }
 }

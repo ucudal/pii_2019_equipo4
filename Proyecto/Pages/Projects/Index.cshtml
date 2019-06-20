@@ -1,11 +1,11 @@
 @page
-@model Proyecto.Pages.Projects.IndexModel
+@model Proyecto.Pages_Projects.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Projects";
 }
 
-<h1>Index</h1>
+<h2>Projects</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -13,42 +13,65 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].EndDate)
-            </th>
-            <th></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Project) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProjectID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProjectID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProjectID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.IndexData.ProjectsIndex)
+        {
+            string selectedRow = "";
+            if (item.ProjectID == Model.ProjectId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.ProjectID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ProjectID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ProjectID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ProjectID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@if (Model.IndexData.TechniciansIndex != null)
+{
+    <h3>
+        Technician Enrolled in Selected Project
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Birth Date</th>
+        </tr>
+        @foreach (var item in Model.IndexData.TechniciansIndex)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+            </tr>
+        }
+    </table>
+}

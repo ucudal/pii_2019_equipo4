@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages_Technicians
 {
     public class DetailsModel : PageModel
     {
@@ -20,6 +20,18 @@ namespace Proyecto.Pages.Technicians
         }
 
         public Technician Technician { get; set; }
+        public IEnumerable<Project> Projects{get;set;}
+
+        public IEnumerable<Project> LoadProjects(){
+            var db = _context;
+            IEnumerable<Project> e = Enumerable.Empty<Project>();
+            try {
+                foreach(Postulation Postulants in db.Postulation.Where(p=> p.TechnicianID == Technician.TechnicianID)){
+                    e = e.Concat(db.Project.Where(t => t.ProjectID == Postulants.ProjectID).AsEnumerable());
+                }
+           }catch{}
+            return e;
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,7 +40,9 @@ namespace Proyecto.Pages.Technicians
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+           Technician = await _context.Technician.FirstOrDefaultAsync(m => m.TechnicianID == id);
+           
+           Projects = LoadProjects();
 
             if (Technician == null)
             {

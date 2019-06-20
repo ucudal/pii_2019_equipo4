@@ -26,10 +26,13 @@ namespace Proyecto
 
                 try
                 {
+
                     var context=services.
                         GetRequiredService<ProjectContext>();
-                    context.Database.Migrate();
+                    context.Database.EnsureCreated();
+                    
                     SeedData.Initialize(services);
+                    context.Database.Migrate();
                 }
                 catch (Exception ex)
                 {

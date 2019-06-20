@@ -1,41 +1,40 @@
 @page
-@model Proyecto.Pages.Projects.DetailsModel
+@model Proyecto.Pages_Projects.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Details</h2>
 
 <div>
     <h4>Project</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
+    <dl class="dl-horizontal">
+        <dt>
             @Html.DisplayNameFor(model => model.Project.Title)
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Project.Title)
         </dd>
-        <dt class="col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.Project.Description)
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Project.Description)
         </dd>
-        <dt class="col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.Project.StartDate)
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Project.StartDate)
         </dd>
-        <dt class="col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.Project.EndDate)
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Project.EndDate)
         </dd>
-        
     </dl>
 </div>
 <div>

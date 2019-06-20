@@ -1,39 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Proyecto.Migrations
+namespace Proyecto.Migrations.Project
 {
-    public partial class nuevocreate : Migration
+    public partial class projects : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "ApplicationUser",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    NormalizedUserName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    NormalizedEmail = table.Column<string>(nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    DOB = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApplicationUser", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Project",
                 columns: table => new
@@ -67,15 +40,21 @@ namespace Proyecto.Migrations
                 name: "Technician",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    TechnicianID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false),
-                    TechnicianId = table.Column<int>(nullable: false)
+                    ProjectID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Technician", x => x.ID);
+                    table.PrimaryKey("PK_Technician", x => x.TechnicianID);
+                    table.ForeignKey(
+                        name: "FK_Technician_Project_ProjectID",
+                        column: x => x.ProjectID,
+                        principalTable: "Project",
+                        principalColumn: "ProjectID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,7 +121,7 @@ namespace Proyecto.Migrations
                         name: "FK_Postulants_Technician_TechnicianID",
                         column: x => x.TechnicianID,
                         principalTable: "Technician",
-                        principalColumn: "ID",
+                        principalColumn: "TechnicianID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -160,13 +139,15 @@ namespace Proyecto.Migrations
                 name: "IX_Role_RolLvlId",
                 table: "Role",
                 column: "RolLvlId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Technician_ProjectID",
+                table: "Technician",
+                column: "ProjectID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ApplicationUser");
-
             migrationBuilder.DropTable(
                 name: "HiringCost");
 
@@ -177,13 +158,13 @@ namespace Proyecto.Migrations
                 name: "Role");
 
             migrationBuilder.DropTable(
-                name: "Project");
-
-            migrationBuilder.DropTable(
                 name: "Technician");
 
             migrationBuilder.DropTable(
                 name: "RoleLevel");
+
+            migrationBuilder.DropTable(
+                name: "Project");
         }
     }
 }

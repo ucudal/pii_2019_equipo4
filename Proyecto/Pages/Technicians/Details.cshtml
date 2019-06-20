@@ -1,5 +1,5 @@
 @page
-@model Proyecto.Pages.Technicians.DetailsModel
+@model Proyecto.Pages_Technicians.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,7 +11,7 @@
     <h4>Technician</h4>
     <hr />
     <dl class="dl-horizontal">
-        
+       
         <dt>
             @Html.DisplayNameFor(model => model.Technician.Name)
         </dt>
@@ -26,7 +26,41 @@
         </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Technician.ID">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Technician.TechnicianID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+<hr />
+
+@if (Model.Projects.Count()>0)
+{
+    <h4>Projects</h4>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+
+        @foreach (var item in Model.Projects)
+        {
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.StartDate
+                </td>
+                <td>
+                    @item.EndDate
+                </td>
+                
+            </tr>
+        }
+    </table>
+}

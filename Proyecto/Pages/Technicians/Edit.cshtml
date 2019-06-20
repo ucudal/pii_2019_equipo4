@@ -1,5 +1,5 @@
 @page
-@model Proyecto.Pages.Technicians.EditModel
+@model Proyecto.Pages_Technicians.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,7 +14,6 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
-            <input type="hidden" asp-for="Technician.ID" />
             <div class="form-group">
                 <label asp-for="Technician.Name" class="control-label"></label>
                 <input asp-for="Technician.Name" class="form-control" />

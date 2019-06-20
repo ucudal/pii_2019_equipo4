@@ -6,7 +6,7 @@ namespace Proyecto.Models
 {
     public class Person
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]

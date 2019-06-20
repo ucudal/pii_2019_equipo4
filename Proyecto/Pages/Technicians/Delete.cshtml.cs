@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages_Technicians
 {
     public class DeleteModel : PageModel
     {
@@ -22,20 +22,26 @@ namespace Proyecto.Pages.Technicians
         [BindProperty]
         public Technician Technician { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public string ErrorMessage {get;set;}
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+            Technician = await _context.Technician.AsNoTracking().FirstOrDefaultAsync(m => m.TechnicianID == id);
 
             if (Technician == null)
             {
                 return NotFound();
             }
+            if(saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
+            }
             return Page();
+           
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
