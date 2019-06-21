@@ -1,0 +1,54 @@
+@page
+@model Proyecto.Pages.HiringCosts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HiringCost[0].level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HiringCost[0].HirCosHourly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HiringCost[0].HirCosAdditional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HiringCost[0].HirCosFull)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.HiringCost) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.level.RolLvlDsc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HirCosHourly)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HirCosAdditional)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HirCosFull)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.HirCosId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.HirCosId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.HirCosId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

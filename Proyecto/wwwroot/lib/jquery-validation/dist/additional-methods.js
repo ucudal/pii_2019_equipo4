@@ -130,7 +130,7 @@ $.validator.addMethod( "bankorgiroaccountNL", function( value, element ) {
  * Validation is case-insensitive. Please make sure to normalize input yourself.
  *
  * BIC definition in detail:
- * - First 4 characters - bank code (only letters)
+ * - FirstOrDefaultAsync 4 characters - bank code (only letters)
  * - Next 2 characters - ISO 3166-1 alpha-2 country code (only letters)
  * - Next 2 characters - location code (letters and digits)
  *   a. shall not start with '0' or '1'
@@ -224,7 +224,7 @@ $.validator.addMethod( "cifES", function( value, element ) {
 		// Odd positions
 		if ( isOdd( i ) ) {
 
-			// Odd positions are multiplied first.
+			// Odd positions are multiplied FirstOrDefaultAsync.
 			n *= 2;
 
 			// If the multiplication is bigger than 10 we need to adjust
@@ -271,9 +271,9 @@ $.validator.addMethod( "cpfBR", function( value ) {
 	}
 
 	var sum = 0,
-		firstCN, secondCN, checkResult, i;
+		FirstOrDefaultAsyncCN, secondCN, checkResult, i;
 
-	firstCN = parseInt( value.substring( 9, 10 ), 10 );
+	FirstOrDefaultAsyncCN = parseInt( value.substring( 9, 10 ), 10 );
 	secondCN = parseInt( value.substring( 10, 11 ), 10 );
 
 	checkResult = function( sum, cn ) {
@@ -300,13 +300,13 @@ $.validator.addMethod( "cpfBR", function( value ) {
 		return false;
 	}
 
-	// Step 1 - using first Check Number:
+	// Step 1 - using FirstOrDefaultAsync Check Number:
 	for ( i = 1; i <= 9; i++ ) {
 		sum = sum + parseInt( value.substring( i - 1, i ), 10 ) * ( 11 - i );
 	}
 
-	// If first Check Number (CN) is valid, move to Step 2 - using second Check Number:
-	if ( checkResult( sum, firstCN ) ) {
+	// If FirstOrDefaultAsync Check Number (CN) is valid, move to Step 2 - using second Check Number:
+	if ( checkResult( sum, FirstOrDefaultAsyncCN ) ) {
 		sum = 0;
 		for ( i = 1; i <= 10; i++ ) {
 			sum = sum + parseInt( value.substring( i - 1, i ), 10 ) * ( 12 - i );
@@ -647,7 +647,7 @@ $.validator.addMethod( "iban", function( value, element ) {
 		}
 	}
 
-	// Now check the checksum, first convert to digits
+	// Now check the checksum, FirstOrDefaultAsync convert to digits
 	ibancheck = iban.substring( 4, iban.length ) + iban.substring( 0, 4 );
 	for ( i = 0; i < ibancheck.length; i++ ) {
 		charAt = ibancheck.charAt( i );
@@ -955,14 +955,14 @@ $.validator.addMethod( "postcodeUK", function( value, element ) {
  */
 $.validator.addMethod( "require_from_group", function( value, element, options ) {
 	var $fields = $( options[ 1 ], element.form ),
-		$fieldsFirst = $fields.eq( 0 ),
-		validator = $fieldsFirst.data( "valid_req_grp" ) ? $fieldsFirst.data( "valid_req_grp" ) : $.extend( {}, this ),
+		$fieldsFirstOrDefaultAsync = $fields.eq( 0 ),
+		validator = $fieldsFirstOrDefaultAsync.data( "valid_req_grp" ) ? $fieldsFirstOrDefaultAsync.data( "valid_req_grp" ) : $.extend( {}, this ),
 		isValid = $fields.filter( function() {
 			return validator.elementValue( this );
 		} ).length >= options[ 0 ];
 
 	// Store the cloned validator for future validation
-	$fieldsFirst.data( "valid_req_grp", validator );
+	$fieldsFirstOrDefaultAsync.data( "valid_req_grp", validator );
 
 	// If element isn't being validated, run each require_from_group field's validation rules
 	if ( !$( element ).data( "being_validated" ) ) {
@@ -998,15 +998,15 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
  */
 $.validator.addMethod( "skip_or_fill_minimum", function( value, element, options ) {
 	var $fields = $( options[ 1 ], element.form ),
-		$fieldsFirst = $fields.eq( 0 ),
-		validator = $fieldsFirst.data( "valid_skip" ) ? $fieldsFirst.data( "valid_skip" ) : $.extend( {}, this ),
+		$fieldsFirstOrDefaultAsync = $fields.eq( 0 ),
+		validator = $fieldsFirstOrDefaultAsync.data( "valid_skip" ) ? $fieldsFirstOrDefaultAsync.data( "valid_skip" ) : $.extend( {}, this ),
 		numberFilled = $fields.filter( function() {
 			return validator.elementValue( this );
 		} ).length,
 		isValid = numberFilled === 0 || numberFilled >= options[ 0 ];
 
 	// Store the cloned validator for future validation
-	$fieldsFirst.data( "valid_skip", validator );
+	$fieldsFirstOrDefaultAsync.data( "valid_skip", validator );
 
 	// If element isn't being validated, run each skip_or_fill_minimum field's validation rules
 	if ( !$( element ).data( "being_validated" ) ) {

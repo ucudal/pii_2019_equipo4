@@ -14,13 +14,13 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<Technician> _userManager;
-        private readonly SignInManager<Technician> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
-            UserManager<Technician> userManager,
-            SignInManager<Technician> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -47,6 +47,7 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
@@ -108,6 +109,7 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
                 }
             }
+
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
@@ -128,6 +130,7 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);

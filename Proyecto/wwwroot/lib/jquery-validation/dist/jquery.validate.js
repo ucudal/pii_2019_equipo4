@@ -649,7 +649,7 @@ $.extend( $.validator, {
 					this.name = name;
 				}
 
-				// Select only the first element for each name, and only those with rules specified
+				// Select only the FirstOrDefaultAsync element for each name, and only those with rules specified
 				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
 					return false;
 				}
@@ -827,7 +827,7 @@ $.extend( $.validator, {
 			return m && ( m.constructor === String ? m : m[ method ] );
 		},
 
-		// Return the first defined argument, allowing empty strings
+		// Return the FirstOrDefaultAsync defined argument, allowing empty strings
 		findDefined: function() {
 			for ( var i = 0; i < arguments.length; i++ ) {
 				if ( arguments[ i ] !== undefined ) {
@@ -1038,7 +1038,7 @@ $.extend( $.validator, {
 
 		validationTargetFor: function( element ) {
 
-			// If radio/checkbox, validate first element in group instead
+			// If radio/checkbox, validate FirstOrDefaultAsync element in group instead
 			if ( this.checkable( element ) ) {
 				element = this.findByName( element.name );
 			}

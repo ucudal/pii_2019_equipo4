@@ -1,11 +1,11 @@
 @page
-@model Proyecto.Pages.Projects.EditModel
+@model Proyecto.Pages_Projects.EditModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h2>Edit</h2>
 
 <h4>Project</h4>
 <hr />
@@ -35,7 +35,7 @@
                 <span asp-validation-for="Project.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
