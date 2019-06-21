@@ -29,7 +29,7 @@ namespace Proyecto.Models
 
         public IList<Postulation> Postulants{get;set;}
         
-        public ICollection<Technician> Technician{get;set;}
+        //public ICollection<Technician> Technician{get;set;}
 
     }
 }

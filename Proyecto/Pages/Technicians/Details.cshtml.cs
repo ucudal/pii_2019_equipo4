@@ -26,7 +26,7 @@ namespace Proyecto.Pages_Technicians
             var db = _context;
             IEnumerable<Project> e = Enumerable.Empty<Project>();
             try {
-                foreach(Postulation Postulants in db.Postulation.Where(p=> p.TechnicianID == Technician.TechnicianID)){
+                foreach(Postulation Postulants in db.Postulation.Where(p=> p.TechnicianID == Technician.ID)){
                     e = e.Concat(db.Project.Where(t => t.ProjectID == Postulants.ProjectID).AsEnumerable());
                 }
            }catch{}
@@ -40,7 +40,7 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-           Technician = await _context.Technician.FirstOrDefaultAsync(m => m.TechnicianID == id);
+           Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
            
            Projects = LoadProjects();
 

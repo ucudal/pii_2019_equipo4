@@ -37,14 +37,7 @@ namespace Proyecto.Pages_Projects
             }
             if (TechniciaNID !=null )
             {
-                ViewData["TechnicianID"] = TechniciaNID.Value;
-                var selectedCourse = IndexData.TechniciansIndex.Where(x => x.TechnicianID == TechniciaNID).Single();
-                await _context.Entry(selectedCourse).Collection(x => x.Postulants).LoadAsync();
-                foreach (Postulation postulation in selectedCourse.Postulants)
-                {
-                    await _context.Entry(postulation).Reference(x => x.Technician).LoadAsync();
-                }
-                IndexData.Cast = selectedCourse.Postulants;
+                TechniciaNID = id.Value;
             }
         }
     }

@@ -55,7 +55,7 @@
 @if (Model.IndexData.TechniciansIndex != null)
 {
     <h3>
-        Technician Enrolled in Selected Project
+        Technician in Selected Project
     </h3>
     <table class="table">
         <tr>
@@ -64,7 +64,12 @@
         </tr>
         @foreach (var item in Model.IndexData.TechniciansIndex)
         {
-            <tr>
+            string selectedRow ="";
+            if (item.ID == Model.TechnicianId)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class = "@selectedRow">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>

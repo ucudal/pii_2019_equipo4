@@ -211,7 +211,7 @@ namespace Proyecto.Models
             ) ;
             context.SaveChanges();
         }
-
+        /*
         private static void SeedProject(ProjectContext context)
         {
             // Look for any movies.
@@ -361,6 +361,7 @@ namespace Proyecto.Models
             }
             context.SaveChanges();
         }
+        */
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new ProjectContext(
@@ -370,10 +371,11 @@ namespace Proyecto.Models
                 SeedRoleLevels(context);
                 SeedRoles(context);
                 SeedHiringCost(context);
-                SeedProject(context);
+                /*SeedProject(context);
                 SeedTechnician(context);
-                SeedPostulation(context);
+                SeedPostulation(context);*/
             }
         }
+        
     }
 }

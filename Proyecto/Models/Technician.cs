@@ -12,8 +12,8 @@ namespace Proyecto.Models
     // Add profile data for application users by adding properties to the Technician class
     public class Technician : Person
     {
-        [Key]
-        public int TechnicianID {get;set;}
+        
+    
 
         public ICollection<Postulation> Postulants {get;set;}
     }

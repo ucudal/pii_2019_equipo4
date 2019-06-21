@@ -30,7 +30,7 @@ namespace Proyecto
                     var context=services.
                         GetRequiredService<ProjectContext>();
                     context.Database.EnsureCreated();
-                    
+                    SeedProjTech.Initialize(services);
                     SeedData.Initialize(services);
                     context.Database.Migrate();
                 }

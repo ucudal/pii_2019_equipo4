@@ -273,7 +273,7 @@ namespace Proyecto.Migrations
 
             modelBuilder.Entity("Proyecto.Models.Technician", b =>
                 {
-                    b.Property<int>("TechnicianID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("BirthDate");
@@ -282,11 +282,7 @@ namespace Proyecto.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.Property<int?>("ProjectID");
-
-                    b.HasKey("TechnicianID");
-
-                    b.HasIndex("ProjectID");
+                    b.HasKey("ID");
 
                     b.ToTable("Technician");
                 });
@@ -363,13 +359,6 @@ namespace Proyecto.Migrations
                         .WithMany()
                         .HasForeignKey("RolLvlId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Proyecto.Models.Technician", b =>
-                {
-                    b.HasOne("Proyecto.Models.Project")
-                        .WithMany("Technician")
-                        .HasForeignKey("ProjectID");
                 });
 #pragma warning restore 612, 618
         }

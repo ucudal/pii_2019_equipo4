@@ -29,8 +29,8 @@ namespace Proyecto.Pages_Technicians
             {
                 return NotFound();
             }
-
-            Technician = await _context.Technician.AsNoTracking().FirstOrDefaultAsync(m => m.TechnicianID == id);
+            
+            Technician = await _context.Technician.AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
 
             if (Technician == null)
             {

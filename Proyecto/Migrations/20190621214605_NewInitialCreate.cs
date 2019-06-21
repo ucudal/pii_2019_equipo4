@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proyecto.Migrations
 {
-    public partial class project : Migration
+    public partial class NewInitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,6 +76,20 @@ namespace Proyecto.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RoleLevel", x => x.RolLvlId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Technician",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(maxLength: 60, nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Technician", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,27 +199,6 @@ namespace Proyecto.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Technician",
-                columns: table => new
-                {
-                    TechnicianID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(maxLength: 60, nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    ProjectID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Technician", x => x.TechnicianID);
-                    table.ForeignKey(
-                        name: "FK_Technician_Project_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "Project",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "HiringCost",
                 columns: table => new
                 {
@@ -269,7 +262,7 @@ namespace Proyecto.Migrations
                         name: "FK_Postulants_Technician_TechnicianID",
                         column: x => x.TechnicianID,
                         principalTable: "Technician",
-                        principalColumn: "TechnicianID",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -324,11 +317,6 @@ namespace Proyecto.Migrations
                 name: "IX_Role_RolLvlId",
                 table: "Role",
                 column: "RolLvlId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Technician_ProjectID",
-                table: "Technician",
-                column: "ProjectID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -364,13 +352,13 @@ namespace Proyecto.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Project");
+
+            migrationBuilder.DropTable(
                 name: "Technician");
 
             migrationBuilder.DropTable(
                 name: "RoleLevel");
-
-            migrationBuilder.DropTable(
-                name: "Project");
         }
     }
 }
