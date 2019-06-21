@@ -22,7 +22,7 @@ namespace Proyecto.Areas.Identity
                 
 
                 services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
-                    .AddEntityFrameworkStores<ProyectoIdentityDbContext>();
+                    .AddEntityFrameworkStores<ProjectContext>();
             });
         }
     }

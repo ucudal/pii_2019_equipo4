@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Areas.Identity.Data;
 using Proyecto.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Proyecto.Data
 {
-    public class ProjectContext : DbContext
+    public class ProjectContext : IdentityDbContext<ApplicationUser>
     {
         public ProjectContext (DbContextOptions<ProjectContext> options)
             : base(options)
@@ -20,7 +21,7 @@ namespace Proyecto.Data
         }
         
         
-        public DbSet<ApplicationUser> ApplicationUser {get;set;}
+        
         //public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
         //public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Project> Project { get; set; }

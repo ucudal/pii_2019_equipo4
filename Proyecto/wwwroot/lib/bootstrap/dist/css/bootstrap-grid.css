@@ -174,7 +174,7 @@ html {
   max-width: 100%;
 }
 
-.order-first {
+.order-FirstOrDefaultAsync {
   -ms-flex-order: -1;
   order: -1;
 }
@@ -367,7 +367,7 @@ html {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .order-sm-first {
+  .order-sm-FirstOrDefaultAsync {
     -ms-flex-order: -1;
     order: -1;
   }
@@ -539,7 +539,7 @@ html {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .order-md-first {
+  .order-md-FirstOrDefaultAsync {
     -ms-flex-order: -1;
     order: -1;
   }
@@ -711,7 +711,7 @@ html {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .order-lg-first {
+  .order-lg-FirstOrDefaultAsync {
     -ms-flex-order: -1;
     order: -1;
   }
@@ -883,7 +883,7 @@ html {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .order-xl-first {
+  .order-xl-FirstOrDefaultAsync {
     -ms-flex-order: -1;
     order: -1;
   }

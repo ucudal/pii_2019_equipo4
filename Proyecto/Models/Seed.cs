@@ -211,7 +211,7 @@ namespace Proyecto.Models
             ) ;
             context.SaveChanges();
         }
-
+        /*
         private static void SeedProject(ProjectContext context)
         {
             // Look for any movies.
@@ -220,7 +220,8 @@ namespace Proyecto.Models
                 return;   // DB has been seeded
             }
 
-            context.Project.AddRange(
+            var projects = new Project[]
+            {
                new Project
                 {
                     Title = "Projecto 1",
@@ -244,7 +245,11 @@ namespace Proyecto.Models
                    StartDate = DateTime.Parse("2019-9-16"),
                    EndDate = DateTime.Parse("2019-12-25")
                 }
-            );
+            };
+            foreach(Project p in projects)
+            {
+                context.Project.Add(p);
+            }
             context.SaveChanges();
         }
         private static void SeedTechnician(ProjectContext context)
@@ -255,7 +260,8 @@ namespace Proyecto.Models
                 return;   // DB has been seeded
             }
 
-            context.Technician.AddRange(
+            var technicians = new Technician[]
+            {
                 new Technician
                 {
                     Name = "Billy Crystal",
@@ -298,7 +304,11 @@ namespace Proyecto.Models
                     Name = "Dean Martin",
                     BirthDate = DateTime.Parse("1917-7-7")
                 }
-            );
+            };
+            foreach(Technician t in technicians)
+            {
+                context.Technician.Add(t);
+            }
             context.SaveChanges();
         }
 
@@ -314,30 +324,31 @@ namespace Proyecto.Models
             {
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Billy Crystal").ID,
-                    ProjectID = context.Project.Single(m => m.Title == "Proyecto 1").ProjectID                },
+                    TechnicianID = context.Technician.Single(a => a.Name == "Billy Crystal").TechnicianID,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto 1").ProjectID                       
+                },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Meg Ryan").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Meg Ryan").TechnicianID,
                     ProjectID = context.Project.Single(m => m.Title == "Proyecto 2").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").TechnicianID,
                     ProjectID = context.Project.Single(m => m.Title == "Proyecto 3").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").TechnicianID,
                     ProjectID = context.Project.Single(m => m.Title == "Proyecto 1").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").TechnicianID,
                     ProjectID = context.Project.Single(m => m.Title == "proyecto 2").ProjectID
                 },
 
@@ -350,6 +361,7 @@ namespace Proyecto.Models
             }
             context.SaveChanges();
         }
+        */
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new ProjectContext(
@@ -359,10 +371,11 @@ namespace Proyecto.Models
                 SeedRoleLevels(context);
                 SeedRoles(context);
                 SeedHiringCost(context);
-                SeedProject(context);
+                /*SeedProject(context);
                 SeedTechnician(context);
-                SeedPostulation(context);
+                SeedPostulation(context);*/
             }
         }
+        
     }
 }

@@ -7,6 +7,7 @@ namespace Proyecto.Models
 {
     public class Postulation
     {
+        
         [Key]
         public int TechnicianID { get; set; }
 
@@ -14,7 +15,7 @@ namespace Proyecto.Models
         public int ProjectID { get; set; }
 
         [Required]
-        public Technician Technician { get; set; }
+        public Technician Technician { get; set; } 
 
         [Required]
         public Project Project { get; set; }

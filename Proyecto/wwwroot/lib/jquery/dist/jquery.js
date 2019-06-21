@@ -199,7 +199,7 @@ jQuery.fn = jQuery.prototype = {
 		return this.pushStack( slice.apply( this, arguments ) );
 	},
 
-	first: function() {
+	FirstOrDefaultAsync: function() {
 		return this.eq( 0 );
 	},
 
@@ -397,18 +397,18 @@ jQuery.extend( {
 
 	// Support: Android <=4.0 only, PhantomJS 1 only
 	// push.apply(_, arraylike) throws on ancient WebKit
-	merge: function( first, second ) {
+	merge: function( FirstOrDefaultAsync, second ) {
 		var len = +second.length,
 			j = 0,
-			i = first.length;
+			i = FirstOrDefaultAsync.length;
 
 		for ( ; j < len; j++ ) {
-			first[ i++ ] = second[ j ];
+			FirstOrDefaultAsync[ i++ ] = second[ j ];
 		}
 
-		first.length = i;
+		FirstOrDefaultAsync.length = i;
 
-		return first;
+		return FirstOrDefaultAsync;
 	},
 
 	grep: function( elems, callback, invert ) {
@@ -612,13 +612,13 @@ var i,
 		"TAG": new RegExp( "^(" + identifier + "|[*])" ),
 		"ATTR": new RegExp( "^" + attributes ),
 		"PSEUDO": new RegExp( "^" + pseudos ),
-		"CHILD": new RegExp( "^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + whitespace +
+		"CHILD": new RegExp( "^:(only|FirstOrDefaultAsync|last|nth|nth-last)-(child|of-type)(?:\\(" + whitespace +
 			"*(even|odd|(([+-]|)(\\d*)n|)" + whitespace + "*(?:([+-]|)" + whitespace +
 			"*(\\d+)|))" + whitespace + "*\\)|)", "i" ),
 		"bool": new RegExp( "^(?:" + booleans + ")$", "i" ),
 		// For use in libraries implementing .is()
 		// We use this for POS matching in `select`
-		"needsContext": new RegExp( "^" + whitespace + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" +
+		"needsContext": new RegExp( "^" + whitespace + "*[>+~]|:(even|odd|eq|gt|lt|nth|FirstOrDefaultAsync|last)(?:\\(" +
 			whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
 	},
 
@@ -804,7 +804,7 @@ function Sizzle( selector, context, results, seed ) {
 				// Exclude object elements
 				} else if ( context.nodeName.toLowerCase() !== "object" ) {
 
-					// Capture the context ID, setting it first if necessary
+					// Capture the context ID, setting it FirstOrDefaultAsync if necessary
 					if ( (nid = context.getAttribute( "id" )) ) {
 						nid = nid.replace( rcssescape, fcssescape );
 					} else {
@@ -1397,7 +1397,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		if ( compare & 1 ||
 			(!support.sortDetached && b.compareDocumentPosition( a ) === compare) ) {
 
-			// Choose the first element that is related to our preferred document
+			// Choose the FirstOrDefaultAsync element that is related to our preferred document
 			if ( a === document || a.ownerDocument === preferredDoc && contains(preferredDoc, a) ) {
 				return -1;
 			}
@@ -1461,7 +1461,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// Do a sibling check if the nodes have a common ancestor
 			siblingCheck( ap[i], bp[i] ) :
 
-			// Otherwise nodes in our document sort first
+			// Otherwise nodes in our document sort FirstOrDefaultAsync
 			ap[i] === preferredDoc ? -1 :
 			bp[i] === preferredDoc ? 1 :
 			0;
@@ -1597,7 +1597,7 @@ getText = Sizzle.getText = function( elem ) {
 			return elem.textContent;
 		} else {
 			// Traverse its children
-			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
+			for ( elem = elem.FirstOrDefaultAsyncChild; elem; elem = elem.nextSibling ) {
 				ret += getText( elem );
 			}
 		}
@@ -1623,9 +1623,9 @@ Expr = Sizzle.selectors = {
 	find: {},
 
 	relative: {
-		">": { dir: "parentNode", first: true },
+		">": { dir: "parentNode", FirstOrDefaultAsync: true },
 		" ": { dir: "parentNode" },
-		"+": { dir: "previousSibling", first: true },
+		"+": { dir: "previousSibling", FirstOrDefaultAsync: true },
 		"~": { dir: "previousSibling" }
 	},
 
@@ -1749,12 +1749,12 @@ Expr = Sizzle.selectors = {
 			};
 		},
 
-		"CHILD": function( type, what, argument, first, last ) {
+		"CHILD": function( type, what, argument, FirstOrDefaultAsync, last ) {
 			var simple = type.slice( 0, 3 ) !== "nth",
 				forward = type.slice( -4 ) !== "last",
 				ofType = what === "of-type";
 
-			return first === 1 && last === 0 ?
+			return FirstOrDefaultAsync === 1 && last === 0 ?
 
 				// Shortcut for :nth-*(n)
 				function( elem ) {
@@ -1771,7 +1771,7 @@ Expr = Sizzle.selectors = {
 
 					if ( parent ) {
 
-						// :(first|last|only)-(child|of-type)
+						// :(FirstOrDefaultAsync|last|only)-(child|of-type)
 						if ( simple ) {
 							while ( dir ) {
 								node = elem;
@@ -1789,7 +1789,7 @@ Expr = Sizzle.selectors = {
 							return true;
 						}
 
-						start = [ forward ? parent.firstChild : parent.lastChild ];
+						start = [ forward ? parent.FirstOrDefaultAsyncChild : parent.lastChild ];
 
 						// non-xml :nth-child(...) stores cache data on `parent`
 						if ( forward && useCache ) {
@@ -1873,7 +1873,7 @@ Expr = Sizzle.selectors = {
 
 						// Incorporate the offset, then check against cycle size
 						diff -= last;
-						return diff === first || ( diff % first === 0 && diff / first >= 0 );
+						return diff === FirstOrDefaultAsync || ( diff % FirstOrDefaultAsync === 0 && diff / FirstOrDefaultAsync >= 0 );
 					}
 				};
 		},
@@ -2030,7 +2030,7 @@ Expr = Sizzle.selectors = {
 			// :empty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
 			//   but not by others (comment: 8; processing instruction: 7; etc.)
 			// nodeType < 6 works because attributes (2) do not appear as children
-			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
+			for ( elem = elem.FirstOrDefaultAsyncChild; elem; elem = elem.nextSibling ) {
 				if ( elem.nodeType < 6 ) {
 					return false;
 				}
@@ -2067,7 +2067,7 @@ Expr = Sizzle.selectors = {
 		},
 
 		// Position-in-collection
-		"first": createPositionalPseudo(function() {
+		"FirstOrDefaultAsync": createPositionalPseudo(function() {
 			return [ 0 ];
 		}),
 
@@ -2143,7 +2143,7 @@ tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
 
 	while ( soFar ) {
 
-		// Comma and first run
+		// Comma and FirstOrDefaultAsync run
 		if ( !matched || (match = rcomma.exec( soFar )) ) {
 			if ( match ) {
 				// Don't consume trailing commas as valid
@@ -2212,7 +2212,7 @@ function addCombinator( matcher, combinator, base ) {
 		checkNonElements = base && key === "parentNode",
 		doneName = done++;
 
-	return combinator.first ?
+	return combinator.FirstOrDefaultAsync ?
 		// Check against closest ancestor/preceding element
 		function( elem, context, xml ) {
 			while ( (elem = elem[ dir ]) ) {
@@ -2708,7 +2708,7 @@ support.sortDetached = assert(function( el ) {
 // https://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
 if ( !assert(function( el ) {
 	el.innerHTML = "<a href='#'></a>";
-	return el.firstChild.getAttribute("href") === "#" ;
+	return el.FirstOrDefaultAsyncChild.getAttribute("href") === "#" ;
 }) ) {
 	addHandle( "type|href|height|width", function( elem, name, isXML ) {
 		if ( !isXML ) {
@@ -2721,8 +2721,8 @@ if ( !assert(function( el ) {
 // Use defaultValue in place of getAttribute("value")
 if ( !support.attributes || !assert(function( el ) {
 	el.innerHTML = "<input/>";
-	el.firstChild.setAttribute( "value", "" );
-	return el.firstChild.getAttribute( "value" ) === "";
+	el.FirstOrDefaultAsyncChild.setAttribute( "value", "" );
+	return el.FirstOrDefaultAsyncChild.getAttribute( "value" ) === "";
 }) ) {
 	addHandle( "value", function( elem, name, isXML ) {
 		if ( !isXML && elem.nodeName.toLowerCase() === "input" ) {
@@ -2886,7 +2886,7 @@ jQuery.fn.extend( {
 			this,
 
 			// If this is a positional/relative selector, check membership in the returned set
-			// so $("p:first").is("p:last") won't return true for a doc with two "p".
+			// so $("p:FirstOrDefaultAsync").is("p:last") won't return true for a doc with two "p".
 			typeof selector === "string" && rneedsContext.test( selector ) ?
 				jQuery( selector ) :
 				selector || [],
@@ -3074,7 +3074,7 @@ jQuery.fn.extend( {
 
 		// No argument, return index in parent
 		if ( !elem ) {
-			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
+			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.FirstOrDefaultAsync().prevAll().length : -1;
 		}
 
 		// Index in selector
@@ -3085,7 +3085,7 @@ jQuery.fn.extend( {
 		// Locate the position of the desired element
 		return indexOf.call( this,
 
-			// If it receives a jQuery object, the first element is used
+			// If it receives a jQuery object, the FirstOrDefaultAsync element is used
 			elem.jquery ? elem[ 0 ] : elem
 		);
 	},
@@ -3140,10 +3140,10 @@ jQuery.each( {
 		return dir( elem, "previousSibling", until );
 	},
 	siblings: function( elem ) {
-		return siblings( ( elem.parentNode || {} ).firstChild, elem );
+		return siblings( ( elem.parentNode || {} ).FirstOrDefaultAsyncChild, elem );
 	},
 	children: function( elem ) {
-		return siblings( elem.firstChild );
+		return siblings( elem.FirstOrDefaultAsyncChild );
 	},
 	contents: function( elem ) {
         if ( nodeName( elem, "iframe" ) ) {
@@ -3225,7 +3225,7 @@ function createOptions( options ) {
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
-	// (we check in cache first)
+	// (we check in cache FirstOrDefaultAsync)
 	options = typeof options === "string" ?
 		createOptions( options ) :
 		jQuery.extend( {}, options );
@@ -3429,7 +3429,7 @@ function adoptValue( value, resolve, reject, noValue ) {
 
 	try {
 
-		// Check for promise aspect first to privilege synchronous behavior
+		// Check for promise aspect FirstOrDefaultAsync to privilege synchronous behavior
 		if ( value && isFunction( ( method = value.promise ) ) ) {
 			method.call( value ).done( resolve ).fail( reject );
 
@@ -4478,7 +4478,7 @@ var isHiddenWithinTree = function( elem, el ) {
 
 			// Otherwise, check computed style
 			// Support: Firefox <=43 - 45
-			// Disconnected elements can have computed display: none, so first confirm that elem is
+			// Disconnected elements can have computed display: none, so FirstOrDefaultAsync confirm that elem is
 			// in the document.
 			jQuery.contains( elem.ownerDocument, elem ) &&
 
@@ -4615,7 +4615,7 @@ function showHide( elements, show ) {
 		if ( show ) {
 
 			// Since we force visibility upon cascade-hidden elements, an immediate (and slow)
-			// check is required in this first loop unless we have a nonempty display value (either
+			// check is required in this FirstOrDefaultAsync loop unless we have a nonempty display value (either
 			// inline or about-to-be-restored)
 			if ( display === "none" ) {
 				values[ index ] = dataPriv.get( elem, "display" ) || null;
@@ -4783,7 +4783,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 				jQuery.merge( nodes, tmp.childNodes );
 
 				// Remember the top-level container
-				tmp = fragment.firstChild;
+				tmp = fragment.FirstOrDefaultAsyncChild;
 
 				// Ensure the created nodes are orphaned (#12392)
 				tmp.textContent = "";
@@ -4978,7 +4978,7 @@ jQuery.event = {
 			handler.guid = jQuery.guid++;
 		}
 
-		// Init the element's event structure and main handler, if this is the first
+		// Init the element's event structure and main handler, if this is the FirstOrDefaultAsync
 		if ( !( events = elemData.events ) ) {
 			events = elemData.events = {};
 		}
@@ -5026,7 +5026,7 @@ jQuery.event = {
 				namespace: namespaces.join( "." )
 			}, handleObjIn );
 
-			// Init the event handler queue if we're the first
+			// Init the event handler queue if we're the FirstOrDefaultAsync
 			if ( !( handlers = events[ type ] ) ) {
 				handlers = events[ type ] = [];
 				handlers.delegateCount = 0;
@@ -5163,7 +5163,7 @@ jQuery.event = {
 		// Determine handlers
 		handlerQueue = jQuery.event.handlers.call( this, event, handlers );
 
-		// Run delegates first; they may want to stop propagation beneath us
+		// Run delegates FirstOrDefaultAsync; they may want to stop propagation beneath us
 		i = 0;
 		while ( ( matched = handlerQueue[ i++ ] ) && !event.isPropagationStopped() ) {
 			event.currentTarget = matched.elem;
@@ -5609,7 +5609,7 @@ var
 // Prefer a tbody over its parent table for containing new rows
 function manipulationTarget( elem, content ) {
 	if ( nodeName( elem, "table" ) &&
-		nodeName( content.nodeType !== 11 ? content : content.firstChild, "tr" ) ) {
+		nodeName( content.nodeType !== 11 ? content : content.FirstOrDefaultAsyncChild, "tr" ) ) {
 
 		return jQuery( elem ).children( "tbody" )[ 0 ] || elem;
 	}
@@ -5685,7 +5685,7 @@ function domManip( collection, args, callback, ignored ) {
 	// Flatten any nested arrays
 	args = concat.apply( [], args );
 
-	var fragment, first, scripts, hasScripts, node, doc,
+	var fragment, FirstOrDefaultAsync, scripts, hasScripts, node, doc,
 		i = 0,
 		l = collection.length,
 		iNoClone = l - 1,
@@ -5707,19 +5707,19 @@ function domManip( collection, args, callback, ignored ) {
 
 	if ( l ) {
 		fragment = buildFragment( args, collection[ 0 ].ownerDocument, false, collection, ignored );
-		first = fragment.firstChild;
+		FirstOrDefaultAsync = fragment.FirstOrDefaultAsyncChild;
 
 		if ( fragment.childNodes.length === 1 ) {
-			fragment = first;
+			fragment = FirstOrDefaultAsync;
 		}
 
 		// Require either new content or an interest in ignored elements to invoke the callback
-		if ( first || ignored ) {
+		if ( FirstOrDefaultAsync || ignored ) {
 			scripts = jQuery.map( getAll( fragment, "script" ), disableScript );
 			hasScripts = scripts.length;
 
 			// Use the original fragment for the last item
-			// instead of the first because it can end up
+			// instead of the FirstOrDefaultAsync because it can end up
 			// being emptied incorrectly in certain situations (#8070).
 			for ( ; i < l; i++ ) {
 				node = fragment;
@@ -5745,7 +5745,7 @@ function domManip( collection, args, callback, ignored ) {
 				// Reenable scripts
 				jQuery.map( scripts, restoreScript );
 
-				// Evaluate executable scripts on first document insertion
+				// Evaluate executable scripts on FirstOrDefaultAsync document insertion
 				for ( i = 0; i < hasScripts; i++ ) {
 					node = scripts[ i ];
 					if ( rscriptType.test( node.type || "" ) &&
@@ -5907,7 +5907,7 @@ jQuery.fn.extend( {
 		return domManip( this, arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
 				var target = manipulationTarget( this, elem );
-				target.insertBefore( elem, target.firstChild );
+				target.insertBefore( elem, target.FirstOrDefaultAsyncChild );
 			}
 		} );
 	},
@@ -6205,7 +6205,7 @@ function curCSS( elem, name, computed ) {
 
 function addGetHookIf( conditionFn, hookFn ) {
 
-	// Define the hook, we'll check on the first run if it's really needed.
+	// Define the hook, we'll check on the FirstOrDefaultAsync run if it's really needed.
 	return {
 		get: function() {
 			if ( conditionFn() ) {
@@ -7370,7 +7370,7 @@ jQuery.fn.extend( {
 			// Enable finishing flag on private data
 			data.finish = true;
 
-			// Empty the queue first
+			// Empty the queue FirstOrDefaultAsync
 			jQuery.queue( this, type, [] );
 
 			if ( hooks && hooks.stop ) {
@@ -8648,7 +8648,7 @@ function ajaxExtend( target, src ) {
  */
 function ajaxHandleResponses( s, jqXHR, responses ) {
 
-	var ct, type, finalDataType, firstDataType,
+	var ct, type, finalDataType, FirstOrDefaultAsyncDataType,
 		contents = s.contents,
 		dataTypes = s.dataTypes;
 
@@ -8681,13 +8681,13 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 				finalDataType = type;
 				break;
 			}
-			if ( !firstDataType ) {
-				firstDataType = type;
+			if ( !FirstOrDefaultAsyncDataType ) {
+				FirstOrDefaultAsyncDataType = type;
 			}
 		}
 
-		// Or just use first one
-		finalDataType = finalDataType || firstDataType;
+		// Or just use FirstOrDefaultAsync one
+		finalDataType = finalDataType || FirstOrDefaultAsyncDataType;
 	}
 
 	// If we found a dataType
@@ -9397,8 +9397,8 @@ jQuery.fn.extend( {
 			wrap.map( function() {
 				var elem = this;
 
-				while ( elem.firstElementChild ) {
-					elem = elem.firstElementChild;
+				while ( elem.FirstOrDefaultAsyncElementChild ) {
+					elem = elem.FirstOrDefaultAsyncElementChild;
 				}
 
 				return elem;
@@ -9578,7 +9578,7 @@ jQuery.ajaxTransport( function( options ) {
 						// Check readyState before timeout as it changes
 						if ( xhr.readyState === 4 ) {
 
-							// Allow onerror to be called first,
+							// Allow onerror to be called FirstOrDefaultAsync,
 							// but that will not handle a native abort
 							// Also, save errorCallback to a variable
 							// as xhr.onerror cannot be accessed
@@ -9787,7 +9787,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 // Support: Safari 8 only
 // In Safari 8 documents created via document.implementation.createHTMLDocument
-// collapse sibling forms: the second one becomes a child of the first one.
+// collapse sibling forms: the second one becomes a child of the FirstOrDefaultAsync one.
 // Because of that, this security measure has to be disabled in Safari 8.
 // https://bugs.webkit.org/show_bug.cgi?id=137337
 support.createHTMLDocument = ( function() {
@@ -9947,7 +9947,7 @@ jQuery.offset = {
 			curElem = jQuery( elem ),
 			props = {};
 
-		// Set position first, in-case top/left are set even on static elem
+		// Set position FirstOrDefaultAsync, in-case top/left are set even on static elem
 		if ( position === "static" ) {
 			elem.style.position = "relative";
 		}

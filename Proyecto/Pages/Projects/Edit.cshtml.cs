@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Projects
+namespace Proyecto.Pages_Projects
 {
     public class EditModel : PageModel
     {

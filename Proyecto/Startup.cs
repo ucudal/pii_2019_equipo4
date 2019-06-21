@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,7 +37,6 @@ namespace Proyecto
         
             services.AddDbContext<ProjectContext>(options =>
         options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
-            services.AddDbContext<ProyectoIdentityDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
             
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

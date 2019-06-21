@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages.Technicians
+namespace Proyecto.Pages_Technicians
 {
     public class EditModel : PageModel
     {
@@ -29,8 +29,8 @@ namespace Proyecto.Pages.Technicians
             {
                 return NotFound();
             }
-
-            Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+            
+            Technician = await _context.Technician.FirstOrDefaultAsync(t => t.ID == id);
 
             if (Technician == null)
             {
@@ -66,7 +66,6 @@ namespace Proyecto.Pages.Technicians
 
             return RedirectToPage("./Index");
         }
-
         private bool TechnicianExists(int id)
         {
             return _context.Technician.Any(e => e.ID == id);

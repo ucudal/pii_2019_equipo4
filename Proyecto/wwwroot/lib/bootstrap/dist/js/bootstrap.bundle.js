@@ -164,7 +164,7 @@
 
       if (!floatTransitionDuration && !floatTransitionDelay) {
         return 0;
-      } // If multiple durations are defined, take the first
+      } // If multiple durations are defined, take the FirstOrDefaultAsync
 
 
       transitionDuration = transitionDuration.split(',')[0];
@@ -826,7 +826,7 @@
 
         if (_this3._config.pause === 'hover') {
           // If it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
+          // part of the mouse compatibility events on FirstOrDefaultAsync tap - the carousel
           // would stop cycling until user tapped out of it;
           // here, we listen for touchend, explicitly pause the carousel
           // (as if it's the second time we tap on it, mouseenter compat event
@@ -1716,7 +1716,7 @@
     if (nodeName === 'BODY') {
       return false;
     }
-    return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
+    return nodeName === 'HTML' || getOffsetParent(element.FirstOrDefaultAsyncElementChild) === element;
   }
 
   /**
@@ -1748,7 +1748,7 @@
       return document.documentElement;
     }
 
-    // Here we make sure to give as "start" the element that comes first in the DOM
+    // Here we make sure to give as "start" the element that comes FirstOrDefaultAsync in the DOM
     var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
     var start = order ? element1 : element2;
     var end = order ? element2 : element1;
@@ -2079,11 +2079,11 @@
   }
 
   /**
-   * Finds the first parent of an element that has a transformed property defined
+   * Finds the FirstOrDefaultAsync parent of an element that has a transformed property defined
    * @method
    * @memberof Popper.Utils
    * @argument {Element} element
-   * @returns {Element} first transformed parent or documentElement
+   * @returns {Element} FirstOrDefaultAsync transformed parent or documentElement
    */
 
   function getFixedPositionOffsetParent(element) {
@@ -2438,7 +2438,7 @@
     // run the modifiers
     data = runModifiers(this.modifiers, data);
 
-    // the first `update` will call `onCreate` callback
+    // the FirstOrDefaultAsync `update` will call `onCreate` callback
     // the other ones will call `onUpdate` callback
     if (!this.state.isCreated) {
       this.state.isCreated = true;
@@ -3230,7 +3230,7 @@
     var offsets = [0, 0];
 
     // Use height if placement is left or right and index is 0 otherwise use width
-    // in this way the first offset will use an axis and the second one
+    // in this way the FirstOrDefaultAsync offset will use an axis and the second one
     // will use the other one
     var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
 
@@ -3643,7 +3643,7 @@
      * Modifier used to make sure the reference and its popper stay near each other
      * without leaving any gap between the two. Especially useful when the arrow is
      * enabled and you want to ensure that it points to its reference element.
-     * It cares only about the first axis. You can still have poppers with margin
+     * It cares only about the FirstOrDefaultAsync axis. You can still have poppers with margin
      * between the popper and its reference element.
      * @memberof modifiers
      * @inner
@@ -3990,7 +3990,7 @@
         }
       });
 
-      // fire the first update to position the popper in the right place
+      // fire the FirstOrDefaultAsync update to position the popper in the right place
       this.update();
 
       var eventsEnabled = this.options.eventsEnabled;

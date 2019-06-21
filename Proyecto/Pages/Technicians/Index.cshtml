@@ -1,5 +1,5 @@
 @page
-@model Proyecto.Pages.Technicians.IndexModel
+@model Proyecto.Pages_Technicians.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,9 +14,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Technician[0].TechnicianId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Technician[0].Name)
             </th>
             <th>
@@ -28,9 +25,7 @@
     <tbody>
 @foreach (var item in Model.Technician) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TechnicianId)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
