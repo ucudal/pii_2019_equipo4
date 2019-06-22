@@ -9,8 +9,8 @@ using Proyecto.Data;
 namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20190621214605_NewInitialCreate")]
-    partial class NewInitialCreate
+    [Migration("20190622011114_Proj")]
+    partial class Proj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -211,15 +211,11 @@ namespace Proyecto.Migrations
 
                     b.Property<int>("ProjectID");
 
-                    b.Property<int>("ProjectID1");
-
                     b.HasKey("TechnicianID", "ProjectID");
 
                     b.HasAlternateKey("ProjectID", "TechnicianID");
 
-                    b.HasIndex("ProjectID1");
-
-                    b.ToTable("Postulants");
+                    b.ToTable("Postulation");
                 });
 
             modelBuilder.Entity("Proyecto.Models.Project", b =>
@@ -346,7 +342,7 @@ namespace Proyecto.Migrations
                 {
                     b.HasOne("Proyecto.Models.Project", "Project")
                         .WithMany("Postulants")
-                        .HasForeignKey("ProjectID1")
+                        .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Proyecto.Models.Technician", "Technician")
