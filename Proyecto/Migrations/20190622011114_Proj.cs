@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proyecto.Migrations
 {
-    public partial class NewInitialCreate : Migration
+    public partial class Proj : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -241,25 +241,24 @@ namespace Proyecto.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Postulants",
+                name: "Postulation",
                 columns: table => new
                 {
                     TechnicianID = table.Column<int>(nullable: false),
-                    ProjectID = table.Column<int>(nullable: false),
-                    ProjectID1 = table.Column<int>(nullable: false)
+                    ProjectID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Postulants", x => new { x.TechnicianID, x.ProjectID });
-                    table.UniqueConstraint("AK_Postulants_ProjectID_TechnicianID", x => new { x.ProjectID, x.TechnicianID });
+                    table.PrimaryKey("PK_Postulation", x => new { x.TechnicianID, x.ProjectID });
+                    table.UniqueConstraint("AK_Postulation_ProjectID_TechnicianID", x => new { x.ProjectID, x.TechnicianID });
                     table.ForeignKey(
-                        name: "FK_Postulants_Project_ProjectID1",
-                        column: x => x.ProjectID1,
+                        name: "FK_Postulation_Project_ProjectID",
+                        column: x => x.ProjectID,
                         principalTable: "Project",
                         principalColumn: "ProjectID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Postulants_Technician_TechnicianID",
+                        name: "FK_Postulation_Technician_TechnicianID",
                         column: x => x.TechnicianID,
                         principalTable: "Technician",
                         principalColumn: "ID",
@@ -309,11 +308,6 @@ namespace Proyecto.Migrations
                 column: "RolLvlId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Postulants_ProjectID1",
-                table: "Postulants",
-                column: "ProjectID1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Role_RolLvlId",
                 table: "Role",
                 column: "RolLvlId");
@@ -340,7 +334,7 @@ namespace Proyecto.Migrations
                 name: "HiringCost");
 
             migrationBuilder.DropTable(
-                name: "Postulants");
+                name: "Postulation");
 
             migrationBuilder.DropTable(
                 name: "Role");
