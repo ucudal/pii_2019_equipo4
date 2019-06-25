@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Proyecto.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Proyecto.Data;
+
+
 
 namespace Proyecto.Areas.Identity.Pages.Account
 {
@@ -20,23 +24,38 @@ namespace Proyecto.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
+
+            this.RolesList = new List<SelectListItem>();
+            for (int i = 0; i < IdentityData.NonAdminRoleNames.Length; i++)
+            {
+                this.RolesList.Add(new SelectListItem { Value = i.ToString(), Text = IdentityData.NonAdminRoleNames[i] });
+            }
         }
+        [BindProperty]
+        public ApplicationUser ApplicationUser { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+        [BindProperty]
+        public int Role { get; set; }
+
+        [BindProperty]
+        public List<SelectListItem> RolesList { get; }
 
         public class InputModel
         {
@@ -71,17 +90,32 @@ namespace Proyecto.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
         }
-
+        
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-        {
+        { 
+            
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Name = Input.Name, DOB = Input.DOB, UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser 
+
+                { Name = Input.Name, 
+                DOB = Input.DOB, 
+                UserName = Input.Email, 
+                Email = Input.Email };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    var roleToAdd = await _roleManager.FindByNameAsync(IdentityData.NonAdminRoleNames[this.Role]);
+                    _userManager.AddToRoleAsync(user, roleToAdd.Name).Wait();
+
+                    // Es necesario tener acceso a RoleManager para poder buscar el rol de este usuario; se asigna aquí para poder
+                    // buscar por rol después cuando no hay acceso a RoleManager.
+                    user.AssignRole(_userManager, roleToAdd.Name);
+                    await _userManager.UpdateAsync(user);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
@@ -95,11 +129,14 @@ namespace Proyecto.Areas.Identity.Pages.Account
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
+                    
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
             }
 
             // If we got this far, something failed, redisplay form
