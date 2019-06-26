@@ -47,7 +47,6 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
@@ -109,7 +108,6 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
                 }
             }
-
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
@@ -130,7 +128,6 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
-
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);

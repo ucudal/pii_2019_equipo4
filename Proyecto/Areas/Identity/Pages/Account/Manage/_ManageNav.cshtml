@@ -1,4 +1,5 @@
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<Proyecto.Areas.Identity.Data.ApplicationUser> SignInManager
+    <!-- porque tengo que poner Proyecto.Areas.Identity.Data.Technician? -->
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

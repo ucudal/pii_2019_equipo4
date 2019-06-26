@@ -11,6 +11,7 @@ using Proyecto.Models;
 using Proyecto.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto
 {
@@ -32,6 +33,7 @@ namespace Proyecto
                     context.Database.EnsureCreated();
                     SeedProjTech.Initialize(services);
                     SeedData.Initialize(services);
+                    SeedIdentityData.Initialize(services); //permite ingresar como admin
                     context.Database.Migrate();
                 }
                 catch (Exception ex)
