@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Models;
 using Proyecto.Data;
 using Proyecto.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proyecto
 {
@@ -34,12 +36,25 @@ namespace Proyecto
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-        
-            services.AddDbContext<ProjectContext>(options =>
-        options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
-            
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                services.AddDbContext<ProjectContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("ProjectContext")));
+
+                services.AddMvc(config =>
+                {
+                    // Requiere que haya usuarios logueados
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
+                })
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AllowAnonymousToPage("/Privacy");
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        
+
             
         }
 
