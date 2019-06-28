@@ -1,21 +1,25 @@
 using System;
-using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Proyecto.Models
 {
-    public class Role 
+    public class Role
     {
         [Key]
-        public int RoleId {get;set;}
+        public int ProjectID{get;set;}
 
-        [Required]
-        [Display(Name = "Descripción")]
-        public string RolDsc {get;set;}
-
-        [Display(Name = "Nivel")]
-        [Required]
-        public int RolLvlId {get;set;}
-        public RoleLevel level {get;set;}
+        
+        
+        [StringLength(60, MinimumLength = 3)]
+        [Display(Name ="Nivel del Técnico")]
+        public string role{get;set;}
+        
+        public Project Project{get;set;}
+        public Technician Technician{get;set;}
     }
+
+
+
 }

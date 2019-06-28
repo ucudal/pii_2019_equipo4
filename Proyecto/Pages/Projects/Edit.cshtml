@@ -25,6 +25,11 @@
                 <span asp-validation-for="Project.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Project.RoleLevel.roleLevel" class="control-label"></label>
+                <input asp-for="Project.RoleLevel.roleLevel" class="form-control" />
+                <span asp-validation-for="Project.RoleLevel.roleLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Project.StartDate" class="control-label"></label>
                 <input asp-for="Project.StartDate" class="form-control" />
                 <span asp-validation-for="Project.StartDate" class="text-danger"></span>
@@ -38,6 +43,85 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        @if (Model.Technicians != null)
+        {
+            <h4>Technicians in this Project</h4>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Birth Data</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Technicians)
+                {
+                    string technicianToDeleteID = item.ID.ToString();
+                    <tr>
+                        <td>
+                            <form method="post" asp-page-handler="DeleteTechnician"
+                                asp-route-id="@Model.Project.ProjectID" asp-route-technicianToDeleteID="@technicianToDeleteID">
+                                <button class="btn btn-default">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthDate)
+                        </td>
+                        
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+
+        @if (Model.OtherTechnicians != null)
+        {
+            <h4>Other Technicians</h4>
+            <form>
+                <p>
+                    Name: <input type="text" asp-for="SearchString" />
+                    <input type="submit" value="Filter" />
+                </p>
+            </form>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Birth Data</th>
+                    
+                </tr>
+
+                @foreach (var item in Model.OtherTechnicians)
+                {
+                    string technicianToAddID = item.ID.ToString();
+                    <tr>
+                        <td>
+                            <form method="post" asp-page-handler="AddTechnician"
+                                asp-route-id="@Model.Project.ProjectID" asp-route-technicianToAddID="@technicianToAddID">
+                                <button class="btn btn-default">Add</button>
+                            </form>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthDate)
+                        </td>
+                        
+                    </tr>
+                }
+            </table>
+        }
     </div>
 </div>
 

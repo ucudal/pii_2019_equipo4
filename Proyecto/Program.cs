@@ -31,7 +31,6 @@ namespace Proyecto
                         GetRequiredService<ProjectContext>();
                     context.Database.EnsureCreated();
                     SeedProjTech.Initialize(services);
-                    SeedData.Initialize(services);
                     context.Database.Migrate();
                 }
                 catch (Exception ex)

@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.Technician[0].Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Technician[0].RoleLevel)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Technician[0].BirthDate)
             </th>
             <th></th>
@@ -28,6 +31,9 @@
             
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleLevel)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)

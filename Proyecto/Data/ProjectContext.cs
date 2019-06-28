@@ -20,6 +20,9 @@ namespace Proyecto.Data
             builder.Entity<Postulation>().HasKey(t => new {t.TechnicianID,t.ProjectID});
             builder.Entity<Postulation>().HasOne (proj => proj.Project).WithMany(post => post.Postulants).HasForeignKey(proj => proj.ProjectID);
             builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulants).HasForeignKey(tech => tech.TechnicianID);
+        
+            //builder.Entity<Role>().HasKey(t => new Role{t.TechnicianID, t.ProjectID});
+            //builder.Entity<Role>().HasOne(proj => proj.Project).WithMany(rol => rol.RoleLevel)
         }
         
         
@@ -29,10 +32,9 @@ namespace Proyecto.Data
         public DbSet<Proyecto.Models.Project> Project { get; set; }
 
         public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
-        public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Technician> Technician{get;set;}
          public DbSet<Proyecto.Models.Postulation> Postulation{get;set;}
 
-         public DbSet<Proyecto.Models.HiringCost> HiringCost{get;set;}
+         
     }
 }

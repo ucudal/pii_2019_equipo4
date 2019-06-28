@@ -211,7 +211,40 @@ namespace Proyecto.Models
             context.SaveChanges();
         }
 
-        
+        private static void SeedRoleLevel(ProjectContext context)
+        {
+            if(context.RoleLevel.Any())
+            {
+                return;
+            }
+            context.RoleLevel.AddRange(
+                new RoleLevel
+                {
+                    ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID,
+                    roleLevel = "Básico"
+                },
+
+                new RoleLevel
+                {
+                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID,
+                    roleLevel = "Avanzado"
+                },
+
+                new RoleLevel
+                {
+                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID,
+                    roleLevel = "Avanzado"
+                },
+
+                new RoleLevel
+                {
+                    ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID,
+                    roleLevel = "Básico"
+                }
+            );
+            context.SaveChanges();
+        }
+    
         }
 
 }

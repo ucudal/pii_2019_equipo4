@@ -28,6 +28,7 @@ namespace Proyecto.Models
         public DateTime EndDate{get;set;}
 
         public IList<Postulation> Postulants{get;set;}
+        public RoleLevel RoleLevel{get;set;}
         
         //public ICollection<Technician> Technician{get;set;}
 

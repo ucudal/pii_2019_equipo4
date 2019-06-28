@@ -13,8 +13,7 @@ namespace Proyecto.Models
     public class Technician : Person
     {
         
-    
-
-        public ICollection<Postulation> Postulants {get;set;}
+        public RoleLevel RoleLevel{get;set;}
+        public List<Postulation> Postulants {get;set;}
     }
 }
