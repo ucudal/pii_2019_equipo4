@@ -14,16 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.HiringCost[0].level)
+                @Html.DisplayNameFor(model => model.HiringCost[0].Level)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HiringCost[0].HirCosHourly)
+                @Html.DisplayNameFor(model => model.HiringCost[0].HiringCostHourly)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HiringCost[0].HirCosAdditional)
+                @Html.DisplayNameFor(model => model.HiringCost[0].HiringCostAdditional)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HiringCost[0].HirCosFull)
+                @Html.DisplayNameFor(model => model.HiringCost[0].HiringCostFull)
             </th>
             <th></th>
         </tr>
@@ -32,21 +32,21 @@
 @foreach (var item in Model.HiringCost) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.level.RolLvlDsc)
+                @Html.DisplayFor(modelItem => item.Level.RolLevelDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HirCosHourly)
+                @Html.DisplayFor(modelItem => item.HiringCostHourly)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HirCosAdditional)
+                @Html.DisplayFor(modelItem => item.HiringCostAdditional)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HirCosFull)
+                @Html.DisplayFor(modelItem => item.HiringCostFull)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.HirCosId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.HirCosId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.HirCosId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.HiringCostID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.HiringCostID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.HiringCostID">Delete</a>
             </td>
         </tr>
 }

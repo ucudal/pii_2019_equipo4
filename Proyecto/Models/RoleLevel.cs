@@ -7,10 +7,10 @@ namespace Proyecto.Models
     public class RoleLevel 
     {
         [Key]
-        public int RolLvlId {get;set;}
+        public int RolLevelID {get;set;}
 
         [Required]
         [Display(Name = "Descripción")]
-        public string RolLvlDsc{get; set;}
+        public string RolLevelDescription{get; set;}
     }
 }

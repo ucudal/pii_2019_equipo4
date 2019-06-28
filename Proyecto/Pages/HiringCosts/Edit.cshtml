@@ -13,26 +13,26 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="HiringCost.HirCosId" />
+            <input type="hidden" asp-for="HiringCost.HiringCostID" />
             <div class="form-group">
-                <label asp-for="HiringCost.RolLvlId" class="control-label"></label>
-                <select asp-for="HiringCost.RolLvlId" class="form-control" asp-items="ViewBag.RolLvlId"></select>
-                <span asp-validation-for="HiringCost.RolLvlId" class="text-danger"></span>
+                <label asp-for="HiringCost.RolLevelID" class="control-label"></label>
+                <select asp-for="HiringCost.RolLevelID" class="form-control" asp-items="ViewBag.RolLevelID"></select>
+                <span asp-validation-for="HiringCost.RolLevelID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HiringCost.HirCosHourly" class="control-label"></label>
-                <input asp-for="HiringCost.HirCosHourly" class="form-control" />
-                <span asp-validation-for="HiringCost.HirCosHourly" class="text-danger"></span>
+                <label asp-for="HiringCost.HiringCostHourly" class="control-label"></label>
+                <input asp-for="HiringCost.HiringCostHourly" class="form-control" />
+                <span asp-validation-for="HiringCost.HiringCostHourly" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HiringCost.HirCosAdditional" class="control-label"></label>
-                <input asp-for="HiringCost.HirCosAdditional" class="form-control" />
-                <span asp-validation-for="HiringCost.HirCosAdditional" class="text-danger"></span>
+                <label asp-for="HiringCost.HiringCostAdditional" class="control-label"></label>
+                <input asp-for="HiringCost.HiringCostAdditional" class="form-control" />
+                <span asp-validation-for="HiringCost.HiringCostAdditional" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HiringCost.HirCosFull" class="control-label"></label>
-                <input asp-for="HiringCost.HirCosFull" class="form-control" />
-                <span asp-validation-for="HiringCost.HirCosFull" class="text-danger"></span>
+                <label asp-for="HiringCost.HiringCostFull" class="control-label"></label>
+                <input asp-for="HiringCost.HiringCostFull" class="form-control" />
+                <span asp-validation-for="HiringCost.HiringCostFull" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

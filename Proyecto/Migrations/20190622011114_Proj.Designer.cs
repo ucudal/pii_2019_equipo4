@@ -187,20 +187,20 @@ namespace Proyecto.Migrations
 
             modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
                 {
-                    b.Property<int>("HirCosId")
+                    b.Property<int>("HiringCostID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<float>("HirCosAdditional");
+                    b.Property<float>("HiringCostAdditional");
 
-                    b.Property<float>("HirCosFull");
+                    b.Property<float>("HiringCostFull");
 
-                    b.Property<float>("HirCosHourly");
+                    b.Property<float>("HiringCostHourly");
 
-                    b.Property<int>("RolLvlId");
+                    b.Property<int>("RolLevelID");
 
-                    b.HasKey("HirCosId");
+                    b.HasKey("HiringCostID");
 
-                    b.HasIndex("RolLvlId");
+                    b.HasIndex("RolLevelID");
 
                     b.ToTable("HiringCost");
                 });
@@ -244,27 +244,27 @@ namespace Proyecto.Migrations
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("RolDsc")
+                    b.Property<string>("RolDescription")
                         .IsRequired();
 
-                    b.Property<int>("RolLvlId");
+                    b.Property<int>("RolLevelID");
 
                     b.HasKey("RoleId");
 
-                    b.HasIndex("RolLvlId");
+                    b.HasIndex("RolLevelID");
 
                     b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
                 {
-                    b.Property<int>("RolLvlId")
+                    b.Property<int>("RolLevelID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("RolLvlDsc")
+                    b.Property<string>("RolLevelDescription")
                         .IsRequired();
 
-                    b.HasKey("RolLvlId");
+                    b.HasKey("RolLevelID");
 
                     b.ToTable("RoleLevel");
                 });
@@ -332,9 +332,9 @@ namespace Proyecto.Migrations
 
             modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
                 {
-                    b.HasOne("Proyecto.Models.RoleLevel", "level")
+                    b.HasOne("Proyecto.Models.RoleLevel", "Level")
                         .WithMany()
-                        .HasForeignKey("RolLvlId")
+                        .HasForeignKey("RolLevelID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -353,9 +353,9 @@ namespace Proyecto.Migrations
 
             modelBuilder.Entity("Proyecto.Models.Role", b =>
                 {
-                    b.HasOne("Proyecto.Models.RoleLevel", "level")
+                    b.HasOne("Proyecto.Models.RoleLevel", "Level")
                         .WithMany()
-                        .HasForeignKey("RolLvlId")
+                        .HasForeignKey("RolLevelID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

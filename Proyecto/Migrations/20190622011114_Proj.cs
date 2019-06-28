@@ -69,13 +69,13 @@ namespace Proyecto.Migrations
                 name: "RoleLevel",
                 columns: table => new
                 {
-                    RolLvlId = table.Column<int>(nullable: false)
+                    RolLevelID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RolLvlDsc = table.Column<string>(nullable: false)
+                    RolLevelDescription = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleLevel", x => x.RolLvlId);
+                    table.PrimaryKey("PK_RoleLevel", x => x.RolLevelID);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,21 +202,21 @@ namespace Proyecto.Migrations
                 name: "HiringCost",
                 columns: table => new
                 {
-                    HirCosId = table.Column<int>(nullable: false)
+                    HiringCostID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RolLvlId = table.Column<int>(nullable: false),
-                    HirCosHourly = table.Column<float>(nullable: false),
-                    HirCosAdditional = table.Column<float>(nullable: false),
-                    HirCosFull = table.Column<float>(nullable: false)
+                    RolLevelID = table.Column<int>(nullable: false),
+                    HiringCostHourly = table.Column<float>(nullable: false),
+                    HiringCostAdditional = table.Column<float>(nullable: false),
+                    HiringCostFull = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HiringCost", x => x.HirCosId);
+                    table.PrimaryKey("PK_HiringCost", x => x.HiringCostID);
                     table.ForeignKey(
-                        name: "FK_HiringCost_RoleLevel_RolLvlId",
-                        column: x => x.RolLvlId,
+                        name: "FK_HiringCost_RoleLevel_RolLevelID",
+                        column: x => x.RolLevelID,
                         principalTable: "RoleLevel",
-                        principalColumn: "RolLvlId",
+                        principalColumn: "RolLevelID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -226,17 +226,17 @@ namespace Proyecto.Migrations
                 {
                     RoleId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RolDsc = table.Column<string>(nullable: false),
-                    RolLvlId = table.Column<int>(nullable: false)
+                    RolDescription = table.Column<string>(nullable: false),
+                    RolLevelID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.RoleId);
                     table.ForeignKey(
-                        name: "FK_Role_RoleLevel_RolLvlId",
-                        column: x => x.RolLvlId,
+                        name: "FK_Role_RoleLevel_RolLevelID",
+                        column: x => x.RolLevelID,
                         principalTable: "RoleLevel",
-                        principalColumn: "RolLvlId",
+                        principalColumn: "RolLevelID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -303,14 +303,14 @@ namespace Proyecto.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_HiringCost_RolLvlId",
+                name: "IX_HiringCost_RolLevelID",
                 table: "HiringCost",
-                column: "RolLvlId");
+                column: "RolLevelID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Role_RolLvlId",
+                name: "IX_Role_RolLevelID",
                 table: "Role",
-                column: "RolLvlId");
+                column: "RolLevelID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

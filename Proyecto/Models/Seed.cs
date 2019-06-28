@@ -19,12 +19,12 @@ namespace Proyecto.Models
             context.RoleLevel.AddRange(
                 new RoleLevel
                 {
-                    RolLvlDsc = "Básico"
+                    RolLevelDescription = "Básico"
                 },
 
                 new RoleLevel
                 {
-                    RolLvlDsc = "Avanzado"
+                    RolLevelDescription = "Avanzado"
                 }
             );
             context.SaveChanges();
@@ -41,146 +41,146 @@ namespace Proyecto.Models
             context.Role.AddRange(
                 new Role
                 {
-                    RolDsc = "Foto fija",
-                    RolLvlId = 1
+                    RolDescription = "Foto fija",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Asistente de cámara",
-                    RolLvlId = 1
+                    RolDescription = "Asistente de cámara",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Asistente de producción",
-                    RolLvlId = 1
+                    RolDescription = "Asistente de producción",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Asistente de dirección",
-                    RolLvlId = 1
+                    RolDescription = "Asistente de dirección",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Asistente de arte (escenografía, vestuario, utilería)",
-                    RolLvlId = 1
+                    RolDescription = "Asistente de arte (escenografía, vestuario, utilería)",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Sonidista",
-                    RolLvlId = 1
+                    RolDescription = "Sonidista",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Editor",
-                    RolLvlId = 1
+                    RolDescription = "Editor",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Redactor creativo",
-                    RolLvlId = 1
+                    RolDescription = "Redactor creativo",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Presentador / conductor",
-                    RolLvlId = 1
+                    RolDescription = "Presentador / conductor",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Ilustrador",
-                    RolLvlId = 1
+                    RolDescription = "Ilustrador",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Diseñador gráfico",
-                    RolLvlId = 1
+                    RolDescription = "Diseñador gráfico",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Operador de Cabina 02",
-                    RolLvlId = 1
+                    RolDescription = "Operador de Cabina 02",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Operador de Cabina 03 y Estudio de Radio",
-                    RolLvlId = 1
+                    RolDescription = "Operador de Cabina 03 y Estudio de Radio",
+                    RolLevelID = 1
                 },
 
                 new Role
                 {
-                    RolDsc = "Foto fija",
-                    RolLvlId = 2
+                    RolDescription = "Foto fija",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Cámara y asistente de cámara",
-                    RolLvlId = 2
+                    RolDescription = "Cámara y asistente de cámara",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Cámara 360",
-                    RolLvlId = 2
+                    RolDescription = "Cámara 360",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Postproductor de imagen",
-                    RolLvlId = 2
+                    RolDescription = "Postproductor de imagen",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Editor",
-                    RolLvlId = 2
+                    RolDescription = "Editor",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Sonidista",
-                    RolLvlId = 2
+                    RolDescription = "Sonidista",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Postproductor de sonido",
-                    RolLvlId = 2
+                    RolDescription = "Postproductor de sonido",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Redactor creativo",
-                    RolLvlId = 2
+                    RolDescription = "Redactor creativo",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Presentador / conductor",
-                    RolLvlId = 2
+                    RolDescription = "Presentador / conductor",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Animador / infografista",
-                    RolLvlId = 2
+                    RolDescription = "Animador / infografista",
+                    RolLevelID = 2
                 },
 
                 new Role
                 {
-                    RolDsc = "Operador de Cabina 01 Estudio de Grabación",
-                    RolLvlId = 2
+                    RolDescription = "Operador de Cabina 01 Estudio de Grabación",
+                    RolLevelID = 2
                 }
             );
             context.SaveChanges();
@@ -195,17 +195,17 @@ namespace Proyecto.Models
             context.HiringCost.AddRange(
                 new HiringCost 
                 {
-                    RolLvlId = 1,
-                    HirCosHourly = 380,
-                    HirCosAdditional = 150,
-                    HirCosFull = 1200
+                    RolLevelID = 1,
+                    HiringCostHourly = 380,
+                    HiringCostAdditional = 150,
+                    HiringCostFull = 1200
                 },
                 new HiringCost 
                 {
-                    RolLvlId = 2,
-                    HirCosHourly = 520,
-                    HirCosAdditional = 280,
-                    HirCosFull = 2000
+                    RolLevelID = 2,
+                    HiringCostHourly = 520,
+                    HiringCostAdditional = 280,
+                    HiringCostFull = 2000
                 }
                 
             ) ;

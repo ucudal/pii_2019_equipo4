@@ -24,7 +24,7 @@ namespace Proyecto.Pages.HiringCosts
         public async Task OnGetAsync()
         {
             HiringCost = await _context.HiringCost
-                .Include(h => h.level).ToListAsync();
+                .Include(h => h.Level).ToListAsync();
         }
     }
 }

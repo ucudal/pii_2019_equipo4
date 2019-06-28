@@ -31,13 +31,13 @@ namespace Proyecto.Pages.Roles
             }
 
             Role = await _context.Role
-                .Include(r => r.level).FirstOrDefaultAsync(m => m.RoleId == id);
+                .Include(r => r.Level).FirstOrDefaultAsync(m => m.RoleId == id);
 
             if (Role == null)
             {
                 return NotFound();
             }
-           ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
+           ViewData["RolLevelID"] = new SelectList(_context.RoleLevel, "RolLevelID", "RolLevelDescription");
             return Page();
         }
 

@@ -29,9 +29,7 @@ namespace Proyecto.Pages_Technicians
             {
                 return NotFound();
             }
-            
             Technician = await _context.Technician.FirstOrDefaultAsync(t => t.ID == id);
-
             if (Technician == null)
             {
                 return NotFound();
@@ -46,7 +44,7 @@ namespace Proyecto.Pages_Technicians
                 return Page();
             }
 
-            _context.Attach(Technician).State = EntityState.Modified;
+            _context.Attach(Technician).State = EntityState.Modified; // ACA FALLA EL EDIT
 
             try
             {
@@ -63,7 +61,6 @@ namespace Proyecto.Pages_Technicians
                     throw;
                 }
             }
-
             return RedirectToPage("./Index");
         }
         private bool TechnicianExists(int id)

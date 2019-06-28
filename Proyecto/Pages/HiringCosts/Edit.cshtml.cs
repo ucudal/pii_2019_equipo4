@@ -31,13 +31,13 @@ namespace Proyecto.Pages.HiringCosts
             }
 
             HiringCost = await _context.HiringCost
-                .Include(h => h.level).FirstOrDefaultAsync(m => m.HirCosId == id);
+                .Include(h => h.Level).FirstOrDefaultAsync(m => m.HiringCostID == id);
 
             if (HiringCost == null)
             {
                 return NotFound();
             }
-           ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
+           ViewData["RolLevelID"] = new SelectList(_context.RoleLevel, "RolLevelID", "RolLevelDescription");
             return Page();
         }
 
@@ -56,7 +56,7 @@ namespace Proyecto.Pages.HiringCosts
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HiringCostExists(HiringCost.HirCosId))
+                if (!HiringCostExists(HiringCost.HiringCostID))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace Proyecto.Pages.HiringCosts
 
         private bool HiringCostExists(int id)
         {
-            return _context.HiringCost.Any(e => e.HirCosId == id);
+            return _context.HiringCost.Any(e => e.HiringCostID == id);
         }
     }
 }
