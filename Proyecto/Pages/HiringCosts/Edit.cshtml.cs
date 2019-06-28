@@ -31,7 +31,7 @@ namespace Proyecto.Pages.HiringCosts
             }
 
             HiringCost = await _context.HiringCost
-                .Include(h => h.level).FirstOrDefaultAsync(m => m.HirCosId == id);
+                .Include(h => h.Level).FirstOrDefaultAsync(m => m.HiringCostId == id);
 
             if (HiringCost == null)
             {
@@ -56,7 +56,7 @@ namespace Proyecto.Pages.HiringCosts
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HiringCostExists(HiringCost.HirCosId))
+                if (!HiringCostExists(HiringCost.HiringCostId))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace Proyecto.Pages.HiringCosts
 
         private bool HiringCostExists(int id)
         {
-            return _context.HiringCost.Any(e => e.HirCosId == id);
+            return _context.HiringCost.Any(e => e.HiringCostId == id);
         }
     }
 }

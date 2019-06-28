@@ -195,17 +195,17 @@ namespace Proyecto.Models
             context.HiringCost.AddRange(
                 new HiringCost 
                 {
-                    RolLvlId = 1,
-                    HirCosHourly = 380,
-                    HirCosAdditional = 150,
-                    HirCosFull = 1200
+                    RolLevelId = 1,
+                    HiringCostHourly = 380,
+                    HiringCostAdditional = 150,
+                    HiringCostFull = 1200
                 },
                 new HiringCost 
                 {
-                    RolLvlId = 2,
-                    HirCosHourly = 520,
-                    HirCosAdditional = 280,
-                    HirCosFull = 2000
+                    RolLevelId = 2,
+                    HiringCostHourly = 520,
+                    HiringCostAdditional = 280,
+                    HiringCostFull = 2000
                 }
                 
             ) ;
