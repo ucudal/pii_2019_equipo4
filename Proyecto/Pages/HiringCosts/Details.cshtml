@@ -12,32 +12,32 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.HiringCost.level)
+            @Html.DisplayNameFor(model => model.HiringCost.Level)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HiringCost.level.RolLvlDsc)
+            @Html.DisplayFor(model => model.HiringCost.Level.RolLevelDescription)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.HiringCost.HirCosHourly)
+            @Html.DisplayNameFor(model => model.HiringCost.HiringCostHourly)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HiringCost.HirCosHourly)
+            @Html.DisplayFor(model => model.HiringCost.HiringCostHourly)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.HiringCost.HirCosAdditional)
+            @Html.DisplayNameFor(model => model.HiringCost.HiringCostAdditional)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HiringCost.HirCosAdditional)
+            @Html.DisplayFor(model => model.HiringCost.HiringCostAdditional)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.HiringCost.HirCosFull)
+            @Html.DisplayNameFor(model => model.HiringCost.HiringCostFull)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HiringCost.HirCosFull)
+            @Html.DisplayFor(model => model.HiringCost.HiringCostFull)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.HiringCost.HirCosId">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.HiringCost.HiringCostID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

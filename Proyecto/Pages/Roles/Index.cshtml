@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Role[0].RolDsc)
+                @Html.DisplayNameFor(model => model.Role[0].RolDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role[0].level)
+                @Html.DisplayNameFor(model => model.Role[0].Level)
             </th>
             <th></th>
         </tr>
@@ -26,10 +26,10 @@
 @foreach (var item in Model.Role) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RolDsc)
+                @Html.DisplayFor(modelItem => item.RolDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.level.RolLvlDsc)
+                @Html.DisplayFor(modelItem => item.Level.RolLevelDescription)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.RoleId">Edit</a> |

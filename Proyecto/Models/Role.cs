@@ -11,11 +11,11 @@ namespace Proyecto.Models
 
         [Required]
         [Display(Name = "Descripción")]
-        public string RolDsc {get;set;}
+        public string RolDescription {get;set;}
 
         [Display(Name = "Nivel")]
         [Required]
-        public int RolLvlId {get;set;}
-        public RoleLevel level {get;set;}
+        public int RolLevelID {get;set;}
+        public RoleLevel Level {get;set;}
     }
 }

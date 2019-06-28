@@ -21,7 +21,7 @@ namespace Proyecto.Pages.HiringCosts
 
         public IActionResult OnGet()
         {
-        ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
+        ViewData["RolLevelID"] = new SelectList(_context.RoleLevel, "RolLevelID", "RolLevelDescription");
             return Page();
         }
 

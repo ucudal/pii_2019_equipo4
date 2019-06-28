@@ -28,7 +28,7 @@ namespace Proyecto.Pages.RoleLevels
                 return NotFound();
             }
 
-            RoleLevel = await _context.RoleLevel.FirstOrDefaultAsync(m => m.RolLvlId == id);
+            RoleLevel = await _context.RoleLevel.FirstOrDefaultAsync(m => m.RolLevelID == id);
 
             if (RoleLevel == null)
             {

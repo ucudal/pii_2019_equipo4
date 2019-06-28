@@ -24,7 +24,7 @@ namespace Proyecto.Pages.Roles
         public async Task OnGetAsync()
         {
             Role = await _context.Role
-                .Include(r => r.level).ToListAsync();
+                .Include(r => r.Level).ToListAsync();
         }
     }
 }

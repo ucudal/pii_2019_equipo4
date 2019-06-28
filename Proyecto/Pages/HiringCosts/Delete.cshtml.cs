@@ -30,7 +30,7 @@ namespace Proyecto.Pages.HiringCosts
             }
 
             HiringCost = await _context.HiringCost
-                .Include(h => h.Level).FirstOrDefaultAsync(m => m.HiringCostId == id);
+                .Include(h => h.Level).FirstOrDefaultAsync(m => m.HiringCostID == id);
 
             if (HiringCost == null)
             {

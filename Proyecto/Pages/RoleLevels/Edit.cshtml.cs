@@ -30,7 +30,7 @@ namespace Proyecto.Pages.RoleLevels
                 return NotFound();
             }
 
-            RoleLevel = await _context.RoleLevel.FirstOrDefaultAsync(m => m.RolLvlId == id);
+            RoleLevel = await _context.RoleLevel.FirstOrDefaultAsync(m => m.RolLevelID == id);
 
             if (RoleLevel == null)
             {
@@ -54,7 +54,7 @@ namespace Proyecto.Pages.RoleLevels
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoleLevelExists(RoleLevel.RolLvlId))
+                if (!RoleLevelExists(RoleLevel.RolLevelID))
                 {
                     return NotFound();
                 }
@@ -69,7 +69,7 @@ namespace Proyecto.Pages.RoleLevels
 
         private bool RoleLevelExists(int id)
         {
-            return _context.RoleLevel.Any(e => e.RolLvlId == id);
+            return _context.RoleLevel.Any(e => e.RolLevelID == id);
         }
     }
 }

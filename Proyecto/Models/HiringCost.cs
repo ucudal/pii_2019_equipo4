@@ -7,11 +7,11 @@ namespace Proyecto.Models
     public class HiringCost
     {
         [Key]
-        public int HiringCostId {get;set;}
+        public int HiringCostID {get;set;}
 
         [Display(Name = "Nivel")]
         [Required]
-        public int RolLevelId {get;set;}
+        public int RolLevelID {get;set;}
         public RoleLevel Level {get;set;}
 
         [Display(Name = "1 era. hora")]
