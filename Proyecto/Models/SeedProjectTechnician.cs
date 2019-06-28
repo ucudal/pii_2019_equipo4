@@ -6,7 +6,7 @@ using Proyecto.Data;
 
 namespace Proyecto.Models
 {
-    public static class SeedProjTech
+    public static class SeedProjectTechnician
     {
 
         public static void Initialize(IServiceProvider serviceProvider)
@@ -35,7 +35,7 @@ namespace Proyecto.Models
                 {
                     ProjectID = 1,
                     Title = "When Harry Met Sally",
-                    Description ="prueba1 ",
+                    Description ="prueba1",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                     
@@ -45,7 +45,7 @@ namespace Proyecto.Models
                 {
                     ProjectID = 2,
                     Title = "Ghostbusters",
-                    Description ="prueba1 ",
+                    Description ="prueba1",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 },
@@ -54,7 +54,7 @@ namespace Proyecto.Models
                 {
                     ProjectID = 3,
                     Title = "Ghostbusters 2",
-                    Description ="prueba1 ",
+                    Description ="prueba1",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 },
@@ -63,7 +63,7 @@ namespace Proyecto.Models
                 {
                     ProjectID = 4,
                     Title = "Rio Bravo",
-                    Description ="prueba1 ",
+                    Description ="prueba1",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 }
