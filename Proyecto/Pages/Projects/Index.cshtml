@@ -10,6 +10,15 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        <select asp-for="RoleLevel" asp-items="Model.RoleFilter">
+            <option value="">All</option>
+        </select>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -29,7 +38,7 @@
             {
                 selectedRow = "success";
             }
-            <tr class="@selectedRow">
+            <tr class="@selectedRow">   
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
@@ -37,8 +46,11 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RoleLevel.roleLevel)
-                </td>
+                    @if(item.RoleLevel!= null)
+                    {
+                        @item.RoleLevel.roleLevel
+                    }
+                </td>                
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
@@ -59,8 +71,7 @@
 @if (Model.IndexData.TechniciansIndex != null)
 {
     <h3>
-        Technician in Selected Project
-    </h3>
+        Technician in Selected Project (tecnicos postulados en el proyecto)   </h3>
     <table class="table">
         <tr>
             <th>Name</th>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Models
 {
@@ -13,7 +14,6 @@ namespace Proyecto.Models
     public class Technician : Person
     {
         
-        public RoleLevel RoleLevel{get;set;}
         public List<Postulation> Postulants {get;set;}
     }
 }

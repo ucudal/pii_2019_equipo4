@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Proyecto.Data;
 using Proyecto.Models;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Projects
 {
+    [Authorize(Roles = IdentityData.AdminRoleName)]
     public class CreateModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;

@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Identity
+@using Proyecto.Areas.Identity.Data;
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
+
+<ul class="navbar-nav">
+@if(signInManager.IsSignedIn(User)) 
+{
+    var currentUser = await userManager.GetUserAsync(User);
+    var isAdmin = currentUser !=null
+    && await userManager.IsInRoleAsync(currentUser, IdentityData.AdminRoleName);
+
+    if (isAdmin)
+    //user.IsInRole("Administrador")
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a class="nav-link btn btn-link text-dark" href="https://localhost:5001/Identity/Users">Users
+                </a>
+            </li>
+            <li>
+                <a class="nav-link btn btn-link text-dark" href="https://localhost:5001/Technicians">Technicians
+                </a>
+            </li>
+        </ul>
+        
+        
+    }
+}
+</ul>
