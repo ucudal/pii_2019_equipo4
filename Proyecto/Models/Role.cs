@@ -16,6 +16,7 @@ namespace Proyecto.Models
         [Display(Name = "Nivel")]
         [Required]
         public int RolLevelID {get;set;}
+        [Display(Name = "Nivel")]
         public RoleLevel Level {get;set;}
     }
 }
