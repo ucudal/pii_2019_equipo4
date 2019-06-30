@@ -26,7 +26,7 @@ namespace Proyecto.Pages_Technicians
 
         public async Task OnGetAsync()
         {
-            Technician = await _context.Technician.ToListAsync();
+            Technician = await _context.GetTechnicianAsync();
         }
     }
 }

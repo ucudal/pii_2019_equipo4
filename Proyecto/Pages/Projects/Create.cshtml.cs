@@ -37,8 +37,7 @@ namespace Proyecto.Pages_Projects
                 return Page();
             }
 
-            _context.Project.Add(Project);
-            await _context.SaveChangesAsync();
+            await _context.AddProjectAsync(Project);
 
             return RedirectToPage("./Index");
         }

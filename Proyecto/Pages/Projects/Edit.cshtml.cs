@@ -97,7 +97,7 @@ namespace Proyecto.Pages_Projects
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(Project.ProjectID))
+                if (!_context.ProjectExists(Project.ProjectID))
                 {
                     return NotFound();
                 }
@@ -131,7 +131,7 @@ namespace Proyecto.Pages_Projects
             }
             catch(DbUpdateConcurrencyException)
             {
-                if(!ProjectExists(Project.ProjectID))
+                if(!_context.ProjectExists(Project.ProjectID))
                 {
                     return NotFound();
                 }
@@ -144,8 +144,7 @@ namespace Proyecto.Pages_Projects
 
         }
         public async Task<IActionResult> OnPostAddTechnicianAsync(int? id, int? technicianToAddID)
-        //actor ToAddID corresponde a @actortoAddId
-        //Add actor corresponde a AddActor
+        
         {
             Project projToUpdate = await _context.Project.
             Include(r => r.RoleLevel).Include(p => p.Postulants)
@@ -157,7 +156,7 @@ namespace Proyecto.Pages_Projects
 
             if (technicianToAddID != null)
             {
-                Technician technicianToAdd = await _context.Technician.Where(a => a.ID == technicianToAddID).FirstOrDefaultAsync();
+                Technician technicianToAdd = await _context.GetTechnicianByIdAsync(technicianToAddID); 
                 if (technicianToAdd != null)
                 {
                     //request 
@@ -179,7 +178,7 @@ namespace Proyecto.Pages_Projects
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(Project.ProjectID))
+                if (!_context.ProjectExists(Project.ProjectID))
                 {
                     return NotFound();
                 }
@@ -192,10 +191,5 @@ namespace Proyecto.Pages_Projects
             return Redirect(Request.Path + $"?id={id}");
         }
 
-        private bool ProjectExists(int id)
-            
-        {
-                return _context.Project.Any(e => e.ProjectID == id);
-        }
     }
 }

@@ -33,7 +33,7 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
             
-            Technician = await _context.Technician.AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
+            Technician = await _context.GetTechnicianByIdAsync(id);
 
             if (Technician == null)
             {
@@ -54,12 +54,12 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FindAsync(id);
+            Technician = await _context.GetTechnicianByIdAsync(id);
 
             if (Technician != null)
             {
-                _context.Technician.Remove(Technician);
-                await _context.SaveChangesAsync();
+               
+                await _context.RemoveTechnicianAsync(Technician);
             }
 
             return RedirectToPage("./Index");

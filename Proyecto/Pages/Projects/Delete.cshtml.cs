@@ -29,7 +29,7 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Project = await _context.GetProjectByIdAsync(id);
 
             if (Project == null)
             {
@@ -45,12 +45,11 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            Project = await _context.Project.FindAsync(id);
+            Project = await _context.GetProjectByIdAsync(id);
 
             if (Project != null)
             {
-                _context.Project.Remove(Project);
-                await _context.SaveChangesAsync();
+                await _context.RemoveProjectAsync(Project);
             }
 
             return RedirectToPage("./Index");

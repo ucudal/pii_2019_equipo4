@@ -37,8 +37,7 @@ namespace Proyecto.Pages_Technicians
                 return Page();
             }
 
-            _context.Technician.Add(Technician);
-            await _context.SaveChangesAsync();
+            await _context.AddTechnicianAsync(Technician);
 
             return RedirectToPage("./Index");
         }

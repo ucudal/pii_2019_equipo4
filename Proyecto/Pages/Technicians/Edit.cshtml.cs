@@ -33,7 +33,7 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
             
-            Technician = await _context.Technician.FirstOrDefaultAsync(t => t.ID == id);
+            Technician = await _context.GetTechnicianByIdAsync(id);
 
             if (Technician == null)
             {
@@ -57,7 +57,7 @@ namespace Proyecto.Pages_Technicians
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TechnicianExists(Technician.ID))
+                if (!_context.TechnicianExists(Technician.ID))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,6 @@ namespace Proyecto.Pages_Technicians
 
             return RedirectToPage("./Index");
         }
-        private bool TechnicianExists(int id)
-        {
-            return _context.Technician.Any(e => e.ID == id);
-        }
+        
     }
 }

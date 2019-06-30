@@ -30,7 +30,7 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Project = await _context.GetProjectByIdAsync(id);
 
             if (Project == null)
             {
