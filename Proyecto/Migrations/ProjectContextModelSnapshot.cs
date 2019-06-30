@@ -134,10 +134,10 @@ namespace Proyecto.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<DateTime>("BirthDate");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime>("DOB");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -183,7 +183,7 @@ namespace Proyecto.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
+            modelBuilder.Entity("Proyecto.Models.Client", b =>
                 {
                     b.Property<int>("HiringCostID")
                         .ValueGeneratedOnAdd();
@@ -200,7 +200,8 @@ namespace Proyecto.Migrations
 
                     b.HasIndex("RolLevelID");
 
-                    b.ToTable("HiringCost");
+
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
@@ -263,6 +264,7 @@ namespace Proyecto.Migrations
                         .IsRequired();
 
                     b.HasKey("RolLevelID");
+
 
                     b.ToTable("RoleLevel");
                 });
@@ -336,6 +338,7 @@ namespace Proyecto.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
                 {
                     b.HasOne("Proyecto.Models.Project", "Project")
@@ -349,11 +352,12 @@ namespace Proyecto.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Proyecto.Models.Role", b =>
+            modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
                 {
                     b.HasOne("Proyecto.Models.RoleLevel", "Level")
                         .WithMany()
                         .HasForeignKey("RolLevelID")
+
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

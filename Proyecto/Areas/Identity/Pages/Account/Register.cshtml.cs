@@ -12,6 +12,10 @@ using Proyecto.Areas.Identity.Data;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+using Proyecto.Data;
+using Proyecto.Models;
+
+
 namespace Proyecto.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -19,6 +23,7 @@ namespace Proyecto.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ProjectContext _context;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -67,7 +72,7 @@ namespace Proyecto.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Birth Date")]
             [DataType(DataType.Date)]
-            public DateTime DOB { get; set; }
+            public DateTime BirthDate { get; set; }
 
             [Required]
             [EmailAddress]
@@ -96,7 +101,14 @@ namespace Proyecto.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Name = Input.Name, DOB = Input.DOB, UserName = Input.Email, Email = Input.Email };
+                //var user = new ApplicationUser { Name = Input.Name, DOB = Input.DOB, UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser 
+
+                { Name = Input.Name, 
+                BirthDate = Input.BirthDate, 
+                UserName = Input.Email, 
+                Email = Input.Email };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -110,6 +122,7 @@ namespace Proyecto.Areas.Identity.Pages.Account
                     user.AssignRole(_userManager, roleToAdd.Name);
 
                     await _userManager.UpdateAsync(user);
+
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(

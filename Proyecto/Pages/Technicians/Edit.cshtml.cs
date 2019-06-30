@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Technicians
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class EditModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;

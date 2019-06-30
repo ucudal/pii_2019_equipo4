@@ -9,8 +9,8 @@ using Proyecto.Data;
 namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20190622011114_Proj")]
-    partial class Proj
+    [Migration("20190628234905_NewInitialCreate")]
+    partial class NewInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,10 +136,10 @@ namespace Proyecto.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<DateTime>("BirthDate");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime>("DOB");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -185,7 +185,7 @@ namespace Proyecto.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Proyecto.Models.HiringCost", b =>
+            modelBuilder.Entity("Proyecto.Models.Client", b =>
                 {
                     b.Property<int>("HiringCostID")
                         .ValueGeneratedOnAdd();
@@ -201,8 +201,18 @@ namespace Proyecto.Migrations
                     b.HasKey("HiringCostID");
 
                     b.HasIndex("RolLevelID");
+//                     b.Property<int>("ID")
+//                         .ValueGeneratedOnAdd();
 
-                    b.ToTable("HiringCost");
+//                     b.Property<DateTime>("BirthDate");
+
+//                     b.Property<string>("Name")
+//                         .IsRequired()
+//                         .HasMaxLength(60);
+
+//                     b.HasKey("ID");
+
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
@@ -351,11 +361,14 @@ namespace Proyecto.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Proyecto.Models.Role", b =>
+            modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
                 {
-                    b.HasOne("Proyecto.Models.RoleLevel", "Level")
-                        .WithMany()
-                        .HasForeignKey("RolLevelID")
+//                     b.HasOne("Proyecto.Models.RoleLevel", "Level")
+//                         .WithMany()
+//                         .HasForeignKey("RolLevelID")
+                    b.HasOne("Proyecto.Models.Project", "Project")
+                        .WithOne("RoleLevel")
+                        .HasForeignKey("Proyecto.Models.RoleLevel", "ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

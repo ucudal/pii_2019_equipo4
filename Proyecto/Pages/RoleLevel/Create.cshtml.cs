@@ -7,12 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Proyecto.Data;
 using Proyecto.Models;
-using Microsoft.AspNetCore.Authorization;
-using Proyecto.Areas.Identity.Data;
 
-namespace Proyecto.Pages_Projects
+namespace Proyecto.Pages.HiringCosts
 {
-    [Authorize(Roles = IdentityData.AdminRoleName)]
     public class CreateModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -24,11 +21,12 @@ namespace Proyecto.Pages_Projects
 
         public IActionResult OnGet()
         {
+        ViewData["RolLevelID"] = new SelectList(_context.RoleLevel, "RolLevelID", "RolLevelDescription");
             return Page();
         }
 
         [BindProperty]
-        public Project Project { get; set; }
+        public HiringCost HiringCost { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -37,7 +35,7 @@ namespace Proyecto.Pages_Projects
                 return Page();
             }
 
-            _context.Project.Add(Project);
+            _context.HiringCost.Add(HiringCost);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

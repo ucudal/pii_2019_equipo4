@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 using Proyecto.Models;
 
 namespace Proyecto.Pages_Technicians
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class DeleteModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;

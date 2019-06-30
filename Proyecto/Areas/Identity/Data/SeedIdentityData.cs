@@ -36,7 +36,7 @@ namespace Proyecto.Areas.Identity.Data
                 user.Name = IdentityData.AdminName;
                 user.UserName = IdentityData.AdminUserName;
                 user.Email = IdentityData.AdminMail;
-                user.DOB = IdentityData.AdminDOB;
+                user.BirthDate = IdentityData.AdminDOB;
                 // Es necesario tener acceso a RoleManager para poder buscar el rol de este usuario; se asigna aquí para poder
                 // buscar por rol después cuando no hay acceso a RoleManager.
                 user.AssignRole(userManager, IdentityData.AdminRoleName);

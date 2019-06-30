@@ -34,6 +34,7 @@ namespace Proyecto
                     SeedProjectTechnician.Initialize(services);
                     SeedData.Initialize(services);
                     SeedIdentityData.Initialize(services); //permite ingresar como admin
+
                     context.Database.Migrate();
                 }
                 catch (Exception ex)

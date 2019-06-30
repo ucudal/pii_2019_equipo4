@@ -1,17 +1,18 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Proyecto.Data;
 using Proyecto.Models;
-using Microsoft.AspNetCore.Authorization;
-using Proyecto.Areas.Identity.Data;
 
-namespace Proyecto.Pages_Projects
+namespace Proyecto.Pages.RoleLevel
 {
-    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class DeleteModel : PageModel
     {
-        
         private readonly Proyecto.Data.ProjectContext _context;
 
         public DeleteModel(Proyecto.Data.ProjectContext context)
@@ -20,7 +21,7 @@ namespace Proyecto.Pages_Projects
         }
 
         [BindProperty]
-        public Project Project { get; set; }
+        public Proyecto.Models.RoleLevel RoleLevel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +30,10 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            RoleLevel = await _context.RoleLevel
+                .Include(r => r.Project).FirstOrDefaultAsync(m => m.ProjectID == id);
 
-            if (Project == null)
+            if (RoleLevel == null)
             {
                 return NotFound();
             }
@@ -45,11 +47,11 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            Project = await _context.Project.FindAsync(id);
+            RoleLevel = await _context.RoleLevel.FindAsync(id);
 
-            if (Project != null)
+            if (RoleLevel != null)
             {
-                _context.Project.Remove(Project);
+                _context.RoleLevel.Remove(RoleLevel);
                 await _context.SaveChangesAsync();
             }
 
