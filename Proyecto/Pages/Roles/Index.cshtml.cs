@@ -19,12 +19,13 @@ namespace Proyecto.Pages.Roles
             _context = context;
         }
 
-        public IList<Role> Role { get;set; }
+        public IList<Role> Role { get; set; }
 
         public async Task OnGetAsync()
         {
             Role = await _context.Role
                 .Include(r => r.Level).ToListAsync();
+            Role.OrderByDescending(s => s.RolLevelID);
         }
     }
 }

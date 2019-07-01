@@ -12,9 +12,9 @@ namespace Proyecto.Models
     // Add profile data for application users by adding properties to the Technician class
     public class Technician : Person
     {
-        
-    
+        public ICollection<Postulation> Postulants { get; set; }
 
-        public ICollection<Postulation> Postulants {get;set;}
+        [Display(Name = "Roles")]
+        public ICollection<TechnicianRole> TechnicianRoles { get; set; }
     }
 }
