@@ -8,27 +8,6 @@ namespace Proyecto.Models
 {
     public static class SeedData
     {
-        private static void SeedRoleLevels(ProjectContext context)
-        {
-            // Look for any RoleLevel.
-            if (context.RoleLevel.Any())
-            {
-                return;   // DB has been seeded
-            }
-
-            context.RoleLevel.AddRange(
-                new RoleLevel
-                {
-                    RolLevelDescription = "Básico"
-                },
-
-                new RoleLevel
-                {
-                    RolLevelDescription = "Avanzado"
-                }
-            );
-            context.SaveChanges();
-        }
 
         private static void SeedRoles(ProjectContext context)
         {
@@ -368,7 +347,6 @@ namespace Proyecto.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ProjectContext>>()))
             {
-                SeedRoleLevels(context);
                 SeedRoles(context);
                 SeedHiringCost(context);
                 /*SeedProject(context);
