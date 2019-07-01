@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 using Proyecto.Models;
 
 namespace Proyecto.Pages_Technicians
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class DeleteModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -30,7 +33,7 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
             
-            Technician = await _context.Technician.AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
+            Technician = await _context.GetTechnicianByIdAsync(id);
 
             if (Technician == null)
             {
@@ -51,12 +54,12 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-            Technician = await _context.Technician.FindAsync(id);
+            Technician = await _context.GetTechnicianByIdAsync(id);
 
             if (Technician != null)
             {
-                _context.Technician.Remove(Technician);
-                await _context.SaveChangesAsync();
+               
+                await _context.RemoveTechnicianAsync(Technician);
             }
 
             return RedirectToPage("./Index");

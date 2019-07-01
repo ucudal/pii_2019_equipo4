@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +12,7 @@ using Proyecto.Models;
 
 namespace Proyecto.Pages_Technicians
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class CreateModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -34,8 +37,7 @@ namespace Proyecto.Pages_Technicians
                 return Page();
             }
 
-            _context.Technician.Add(Technician);
-            await _context.SaveChangesAsync();
+            await _context.AddTechnicianAsync(Technician);
 
             return RedirectToPage("./Index");
         }

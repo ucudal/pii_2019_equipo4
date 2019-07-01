@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proyecto.Migrations
 {
-    public partial class Proj : Migration
+    public partial class NewInitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,12 +41,26 @@ namespace Proyecto.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    DOB = table.Column<DateTime>(nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
                     Role = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Client",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(maxLength: 60, nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Client", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,19 +77,6 @@ namespace Proyecto.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Project", x => x.ProjectID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoleLevel",
-                columns: table => new
-                {
-                    RolLevelID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RolLevelDescription = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoleLevel", x => x.RolLevelID);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,44 +200,20 @@ namespace Proyecto.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HiringCost",
+                name: "RoleLevel",
                 columns: table => new
                 {
-                    HiringCostID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RolLevelID = table.Column<int>(nullable: false),
-                    HiringCostHourly = table.Column<float>(nullable: false),
-                    HiringCostAdditional = table.Column<float>(nullable: false),
-                    HiringCostFull = table.Column<float>(nullable: false)
+                    ProjectID = table.Column<int>(nullable: false),
+                    roleLevel = table.Column<string>(maxLength: 60, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HiringCost", x => x.HiringCostID);
+                    table.PrimaryKey("PK_RoleLevel", x => x.ProjectID);
                     table.ForeignKey(
-                        name: "FK_HiringCost_RoleLevel_RolLevelID",
-                        column: x => x.RolLevelID,
-                        principalTable: "RoleLevel",
-                        principalColumn: "RolLevelID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    RoleId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RolDescription = table.Column<string>(nullable: false),
-                    RolLevelID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.RoleId);
-                    table.ForeignKey(
-                        name: "FK_Role_RoleLevel_RolLevelID",
-                        column: x => x.RolLevelID,
-                        principalTable: "RoleLevel",
-                        principalColumn: "RolLevelID",
+                        name: "FK_RoleLevel_Project_ProjectID",
+                        column: x => x.ProjectID,
+                        principalTable: "Project",
+                        principalColumn: "ProjectID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -301,16 +278,6 @@ namespace Proyecto.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HiringCost_RolLevelID",
-                table: "HiringCost",
-                column: "RolLevelID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Role_RolLevelID",
-                table: "Role",
-                column: "RolLevelID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -331,13 +298,13 @@ namespace Proyecto.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "HiringCost");
+                name: "Client");
 
             migrationBuilder.DropTable(
                 name: "Postulation");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "RoleLevel");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -346,13 +313,10 @@ namespace Proyecto.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Project");
-
-            migrationBuilder.DropTable(
                 name: "Technician");
 
             migrationBuilder.DropTable(
-                name: "RoleLevel");
+                name: "Project");
         }
     }
 }

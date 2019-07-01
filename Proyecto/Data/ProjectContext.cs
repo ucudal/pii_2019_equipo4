@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Areas.Identity.Data;
 using Proyecto.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Proyecto.Data
 {
@@ -20,6 +23,9 @@ namespace Proyecto.Data
             builder.Entity<Postulation>().HasKey(t => new {t.TechnicianID,t.ProjectID});
             builder.Entity<Postulation>().HasOne (proj => proj.Project).WithMany(post => post.Postulants).HasForeignKey(proj => proj.ProjectID);
             builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulants).HasForeignKey(tech => tech.TechnicianID);
+        
+            
+            
         }
         
         
@@ -29,10 +35,52 @@ namespace Proyecto.Data
         public DbSet<Proyecto.Models.Project> Project { get; set; }
 
         public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
-        public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Technician> Technician{get;set;}
+        public DbSet<Proyecto.Models.Client> Client {get;set;}
          public DbSet<Proyecto.Models.Postulation> Postulation{get;set;}
 
-         public DbSet<Proyecto.Models.HiringCost> HiringCost{get;set;}
+        public bool TechnicianExists(int id)
+        {
+            return this.Technician.Any(e => e.ID == id);
+        }
+
+        public async virtual Task<List<Technician>> GetTechnicianAsync() => await this.Technician
+                .AsNoTracking()
+                .ToListAsync();
+
+        public Task<Technician> GetTechnicianByIdAsync(int? id)
+        {
+            return this.Technician.FirstOrDefaultAsync(m => m.ID == id);
+        }
+
+        public Task<int> AddTechnicianAsync(Technician Technician)
+        {
+            this.Technician.Add(Technician);
+            return this.SaveChangesAsync();
+        }
+
+        public Task<int> RemoveTechnicianAsync(Technician Technician)
+        {
+            this.Technician.Remove(Technician);
+            return this.SaveChangesAsync();
+        }
+        public bool ProjectExists(int id)
+        {
+            return this.Project.Any(p => p.ProjectID == id);
+        }
+        public Task<Project> GetProjectByIdAsync(int? id)
+        {
+            return this.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+        }
+        public Task<int> AddProjectAsync(Project Project)
+        {
+            this.Project.Add(Project);
+            return this.SaveChangesAsync();
+        }
+        public Task<int> RemoveProjectAsync(Project Project)
+        {
+            this.Project.Remove(Project);
+            return this.SaveChangesAsync();
+        }
     }
 }

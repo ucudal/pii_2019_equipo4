@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Technicians
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class EditModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -29,7 +32,9 @@ namespace Proyecto.Pages_Technicians
             {
                 return NotFound();
             }
-            Technician = await _context.Technician.FirstOrDefaultAsync(t => t.ID == id);
+            
+            Technician = await _context.GetTechnicianByIdAsync(id);
+
             if (Technician == null)
             {
                 return NotFound();
@@ -52,7 +57,7 @@ namespace Proyecto.Pages_Technicians
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TechnicianExists(Technician.ID))
+                if (!_context.TechnicianExists(Technician.ID))
                 {
                     return NotFound();
                 }
@@ -63,9 +68,6 @@ namespace Proyecto.Pages_Technicians
             }
             return RedirectToPage("./Index");
         }
-        private bool TechnicianExists(int id)
-        {
-            return _context.Technician.Any(e => e.ID == id);
-        }
+        
     }
 }

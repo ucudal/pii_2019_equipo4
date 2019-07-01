@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+/*Patrones
+Expert: es experta en el conocimiento de la información
+necesaria para la creacion de un proyecto
+Creator: cumple con creator ya que agrega y contiene objetos de RoleLevel y Postulation
+*/
 
 namespace Proyecto.Models
 {
@@ -28,6 +33,13 @@ namespace Proyecto.Models
         public DateTime EndDate{get;set;}
 
         public IList<Postulation> Postulants{get;set;}
+        public RoleLevel RoleLevel
+        {get
+            {
+                return new RoleLevel();
+            }
+            set{}
+        }
         
         //public ICollection<Technician> Technician{get;set;}
 

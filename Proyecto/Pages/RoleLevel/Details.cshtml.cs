@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
-using Microsoft.AspNetCore.Authorization;
-using Proyecto.Areas.Identity.Data;
 
-namespace Proyecto.Pages_Projects
+namespace Proyecto.Pages.RoleLevel
 {
     public class DetailsModel : PageModel
     {
@@ -21,7 +19,7 @@ namespace Proyecto.Pages_Projects
             _context = context;
         }
 
-        public Project Project { get; set; }
+        public Proyecto.Models.RoleLevel RoleLevel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,9 +28,10 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            Project = await _context.GetProjectByIdAsync(id);
+            RoleLevel = await _context.RoleLevel
+                .Include(r => r.Project).FirstOrDefaultAsync(m => m.ProjectID == id);
 
-            if (Project == null)
+            if (RoleLevel == null)
             {
                 return NotFound();
             }

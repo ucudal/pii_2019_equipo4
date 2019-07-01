@@ -55,7 +55,7 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
             [Required]
             [Display(Name = "Birth Date")]
             [DataType(DataType.Date)]
-            public DateTime DOB { get; set; }
+            public DateTime BirthDate { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -75,7 +75,7 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 Name = user.Name,
-                DOB = user.DOB,
+                BirthDate = user.BirthDate,
                 Email = email,
                 PhoneNumber = phoneNumber
             };
@@ -113,9 +113,9 @@ namespace Proyecto.Areas.Identity.Pages.Account.Manage
                 user.Name = Input.Name;
             }
 
-            if (Input.DOB != user.DOB)
+            if (Input.BirthDate != user.BirthDate)
             {
-                user.DOB = Input.DOB;
+                user.BirthDate = Input.BirthDate;
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

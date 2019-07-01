@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Models;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Technicians
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class DetailsModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -40,7 +43,7 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-           Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+           Technician = await _context.GetTechnicianByIdAsync(id);
            
            Projects = LoadProjects();
 

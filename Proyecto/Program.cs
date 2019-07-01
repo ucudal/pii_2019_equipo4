@@ -32,8 +32,7 @@ namespace Proyecto
                         GetRequiredService<ProjectContext>();
                     context.Database.EnsureCreated();
                     SeedProjTech.Initialize(services);
-                    SeedData.Initialize(services);
-                    SeedIdentityData.Initialize(services); //permite ingresar como admin
+                    SeedIdentityData.Initialize(services);
                     context.Database.Migrate();
                 }
                 catch (Exception ex)
