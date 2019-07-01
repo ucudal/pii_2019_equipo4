@@ -6,6 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto.Models
 {
+    /*Patrones
+Expert: es experta en el conocimiento de la información
+necesaria para la creacion de un proyecto
+Creator: cumple con creator ya que agrega y contiene objetos de RoleLevel y Postulation
+*/
     public class Project
     {
         public int ProjectID {get;set;}
