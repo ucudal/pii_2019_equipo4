@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using Xunit;
 using Proyecto.Models;
-using Proyecto.Pages.RoleLevel;
+using Proyecto.Pages_Technicians;
 using Proyecto.Data;
 using Proyecto.Areas.Identity.Data;
-/*
+
 namespace Proyecto.Tests
 {
-    public class RoleLevelsIndexPageTests
+    public class TechniciansIndexPageTests
     {
         // A delegate to perform a test action using a pre-configured ProjectContext
         private delegate Task TestAction(ProjectContext context);
@@ -33,7 +33,7 @@ namespace Proyecto.Tests
                 using (var context = new ProjectContext(options))
                 {
                     context.Database.EnsureCreated();
-                    SeedProjTech.Initialize(context);
+                    SeedProjectTechnician.Initialize(context);
 
                     await testAction(context);
                 }
@@ -50,18 +50,18 @@ namespace Proyecto.Tests
             // Arrange: seed database with test data
             await PrepareTestContext(async(context) =>
             {
-                    var expectedRoleLevels = SeedProjTech.GetSeedingRoleLevels(context);
+                    var expectedTechnicians = SeedProjectTechnician.GetSeedingTechnicians();
 
-                    // Act: retrieve RoleLevels
+                    // Act: retrieve Technicians
                     var pageModel = new IndexModel(context);
                     await pageModel.OnGetAsync();
 
-                    // Assert: seeded and retrieved RoleLevels match
-                    var actualMessages = Assert.IsAssignableFrom<List<RoleLevel>>(pageModel.RoleLevel);
+                    // Assert: seeded and retrieved Technicians match
+                    var actualMessages = Assert.IsAssignableFrom<List<Technician>>(pageModel.Technician);
                     Assert.Equal(
-                        expectedRoleLevels.OrderBy(a => a.ProjectID).Select(a => a.roleLevel),
-                        actualMessages.OrderBy(a => a.ProjectID).Select(a => a.roleLevel));
-            }); 
+                        expectedTechnicians.OrderBy(a => a.ID).Select(a => a.Name),
+                        actualMessages.OrderBy(a => a.ID).Select(a => a.Name));
+            });
         }
     }
-}*/
+}

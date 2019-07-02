@@ -104,18 +104,18 @@ namespace Proyecto.Pages_Projects
         public async Task<IActionResult> OnPostDeleteTechnicianAsync(string id, string technicianToDeleteID)
         {
             
-            Project projToUpdate = await _context.Project.
+            Project projectToUpdate = await _context.Project.
             Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
-            await TryUpdateModelAsync<Project>(projToUpdate);
+            await TryUpdateModelAsync<Project>(projectToUpdate);
 
-            var technicianToDelete = projToUpdate.Postulants.
+            var technicianToDelete = projectToUpdate.Postulants.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
             if(technicianToDelete != null)
             {
-                projToUpdate.Postulants.Remove(technicianToDelete);
+                projectToUpdate.Postulants.Remove(technicianToDelete);
             }
 
             try
@@ -159,10 +159,10 @@ namespace Proyecto.Pages_Projects
                     {
                         TechnicianID = technicianToAddID,
                         Technician = technicianToAdd,
-                        ProjectID =projToUpdate.ProjectID,
-                        Project = projToUpdate
+                        ProjectID =projectToUpdate.ProjectID,
+                        Project = projectToUpdate
                     };
-                    projToUpdate.Postulants.Add(postulationToAdd);
+                    projectToUpdate.Postulants.Add(postulationToAdd);
                        
                 }
             }

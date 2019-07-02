@@ -9,7 +9,7 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Tests
 {
-    public class ProjsApplicationContextTests
+    public class ProjectsApplicationContextTests
     {
         [Fact]
         public async Task ProjectsAreRetrievedTest()
@@ -18,7 +18,7 @@ namespace Proyecto.Tests
             {
                 // Arrange: seed database with Technicians
            
-                var expectedProjects = SeedProjTech.GetSeedingProjects();
+                var expectedProjects = SeedProjectTechnician.GetSeedingProjects();
                 await db.AddRangeAsync(expectedProjects);
                 await db.SaveChangesAsync();
 
