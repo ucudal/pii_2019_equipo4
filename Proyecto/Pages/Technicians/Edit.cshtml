@@ -31,37 +31,6 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-8">
-    @if (Model.Technician != null)
-    {
-        <h4>Roles</h4>
-        <table class="table">
-                <tr>
-                    <th>Rol</th>
-                    <th>Nivel</th>
-                </tr>
-                @foreach (var item in Model.Technician.TechnicianRoles)
-                {
-                    <tr>
-                        <td>
-                            <form method="post" asp-page-handler="DeleteTechnician"
-                                asp-route-id="@Model.Technician.ID" asp-route-technicianToDeleteID="@technicianToDeleteID">
-                                <button class="btn btn-default">Delete</button>
-                            </form>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Role.RolDescription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Role.Level.RolLevelDescription)
-                        </td>
-                    </tr>
-                }
-            </table>
-    }
- </div>
-</div>
 <div>
     <a asp-page="./Index">Volver</a>
 </div>
