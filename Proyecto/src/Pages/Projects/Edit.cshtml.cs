@@ -159,10 +159,10 @@ namespace Proyecto.Pages_Projects
                     {
                         TechnicianID = technicianToAddID,
                         Technician = technicianToAdd,
-                        ProjectID =projectToUpdate.ProjectID,
-                        Project = projectToUpdate
+                        ProjectID =projToUpdate.ProjectID,
+                        Project = projToUpdate
                     };
-                    projectToUpdate.Postulants.Add(postulationToAdd);
+                    projToUpdate.Postulants.Add(postulationToAdd);
                        
                 }
             }
