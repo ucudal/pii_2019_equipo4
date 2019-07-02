@@ -286,12 +286,12 @@ namespace Proyecto.Migrations
             modelBuilder.Entity("Proyecto.Models.Postulation", b =>
                 {
                     b.HasOne("Proyecto.Models.Project", "Project")
-                        .WithMany("Postulants")
+                        .WithMany("Postulations")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Proyecto.Models.Technician", "Technician")
-                        .WithMany("Postulants")
+                        .WithMany("Postulations")
                         .HasForeignKey("TechnicianID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

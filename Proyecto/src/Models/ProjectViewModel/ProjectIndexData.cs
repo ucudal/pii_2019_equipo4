@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Proyecto.Models.ProjectViewModel
 {
+    /// <summary>
+    /// Informacion de indices del sistema
+    /// </summary>
     public class ProjectIndexData
     {
         public IEnumerable<Project> ProjectsIndex { get; set; }
