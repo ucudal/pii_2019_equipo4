@@ -42,11 +42,11 @@ namespace Proyecto.Pages_Projects
         public async Task<IActionResult> OnPostUnPostulateTechnicianAsync(string id, string technicianToDeleteID)
         {
             Project = await _context.GetProjectByIdAsync(id);
-            var technicianToDelete = Project.Postulants.
+            var technicianToDelete = Project.Postulations.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
             if(technicianToDelete != null)
             {
-                Project.Postulants.Remove(technicianToDelete);
+                Project.Postulations.Remove(technicianToDelete);
             }
 
             try
@@ -85,7 +85,7 @@ namespace Proyecto.Pages_Projects
                         ProjectID =Project.ProjectID,
                         Project = Project
                     };
-                    Project.Postulants.Add(postulationToAdd);
+                    Project.Postulations.Add(postulationToAdd);
                 }
             }
 

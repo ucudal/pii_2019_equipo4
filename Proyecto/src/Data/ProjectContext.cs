@@ -21,8 +21,8 @@ namespace Proyecto.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
             builder.Entity<Postulation>().HasKey(t => new {t.TechnicianID,t.ProjectID});
-            builder.Entity<Postulation>().HasOne (proj => proj.Project).WithMany(post => post.Postulants).HasForeignKey(proj => proj.ProjectID);
-            builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulants).HasForeignKey(tech => tech.TechnicianID);
+            builder.Entity<Postulation>().HasOne (proj => proj.Project).WithMany(post => post.Postulations).HasForeignKey(proj => proj.ProjectID);
+            builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulations).HasForeignKey(tech => tech.TechnicianID);
         
             
         }

@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace Proyecto.Models
 {
+    /// <summary>
+    /// Define la relación de postulacion a un proyecto entre un técnico y un proyecto
+    /// (relación 1 a 1) 
+    /// </summary>
     public class Postulation
     {
         
