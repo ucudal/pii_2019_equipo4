@@ -32,7 +32,7 @@ namespace Proyecto.Pages_Projects
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
@@ -70,7 +70,7 @@ namespace Proyecto.Pages_Projects
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Proyecto.Pages_Projects
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(Project.ProjectID))
+                if (!_context.ProjectExists(Project.ProjectID))
                 {
                     return NotFound();
                 }
@@ -109,8 +109,9 @@ namespace Proyecto.Pages_Projects
 
             return RedirectToPage("./Index");
         }
-        public async Task<IActionResult> OnPostDeleteTechnicianAsync(int id, int technicianToDeleteID)
+        public async Task<IActionResult> OnPostDeleteTechnicianAsync(string id, string technicianToDeleteID)
         {
+            
             Project projToUpdate = await _context.Project.
             Include(r => r.RoleLevel).Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
@@ -131,7 +132,7 @@ namespace Proyecto.Pages_Projects
             }
             catch(DbUpdateConcurrencyException)
             {
-                if(!ProjectExists(Project.ProjectID))
+                if(!_context.ProjectExists(Project.ProjectID))
                 {
                     return NotFound();
                 }
@@ -143,27 +144,28 @@ namespace Proyecto.Pages_Projects
             return Redirect(Request.Path + $"?id={id}");
 
         }
-        public async Task<IActionResult> OnPostAddTechnicianAsync(int? id, int? technicianToAddID)
-        //actor ToAddID corresponde a @actortoAddId
-        //Add actor corresponde a AddActor
+        public async Task<IActionResult> OnPostAddTechnicianAsync(string id, string technicianToAddID)
+        
         {
             Project projToUpdate = await _context.Project.
             Include(r => r.RoleLevel).Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
-
+            
             await TryUpdateModelAsync<Project>(projToUpdate);
+            
+            
 
 
             if (technicianToAddID != null)
             {
-                Technician technicianToAdd = await _context.Technician.Where(a => a.ID == technicianToAddID).FirstOrDefaultAsync();
+                Technician technicianToAdd = await _context.Technician.Where(a => a.Id == technicianToAddID).FirstOrDefaultAsync();
                 if (technicianToAdd != null)
                 {
                     //request 
                     var postulationToAdd = new Postulation()
                     {
-                        TechnicianID = technicianToAddID.Value,
+                        TechnicianID = technicianToAddID,
                         Technician = technicianToAdd,
                         ProjectID =projToUpdate.ProjectID,
                         Project = projToUpdate
@@ -179,7 +181,7 @@ namespace Proyecto.Pages_Projects
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(Project.ProjectID))
+                if (!_context.ProjectExists(Project.ProjectID))
                 {
                     return NotFound();
                 }
@@ -192,10 +194,5 @@ namespace Proyecto.Pages_Projects
             return Redirect(Request.Path + $"?id={id}");
         }
 
-        private bool ProjectExists(int id)
-            
-        {
-                return _context.Project.Any(e => e.ProjectID == id);
-        }
     }
 }

@@ -23,14 +23,14 @@ namespace Proyecto.Pages_Projects
 
         public Project Project { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Project = await _context.GetProjectByIdAsync(id);
 
             if (Project == null)
             {

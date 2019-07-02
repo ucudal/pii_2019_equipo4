@@ -13,7 +13,7 @@ Creator: cumple con creator ya que agrega y contiene objetos de RoleLevel y Post
 */
     public class Project
     {
-        public int ProjectID {get;set;}
+        public string ProjectID {get;set;}
         //requerimientos para el titulo
         [StringLength(60, MinimumLength = 0)]
         [Required]

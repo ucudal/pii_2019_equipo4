@@ -23,7 +23,7 @@ namespace Proyecto.Pages.RoleLevel
         [BindProperty]
         public Proyecto.Models.RoleLevel RoleLevel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace Proyecto.Pages.RoleLevel
             return RedirectToPage("./Index");
         }
 
-        private bool RoleLevelExists(int id)
+        private bool RoleLevelExists(string id)
         {
             return _context.RoleLevel.Any(e => e.ProjectID == id);
         }

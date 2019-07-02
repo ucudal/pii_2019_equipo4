@@ -8,7 +8,7 @@ namespace Proyecto.Models
     public class RoleLevel
     {
         [Key]
-        public int ProjectID{get;set;}
+        public string ProjectID{get;set;}
         
         
         [StringLength(60, MinimumLength = 3)]

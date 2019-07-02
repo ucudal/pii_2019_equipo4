@@ -18,19 +18,18 @@ using Proyecto.Models;
 namespace Proyecto.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class RegisterTechnicianModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ProjectContext _context;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<RegisterTechnicianModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RegisterModel(
+        public RegisterTechnicianModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<RegisterTechnicianModel> logger,
             IEmailSender emailSender, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
@@ -98,7 +97,7 @@ namespace Proyecto.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
+                var user = new Technician 
 
                 { Name = Input.Name, 
                 BirthDate = Input.BirthDate, 

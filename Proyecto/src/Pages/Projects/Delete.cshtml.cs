@@ -22,14 +22,14 @@ namespace Proyecto.Pages_Projects
         [BindProperty]
         public Project Project { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Project = await _context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Project = await _context.GetProjectByIdAsync(id);
 
             if (Project == null)
             {
@@ -38,19 +38,19 @@ namespace Proyecto.Pages_Projects
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Project = await _context.Project.FindAsync(id);
+            Project = await _context.GetProjectByIdAsync(id);
 
             if (Project != null)
             {
-                _context.Project.Remove(Project);
-                await _context.SaveChangesAsync();
+               
+                await _context.RemoveProjectAsync(Project);
             }
 
             return RedirectToPage("./Index");

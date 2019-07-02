@@ -36,9 +36,17 @@ namespace Proyecto.Pages_Projects
             {
                 return Page();
             }
-
-            _context.Project.Add(Project);
-            await _context.SaveChangesAsync();
+            Project ProjectInDB = _context.Project.FirstOrDefault(p =>p.Title == Project.Title);
+            
+            try
+            {
+                Check.Precondition(ProjectInDB == null,"Ya existe un proyecto con el mismo nombre");
+            }
+            catch
+            {
+                
+            }
+            await _context.AddProjectAsync(Project);
 
             return RedirectToPage("./Index");
         }
