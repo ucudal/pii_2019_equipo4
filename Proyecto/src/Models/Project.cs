@@ -6,9 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto.Models
 {
+    /*Patrones
+Expert: es experta en el conocimiento de la información
+necesaria para la creacion de un proyecto
+Creator: cumple con creator ya que agrega y contiene objetos de RoleLevel y Postulation
+*/
     public class Project
     {
-        public int ProjectID {get;set;}
+        public string ProjectID {get;set;}
         //requerimientos para el titulo
         [StringLength(60, MinimumLength = 0)]
         [Required]
@@ -28,9 +33,6 @@ namespace Proyecto.Models
         public DateTime EndDate{get;set;}
 
         public IList<Postulation> Postulants{get;set;}
-        public RoleLevel RoleLevel{get;set;}
-        
-        //public ICollection<Technician> Technician{get;set;}
 
     }
 }

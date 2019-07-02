@@ -24,43 +24,35 @@ namespace Proyecto.Pages_Projects
             _context = context;
         }
         public ProjectIndexData IndexData {get;set;}
-        public int ProjectId{get;set;}
-        public int TechnicianId{get;set;}
+        public string ProjectId{get;set;}
+        public string TechnicianId{get;set;}
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         public SelectList RoleFilter{get;set;}
 
         [BindProperty(SupportsGet = true)]
-        public string RoleLevel { get; set; }
-
         public IList<Project> Project { get;set; }
 
-        public async Task OnGetAsync(int? id,int? TechniciaNID)
+        public async Task OnGetAsync(string id,string TechniciaNID)
         {
-            IQueryable<string> genreQuery = from m in _context.Project
-                                            orderby m.RoleLevel.roleLevel
-                                            select m.RoleLevel.roleLevel;
-            RoleFilter = new SelectList(await genreQuery.Distinct().ToListAsync());
-
-
+            
             IndexData = new ProjectIndexData();
             IndexData.ProjectsIndex = await _context.Project.Where(s=> !string.IsNullOrEmpty(SearchString)?
             s.Title.Contains(SearchString) : true)
-            .Where(x => !string.IsNullOrEmpty(RoleLevel) ? x.RoleLevel.roleLevel == RoleLevel : true)
-            .Include(r => r.RoleLevel).Include(c => c.Postulants).ThenInclude(c => c.Technician)
+            .Include(c => c.Postulants).ThenInclude(c => c.Technician)
             .AsNoTracking().ToListAsync();
             
         
             if (id != null)
             {
-                ProjectId = id.Value;
-                Project project = IndexData.ProjectsIndex.Where(p => p.ProjectID == id.Value).Single();
+                ProjectId = id;
+                Project project = IndexData.ProjectsIndex.Where(p => p.ProjectID == id).Single();
                 IndexData.TechniciansIndex = project.Postulants.Select(t => t.Technician);
             }
             if (TechniciaNID !=null )
             {
-                TechniciaNID = id.Value;
+                TechniciaNID = id;
             }
         }
     }

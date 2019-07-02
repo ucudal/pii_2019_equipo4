@@ -46,7 +46,6 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    ProjectID = 1,
                     Title = "When Harry Met Sally",
                     Description ="prueba1 ",
                     StartDate = DateTime.Parse("1989-2-12"),
@@ -56,7 +55,6 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    ProjectID = 2,
                     Title = "Ghostbusters",
                     Description ="prueba1 ",
                     StartDate = DateTime.Parse("1989-2-12"),
@@ -65,7 +63,6 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    ProjectID = 3,
                     Title = "Ghostbusters 2",
                     Description ="prueba1 ",
                     StartDate = DateTime.Parse("1989-2-12"),
@@ -74,7 +71,7 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    ProjectID = 4,
+                    
                     Title = "Rio Bravo",
                     Description ="prueba1 ",
                     StartDate = DateTime.Parse("1989-2-12"),
@@ -173,117 +170,66 @@ namespace Proyecto.Models
             {
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(t => t.Name == "Bill Murray").ID,
+                    TechnicianID = context.Technician.Single(t => t.Name == "Bill Murray").Id,
                     ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Meg Ryan").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Meg Ryan").Id,
                     ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").Id,
                     ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").Id,
                     ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").Id,
                     ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").Id,
                     ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").Id,
                     ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").ID,
+                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").Id,
                     ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID
                 },
 
                  new Postulation
                  {
-                     TechnicianID = context.Technician.Single(a => a.Name == "John Wayne").ID,
+                     TechnicianID = context.Technician.Single(a => a.Name == "John Wayne").Id,
                      ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID
                  },
 
                  new Postulation {
-                     TechnicianID = context.Technician.Single(a => a.Name == "Dean Martin").ID,
+                     TechnicianID = context.Technician.Single(a => a.Name == "Dean Martin").Id,
                      ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID
                  }
             };
 
         }
-
-        private static void SeedRoleLevel(ProjectContext context)
-        {
-            if(context.RoleLevel.Any())
-            {
-                return;
-            }
-
-            foreach (RoleLevel a in GetSeedingRoleLevels(context))
-            {
-                context.RoleLevel.Add(a);
-
-            }
-            context.RoleLevel.AddRange(GetSeedingRoleLevels(context));           
-            context.SaveChanges();
-        }
-
-        public static List<RoleLevel> GetSeedingRoleLevels(ProjectContext context)
-        {
-            return new List<RoleLevel>()
-            {
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID,
-                    roleLevel = "Básico"
-                },
-
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID,
-                    roleLevel = "Avanzado"
-                },
-
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID,
-                    roleLevel = "Avanzado"
-                },
-
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID,
-                    roleLevel = "Básico"
-                }
-
-            };
-        }
-
-
-        
-    
-        }
+    }
 
 }
 
