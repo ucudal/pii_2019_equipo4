@@ -9,16 +9,19 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Models
 {
-    /*
-    Principios
-    Principio de sustitución de Liskov:por cada objeto de la clase Person 
-    hay un objeto Technician y otro objeto Client.*/
 
-    // Add profile data for application users by adding properties to the Technician class
+    /// <summary>
+    /// Principios:
+    /// Liskov, polimorfismo, Un Technician puede ser usado como ApplicationUser
+    /// </summary>
     public class Technician : ApplicationUser
     {
-        
-        
-        public List<Postulation> Postulants {get;set;}
+
+
+        /// <summary>
+        /// Lista de todas las postulaciones a las que se a inscripto el tecnico
+        /// </summary>
+        /// <value>Lista de Postulaciones</value>
+        public List<Postulation> Postulations {get;set;}
     }
 }
