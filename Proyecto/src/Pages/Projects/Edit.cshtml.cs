@@ -13,7 +13,7 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Projects
 {
-    [Authorize(Roles = IdentityData.AdminRoleName)]
+    [Authorize(Roles = IdentityData.AdminAndClient)]
     public class EditModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -41,7 +41,6 @@ namespace Proyecto.Pages_Projects
 
             Project = await _context.Project.
             Where(p=> p.ProjectID==id).
-            Include(r => r.RoleLevel).
             Include(a => a.Postulants).
             ThenInclude(t => t.Technician).
              AsNoTracking().FirstOrDefaultAsync(m => m.ProjectID == id);
@@ -77,18 +76,11 @@ namespace Proyecto.Pages_Projects
                 return Page();
             }
             var projToUpdate = await _context.Project.
-            Include(r => r.RoleLevel).Include(p => p.Postulants)
+            Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).FirstOrDefaultAsync(p => p.ProjectID == id);
 
             if(await TryUpdateModelAsync<Project>(projToUpdate,"Project",i => i.Title,
-            i => i.Description,i => i.StartDate, i =>i.EndDate, i => i.RoleLevel))
-
-            if(string.IsNullOrWhiteSpace(projToUpdate.RoleLevel?.roleLevel))
-            {
-                projToUpdate.RoleLevel = null;
-            }
-
-
+            i => i.Description,i => i.StartDate))
         
 
             try
@@ -113,7 +105,7 @@ namespace Proyecto.Pages_Projects
         {
             
             Project projToUpdate = await _context.Project.
-            Include(r => r.RoleLevel).Include(p => p.Postulants)
+            Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
@@ -148,7 +140,7 @@ namespace Proyecto.Pages_Projects
         
         {
             Project projToUpdate = await _context.Project.
-            Include(r => r.RoleLevel).Include(p => p.Postulants)
+            Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             

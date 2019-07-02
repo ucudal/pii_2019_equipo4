@@ -196,24 +196,6 @@ namespace Proyecto.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "RoleLevel",
-                columns: table => new
-                {
-                    ProjectID = table.Column<string>(nullable: false),
-                    roleLevel = table.Column<string>(maxLength: 60, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoleLevel", x => x.ProjectID);
-                    table.ForeignKey(
-                        name: "FK_RoleLevel_Project_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "Project",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -273,16 +255,13 @@ namespace Proyecto.Migrations
                 name: "Postulation");
 
             migrationBuilder.DropTable(
-                name: "RoleLevel");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Project");
 
             migrationBuilder.DropTable(
-                name: "Project");
+                name: "AspNetUsers");
         }
     }
 }

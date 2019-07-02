@@ -9,7 +9,7 @@ using Proyecto.Data;
 namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20190702034614_proj")]
+    [Migration("20190702213041_proj")]
     partial class proj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,18 +224,6 @@ namespace Proyecto.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
-                {
-                    b.Property<string>("ProjectID");
-
-                    b.Property<string>("roleLevel")
-                        .HasMaxLength(60);
-
-                    b.HasKey("ProjectID");
-
-                    b.ToTable("RoleLevel");
-                });
-
             modelBuilder.Entity("Proyecto.Models.Client", b =>
                 {
                     b.HasBaseType("Proyecto.Areas.Identity.Data.ApplicationUser");
@@ -305,14 +293,6 @@ namespace Proyecto.Migrations
                     b.HasOne("Proyecto.Models.Technician", "Technician")
                         .WithMany("Postulants")
                         .HasForeignKey("TechnicianID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
-                {
-                    b.HasOne("Proyecto.Models.Project", "Project")
-                        .WithOne("RoleLevel")
-                        .HasForeignKey("Proyecto.Models.RoleLevel", "ProjectID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

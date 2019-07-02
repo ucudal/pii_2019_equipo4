@@ -34,7 +34,7 @@ namespace Proyecto.Data
         //public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Project> Project { get; set; }
 
-        public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
+        
         public DbSet<Proyecto.Models.Technician> Technician{get;set;}
         public DbSet<Proyecto.Models.Client> Client {get;set;}
         public DbSet<Proyecto.Models.Postulation> Postulation{get;set;}
@@ -50,12 +50,7 @@ namespace Proyecto.Data
                 .AsNoTracking()
                 .ToListAsync();
         }
-        public async virtual Task<List<Proyecto.Models.RoleLevel>> GetRoleLevelsAsync()
-        {
-            return await this.RoleLevel
-                .AsNoTracking()
-                .ToListAsync();
-        }
+        
         public bool TechnicianExists(string id)
         {
             return this.Technician.Any(e => e.Id == id);

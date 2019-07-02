@@ -12,7 +12,7 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Projects
 {
-    [Authorize(Roles = IdentityData.AdminRoleName)]
+    [Authorize(Roles = IdentityData.AdminAndClient)]
     public class CreateModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -42,7 +42,7 @@ namespace Proyecto.Pages_Projects
             {
                 Check.Precondition(ProjectInDB == null,"Ya existe un proyecto con el mismo nombre");
             }
-            catch
+            catch(Check.PreconditionException)
             {
                 
             }

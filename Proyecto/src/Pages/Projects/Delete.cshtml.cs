@@ -8,7 +8,7 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Pages_Projects
 {
-    [Authorize(Roles=IdentityData.AdminRoleName)]
+    [Authorize(Roles=IdentityData.AdminAndClient)]
     public class DeleteModel : PageModel
     {
         

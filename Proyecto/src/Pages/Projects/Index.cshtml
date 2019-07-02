@@ -12,9 +12,7 @@
 </p>
 <form>
     <p>
-        <select asp-for="RoleLevel" asp-items="Model.RoleFilter">
-            <option value="">All</option>
-        </select>
+        
         Title: <input type="text" asp-for="SearchString" />
         <input type="submit" value="Filter" />
     </p>
@@ -45,12 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
-                    @if(item.RoleLevel!= null)
-                    {
-                        @item.RoleLevel.roleLevel
-                    }
-                </td>                
+                               
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>

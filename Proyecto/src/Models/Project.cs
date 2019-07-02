@@ -33,9 +33,6 @@ Creator: cumple con creator ya que agrega y contiene objetos de RoleLevel y Post
         public DateTime EndDate{get;set;}
 
         public IList<Postulation> Postulants{get;set;}
-        public RoleLevel RoleLevel{get;set;}
-        
-        //public ICollection<Technician> Technician{get;set;}
 
     }
 }

@@ -18,6 +18,7 @@ namespace Proyecto.Models
     public class Technician : ApplicationUser
     {
         
+        
         public List<Postulation> Postulants {get;set;}
     }
 }

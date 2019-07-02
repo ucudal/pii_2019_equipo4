@@ -229,59 +229,7 @@ namespace Proyecto.Models
             };
 
         }
-
-        private static void SeedRoleLevel(ProjectContext context)
-        {
-            if(context.RoleLevel.Any())
-            {
-                return;
-            }
-
-            foreach (RoleLevel a in GetSeedingRoleLevels(context))
-            {
-                context.RoleLevel.Add(a);
-
-            }
-            context.RoleLevel.AddRange(GetSeedingRoleLevels(context));           
-            context.SaveChanges();
-        }
-
-        public static List<RoleLevel> GetSeedingRoleLevels(ProjectContext context)
-        {
-            return new List<RoleLevel>()
-            {
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID,
-                    roleLevel = "Básico"
-                },
-
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID,
-                    roleLevel = "Avanzado"
-                },
-
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID,
-                    roleLevel = "Avanzado"
-                },
-
-                new RoleLevel
-                {
-                    ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID,
-                    roleLevel = "Básico"
-                }
-
-            };
-        }
-        
-
-
-        
-    
-        }
+    }
 
 }
 
