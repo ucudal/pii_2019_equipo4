@@ -2,17 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Proyecto.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Proyecto.Data;
 using Proyecto.Models;
 
-namespace Proyecto.Pages_Technicians
+namespace Proyecto.Pages.Roles
 {
-    [Authorize(Roles=IdentityData.AdminRoleName)]
     public class CreateModel : PageModel
     {
         private readonly Proyecto.Data.ProjectContext _context;
@@ -24,11 +21,12 @@ namespace Proyecto.Pages_Technicians
 
         public IActionResult OnGet()
         {
+        ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
             return Page();
         }
 
         [BindProperty]
-        public Technician Technician { get; set; }
+        public Role Role { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -37,8 +35,8 @@ namespace Proyecto.Pages_Technicians
                 return Page();
             }
 
-            
-            await _context.AddTechnicianAsync(Technician);
+            _context.Role.Add(Role);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

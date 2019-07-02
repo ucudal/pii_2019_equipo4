@@ -17,15 +17,8 @@ namespace Proyecto.Models
     // Add profile data for application users by adding properties to the Technician class
     public class Technician : ApplicationUser
     {
-<<<<<<< HEAD:Proyecto/Models/Technician.cs
-        public ICollection<Postulation> Postulants { get; set; }
-
-        [Display(Name = "Roles")]
-        public ICollection<TechnicianRole> TechnicianRoles { get; set; }
-=======
-        
-        
         public List<Postulation> Postulants {get;set;}
->>>>>>> master:Proyecto/src/Models/Technician.cs
+        [Display(Name = "Roles")]
+        public IEnumerable <TechnicianRole> TechnicianRoles {get;set;}
     }
 }
