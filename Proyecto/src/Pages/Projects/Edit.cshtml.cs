@@ -76,20 +76,17 @@ namespace Proyecto.Pages_Projects
             {
                 return Page();
             }
-            var projToUpdate = await _context.Project.
+            var projectToUpdate = await _context.Project.
             Include(r => r.RoleLevel).Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).FirstOrDefaultAsync(p => p.ProjectID == id);
 
-            if(await TryUpdateModelAsync<Project>(projToUpdate,"Project",i => i.Title,
+            if(await TryUpdateModelAsync<Project>(projectToUpdate,"Project",i => i.Title,
             i => i.Description,i => i.StartDate, i =>i.EndDate, i => i.RoleLevel))
 
-            if(string.IsNullOrWhiteSpace(projToUpdate.RoleLevel?.roleLevel))
+            if(string.IsNullOrWhiteSpace(projectToUpdate.RoleLevel?.roleLevel))
             {
-                projToUpdate.RoleLevel = null;
+                projectToUpdate.RoleLevel = null;
             }
-
-
-        
 
             try
             {
@@ -111,18 +108,18 @@ namespace Proyecto.Pages_Projects
         }
         public async Task<IActionResult> OnPostDeleteTechnicianAsync(int id, int technicianToDeleteID)
         {
-            Project projToUpdate = await _context.Project.
+            Project projectToUpdate = await _context.Project.
             Include(r => r.RoleLevel).Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
-            await TryUpdateModelAsync<Project>(projToUpdate);
+            await TryUpdateModelAsync<Project>(projectToUpdate);
 
-            var technicianToDelete = projToUpdate.Postulants.
+            var technicianToDelete = projectToUpdate.Postulants.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
             if(technicianToDelete != null)
             {
-                projToUpdate.Postulants.Remove(technicianToDelete);
+                projectToUpdate.Postulants.Remove(technicianToDelete);
             }
 
             try
@@ -147,12 +144,12 @@ namespace Proyecto.Pages_Projects
         //actor ToAddID corresponde a @actortoAddId
         //Add actor corresponde a AddActor
         {
-            Project projToUpdate = await _context.Project.
+            Project projectToUpdate = await _context.Project.
             Include(r => r.RoleLevel).Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
 
-            await TryUpdateModelAsync<Project>(projToUpdate);
+            await TryUpdateModelAsync<Project>(projectToUpdate);
 
 
             if (technicianToAddID != null)
@@ -165,10 +162,10 @@ namespace Proyecto.Pages_Projects
                     {
                         TechnicianID = technicianToAddID.Value,
                         Technician = technicianToAdd,
-                        ProjectID =projToUpdate.ProjectID,
-                        Project = projToUpdate
+                        ProjectID =projectToUpdate.ProjectID,
+                        Project = projectToUpdate
                     };
-                    projToUpdate.Postulants.Add(postulationToAdd);
+                    projectToUpdate.Postulants.Add(postulationToAdd);
                        
                 }
             }

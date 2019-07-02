@@ -18,7 +18,7 @@ namespace Proyecto.Tests
             {
                 // Arrange: seed database with Technicians
            
-                var expectedTechnicians = SeedProjTech.GetSeedingTechnicians();
+                var expectedTechnicians = SeedProjectTech.GetSeedingTechnicians();
                 await db.AddRangeAsync(expectedTechnicians);
                 await db.SaveChangesAsync();
 

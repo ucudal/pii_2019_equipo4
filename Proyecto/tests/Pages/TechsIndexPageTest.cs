@@ -33,7 +33,7 @@ namespace Proyecto.Tests
                 using (var context = new ProjectContext(options))
                 {
                     context.Database.EnsureCreated();
-                    SeedProjTech.Initialize(context);
+                    SeedProjectTech.Initialize(context);
 
                     await testAction(context);
                 }
@@ -50,7 +50,7 @@ namespace Proyecto.Tests
             // Arrange: seed database with test data
             await PrepareTestContext(async(context) =>
             {
-                    var expectedTechnicians = SeedProjTech.GetSeedingTechnicians();
+                    var expectedTechnicians = SeedProjectTech.GetSeedingTechnicians();
 
                     // Act: retrieve Technicians
                     var pageModel = new IndexModel(context);
