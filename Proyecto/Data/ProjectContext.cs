@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Areas.Identity.Data;
 using Proyecto.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace Proyecto.Data
 {
@@ -20,6 +22,11 @@ namespace Proyecto.Data
             builder.Entity<Postulation>().HasKey(t => new { t.TechnicianID, t.ProjectID });
             builder.Entity<Postulation>().HasOne(proj => proj.Project).WithMany(post => post.Postulants).HasForeignKey(proj => proj.ProjectID);
             builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulants).HasForeignKey(tech => tech.TechnicianID);
+        }
+
+        internal Task AddTechnicianAsync(Technician technician)
+        {
+            throw new NotImplementedException();
         }
 
 

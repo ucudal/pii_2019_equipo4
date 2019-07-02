@@ -34,10 +34,19 @@ namespace Proyecto.Pages_Technicians
                 return Page();
             }
 
-            _context.Technician.Add(Technician);
-            await _context.SaveChangesAsync();
+            var emptyTechnician = new Technician();
 
-            return RedirectToPage("./Index");
+            if (await TryUpdateModelAsync<Technician>(
+                emptyTechnician,
+                "technician",   // Prefix for form value.
+                s => s.Name, s => s.BirthDate, s => s.TechnicianRoles))
+            {
+                _context.Technician.Add(emptyTechnician);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
+            return null;
         }
     }
 }
