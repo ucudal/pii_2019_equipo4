@@ -187,28 +187,28 @@ namespace Proyecto.Models
         }
         private static void SeedHiringCost(ProjectContext context)
         {
-           // Look for any Role.
+            // Look for any Role.
             if (context.HiringCost.Any())
             {
                 return;   // DB has been seeded
             }
             context.HiringCost.AddRange(
-                new HiringCost 
+                new HiringCost
                 {
                     RolLevelID = 1,
                     HiringCostHourly = 380,
                     HiringCostAdditional = 150,
                     HiringCostFull = 1200
                 },
-                new HiringCost 
+                new HiringCost
                 {
                     RolLevelID = 2,
                     HiringCostHourly = 520,
                     HiringCostAdditional = 280,
                     HiringCostFull = 2000
                 }
-                
-            ) ;
+
+            );
             context.SaveChanges();
         }
         /*
@@ -362,6 +362,26 @@ namespace Proyecto.Models
             context.SaveChanges();
         }
         */
+        private static void SeedTechnicianRoles(ProjectContext context)
+        {
+            if (context.TechnicianRole.Any())
+            {
+                return;   // DB has been seeded
+            }
+            context.TechnicianRole.AddRange(
+                new TechnicianRole
+                {
+                    TechnicianId = 1,
+                    RoleId = 1
+                },
+                new TechnicianRole
+                {
+                    TechnicianId = 1,
+                    RoleId = 7
+                }
+                );
+            context.SaveChanges();
+        }
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new ProjectContext(
@@ -374,8 +394,9 @@ namespace Proyecto.Models
                 /*SeedProject(context);
                 SeedTechnician(context);
                 SeedPostulation(context);*/
+                SeedTechnicianRoles(context);
             }
         }
-        
+
     }
 }

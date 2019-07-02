@@ -1,4 +1,4 @@
-@page
+@page "{id:int?}"
 @model Proyecto.Pages_Technicians.DetailsModel
 
 @{
@@ -40,7 +40,7 @@
                             @Html.DisplayFor(modelItem => item.Role.RolDescription)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Role.Level)
+                            @Html.DisplayFor(modelItem => item.Role.Level.RolLevelDescription)
                         </td>
                     </tr>
                 }

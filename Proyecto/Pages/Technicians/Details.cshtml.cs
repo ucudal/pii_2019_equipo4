@@ -44,7 +44,9 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-            Technician = await _context.Technician.Include(s => s.TechnicianRoles).AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
+            Technician = await _context.Technician
+                    .Include(s => s.TechnicianRoles).ThenInclude(e => e.Role).ThenInclude(t => t.Level)
+                .AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
 
             Projects = LoadProjects();
 
