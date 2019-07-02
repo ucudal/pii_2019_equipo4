@@ -5,9 +5,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editar</h2>
 
-<h4>Technician</h4>
+<h4>Técnico</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,14 +25,45 @@
                 <span asp-validation-for="Technician.BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-8">
+    @if (Model.Technician != null)
+    {
+        <h4>Roles</h4>
+        <table class="table">
+                <tr>
+                    <th>Rol</th>
+                    <th>Nivel</th>
+                </tr>
+                @foreach (var item in Model.Technician.TechnicianRoles)
+                {
+                    <tr>
+                        <td>
+                            <form method="post" asp-page-handler="DeleteTechnician"
+                                asp-route-id="@Model.Technician.ID" asp-route-technicianToDeleteID="@technicianToDeleteID">
+                                <button class="btn btn-default">Delete</button>
+                            </form>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.RolDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.Level.RolLevelDescription)
+                        </td>
+                    </tr>
+                }
+            </table>
+    }
+ </div>
+</div>
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Volver</a>
 </div>
 
 @section Scripts {
