@@ -24,7 +24,6 @@ namespace Proyecto.Data
             builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulants).HasForeignKey(tech => tech.TechnicianID);
         
             
-            
         }
         
         
