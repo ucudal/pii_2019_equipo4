@@ -14,6 +14,11 @@ namespace Proyecto.Pages_Projects
 {
     public class DetailsModel : PageModel
     {
+        /// <summary>
+        /// Referencia al contexto del proyecto
+        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
+        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
+        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public DetailsModel(Proyecto.Data.ProjectContext context)

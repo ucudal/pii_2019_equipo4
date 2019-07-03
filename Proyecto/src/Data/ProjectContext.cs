@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace Proyecto.Data
 {
+    /// <summary>
+    /// El contexto del proyecto
+    /// </summary>
     public class ProjectContext : IdentityDbContext<ApplicationUser>
     {
         public ProjectContext (DbContextOptions<ProjectContext> options)

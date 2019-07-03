@@ -11,7 +11,11 @@ namespace Proyecto.Pages_Projects
     [Authorize(Roles=IdentityData.AdminAndClient)]
     public class DeleteModel : PageModel
     {
-        
+        /// <summary>
+        /// Referencia al contexto del proyecto
+        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
+        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
+        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public DeleteModel(Proyecto.Data.ProjectContext context)
@@ -28,7 +32,8 @@ namespace Proyecto.Pages_Projects
             {
                 return NotFound();
             }
-
+            
+            //Don't Talk with Strangers
             Project = await _context.GetProjectByIdAsync(id);
 
             if (Project == null)
