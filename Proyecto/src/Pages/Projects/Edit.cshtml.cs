@@ -146,8 +146,6 @@ namespace Proyecto.Pages_Projects
             
             await TryUpdateModelAsync<Project>(projToUpdate);
             
-            
-
 
             if (technicianToAddID != null)
             {

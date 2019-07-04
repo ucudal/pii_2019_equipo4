@@ -19,5 +19,6 @@ namespace Proyecto.Models
 
         [Required]
         public Project Project { get; set; }
+        
     }
 }

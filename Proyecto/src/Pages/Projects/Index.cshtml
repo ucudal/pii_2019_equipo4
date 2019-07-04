@@ -77,9 +77,10 @@
             {
                 selectedRow = "table-success";
             }
+            string TechnicianId = item.Id;
             <tr class = "@selectedRow">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    <a href="https://localhost:5001/Identity/Users/Details?id="> @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BirthDate)
