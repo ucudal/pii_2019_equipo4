@@ -4,7 +4,8 @@ using Proyecto.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 namespace Proyecto.Data
 {
     public class ProjectContext : IdentityDbContext<ApplicationUser>
@@ -33,7 +34,7 @@ namespace Proyecto.Data
         //public DbSet<Proyecto.Models.Role> Role {get;set;}
         public DbSet<Proyecto.Models.Project> Project { get; set; }
 
-        public DbSet<Proyecto.Models.RoleLevel> RoleLevel {get;set;}
+        
         public DbSet<Proyecto.Models.Technician> Technician{get;set;}
         public DbSet<Proyecto.Models.Client> Client {get;set;}
         public DbSet<Proyecto.Models.Postulation> Postulation{get;set;}
@@ -49,13 +50,76 @@ namespace Proyecto.Data
                 .AsNoTracking()
                 .ToListAsync();
         }
-        public async virtual Task<List<Proyecto.Models.RoleLevel>> GetRoleLevelsAsync()
+        
+        public bool TechnicianExists(string id)
         {
-            return await this.RoleLevel
+            return this.Technician.Any(e => e.Id == id);
+        }
+
+        public async virtual Task<List<Technician>> GetTechnicianAsync()
+        {
+            return await this.Technician
                 .AsNoTracking()
                 .ToListAsync();
         }
 
+
+        public Task<Technician> GetTechnicianByIdAsync(string id)
+        {
+            return this.Technician.FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public Task<int> AddTechnicianAsync(Technician Technician)
+        {
+            this.Technician.Add(Technician);
+            return this.SaveChangesAsync();
+        }
+
+        public Task<int> RemoveTechnicianAsync(Technician Technician)
+        {
+            this.Technician.Remove(Technician);
+            return this.SaveChangesAsync();
+        }
+
+        public bool ProjectExists(string id)
+        {
+            return this.Project.Any(e => e.ProjectID == id);
+        }
+
+        public async virtual Task<List<Project>> GetProjectAsync()
+        {
+            return await this.Project
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public Task<Project> GetProjectByIdAsync(string id)
+        {
+            return this.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+        }
+
+        public Task<int> AddProjectAsync(Project Project)
+        {
+            this.Project.Add(Project);
+            return this.SaveChangesAsync();
+        }
+
+        public Task<int> RemoveProjectAsync(Project Project)
+        {
+            this.Project.Remove(Project);
+            return this.SaveChangesAsync();
+        }
+        public Task<int> AddClientAsync(Client Client)
+        {
+            this.Client.Add(Client);
+            return this.SaveChangesAsync();
+        }
+        public async virtual Task<List<Client>> GetClientAsync()
+        {
+            return await this.Client
+                .AsNoTracking()
+                .ToListAsync();
+        }
          
     }
 }

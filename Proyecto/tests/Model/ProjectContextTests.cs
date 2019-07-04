@@ -32,5 +32,23 @@ namespace Proyecto.Tests
                     actualProjects.OrderBy(a => a.ProjectID).Select(a => a.Title));
             }
         }
+
+        [Fact]
+        public async Task AddProjectAsync_ProjectIsAdded()
+        {
+            using (var db = new ProjectContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = "10";
+                var expectedProject = new Project() { ProjectID = recId, Title = "Juana" };
+
+                // Act
+                await db.AddProjectAsync(expectedProject);
+
+                // Assert
+                var actualProject = await db.FindAsync<Project>(recId);
+                Assert.Equal(expectedProject, actualProject);
+            }
+        }
     }
 }

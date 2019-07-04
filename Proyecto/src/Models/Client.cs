@@ -1,8 +1,12 @@
 using System;
-
+using Proyecto.Areas.Identity.Data;
 namespace Proyecto.Models
 {
-    public class Client : Person
+    /*
+    Principios
+    Principio de sustitución de Liskov:por cada objeto de la clase Person 
+    hay un objeto Technician y otro objeto Client.*/
+    public class Client : ApplicationUser
     {
         
     }

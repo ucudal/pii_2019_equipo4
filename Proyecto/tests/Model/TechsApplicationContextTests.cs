@@ -28,9 +28,54 @@ namespace Proyecto.Tests
                 // Assert: seeded and retrieved Technicians match
                 var actualTechnicians = Assert.IsAssignableFrom<List<Technician>>(result);
                 Assert.Equal(
-                    expectedTechnicians.OrderBy(a => a.ID).Select(a => a.Name),
-                    actualTechnicians.OrderBy(a => a.ID).Select(a => a.Name));
+                    expectedTechnicians.Select(a => a.Name),
+                    actualTechnicians.Select(a => a.Name));
             }
         }
+
+        [Fact]
+        public async Task AddTechnicianAsync_TechnicianIsAdded()
+        {
+            using (var db = new ProjectContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = "10";
+                var expectedTechnician = new Technician() { Id = recId, Name = "Juana" };
+
+                // Act
+                await db.AddTechnicianAsync(expectedTechnician);
+
+                // Assert
+                var actualTechnician = await db.FindAsync<Technician>(recId);
+                Assert.Equal(expectedTechnician, actualTechnician);
+            }
+        }
+/*
+        [Fact]
+        public async Task DeleteTechnicianAsync_TechnicianIsDeleted_WhenTechnicianIsFound()
+        {
+            using (var db = new ProjectContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var seedTechnician = SeedProjTech.GetSeedingTechnicians();
+                await db.AddRangeAsync(seedTechnician);
+                await db.SaveChangesAsync();
+                var recId = "10";
+                var expected2Technician = new Technician() { Id = recId, Name = "Juan" };
+                //var recId = "1";
+                var expectedTechnician = 
+                    seedTechnician.Where(technician => technician.Id != recId).ToList();
+
+                // Act
+                await db.RemoveTechnicianAsync(expectedTechnician);
+
+                // Assert
+                //var actualTechnician = await db.FindAsync<Technician>(recId);
+                //Assert.Equal(expectedTechnician, actualTechnician);
+                var actualTechnician = await db.FindAsync<Technician>();
+                Assert.Equal(expected2Technician, actualTechnician);
+                
+            }
+        }*/
     }
 }

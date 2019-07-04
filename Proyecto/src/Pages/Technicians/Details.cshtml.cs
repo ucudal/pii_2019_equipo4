@@ -29,21 +29,21 @@ namespace Proyecto.Pages_Technicians
             var db = _context;
             IEnumerable<Project> e = Enumerable.Empty<Project>();
             try {
-                foreach(Postulation Postulants in db.Postulation.Where(p=> p.TechnicianID == Technician.ID)){
+                foreach(Postulation Postulants in db.Postulation.Where(p=> p.TechnicianID == Technician.Id)){
                     e = e.Concat(db.Project.Where(t => t.ProjectID == Postulants.ProjectID).AsEnumerable());
                 }
            }catch{}
             return e;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-           Technician = await _context.Technician.FirstOrDefaultAsync(m => m.ID == id);
+           Technician = await _context.GetTechnicianByIdAsync(id);
            
            Projects = LoadProjects();
 

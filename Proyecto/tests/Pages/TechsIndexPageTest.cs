@@ -7,7 +7,14 @@ using Xunit;
 using Proyecto.Models;
 using Proyecto.Pages_Technicians;
 using Proyecto.Data;
-using Proyecto.Areas.Identity.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
+
 
 namespace Proyecto.Tests
 {
@@ -57,10 +64,10 @@ namespace Proyecto.Tests
                     await pageModel.OnGetAsync();
 
                     // Assert: seeded and retrieved Technicians match
-                    var actualMessages = Assert.IsAssignableFrom<List<Technician>>(pageModel.Technician);
+                    var actualTechnicians = Assert.IsAssignableFrom<List<Technician>>(pageModel.Technician);
                     Assert.Equal(
-                        expectedTechnicians.OrderBy(a => a.ID).Select(a => a.Name),
-                        actualMessages.OrderBy(a => a.ID).Select(a => a.Name));
+                        expectedTechnicians.Select(a => a.Name),
+                        actualTechnicians.Select(a => a.Name));
             });
         }
     }
