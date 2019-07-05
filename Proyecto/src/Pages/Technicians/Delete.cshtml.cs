@@ -15,6 +15,11 @@ namespace Proyecto.Pages_Technicians
     [Authorize(Roles=IdentityData.AdminRoleName)]
     public class DeleteModel : PageModel
     {
+        /// <summary>
+        /// Referencia al contexto del proyecto
+        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
+        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
+        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public DeleteModel(Proyecto.Data.ProjectContext context)
@@ -58,8 +63,15 @@ namespace Proyecto.Pages_Technicians
 
             if (Technician != null)
             {
+                try
+                {
+                    Check.Precondition(_context.RemoveTechnicianAsync(Technician) !=null,"Error al borrar al Técnico");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+                }
                 
-                await _context.RemoveTechnicianAsync(Technician);
             }
 
             return RedirectToPage("./Index");

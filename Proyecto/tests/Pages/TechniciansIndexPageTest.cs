@@ -5,12 +5,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using Xunit;
 using Proyecto.Models;
-using Proyecto.Pages_Projects;
+using Proyecto.Pages_Technicians;
 using Proyecto.Data;
-using Proyecto.Areas.Identity.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
+
 
 namespace Proyecto.Tests
-{    public class ProjectsIndexPageTests
+{
+    public class TechniciansIndexPageTests
     {
         // A delegate to perform a test action using a pre-configured ProjectContext
         private delegate Task TestAction(ProjectContext context);
@@ -32,7 +40,7 @@ namespace Proyecto.Tests
                 using (var context = new ProjectContext(options))
                 {
                     context.Database.EnsureCreated();
-                    SeedProjTech.Initialize(context);
+                    SeedProjectTechnician.Initialize(context);
 
                     await testAction(context);
                 }
@@ -43,27 +51,24 @@ namespace Proyecto.Tests
             }
         }
 
-        public string id{get;set;}
-        public string tech{get;set;}
-
         [Fact]
         public async Task OnGetAsyncPopulatesPageModel()
         {
             // Arrange: seed database with test data
             await PrepareTestContext(async(context) =>
             {
-                    var expectedProjects = SeedProjTech.GetSeedingProjects();
-                    
-                    // Act: retrieve Projects
-                    var pageModel = new IndexModel(context);
-                    await pageModel.OnGetAsync(id, tech);
+                    var expectedTechnicians = SeedProjectTechnician.GetSeedingTechnicians();
 
-                    // Assert: seeded and retrieved Projects match
-                    //var actualMessages = Assert.IsAssignableFrom<List<Project>>(pageModel.Project);
-                    //Assert.Equal(
-                      //  expectedProjects.Select(a => a.Title),
-                        //actualMessages.Select(a => a.Title));
+                    // Act: retrieve Technicians
+                    var pageModel = new IndexModel(context);
+                    await pageModel.OnGetAsync();
+
+                    // Assert: seeded and retrieved Technicians match
+                    var actualTechnicians = Assert.IsAssignableFrom<List<Technician>>(pageModel.Technician);
+                    Assert.Equal(
+                        expectedTechnicians.Select(a => a.Name),
+                        actualTechnicians.Select(a => a.Name));
             });
         }
-    } 
+    }
 }

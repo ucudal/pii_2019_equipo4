@@ -16,6 +16,11 @@ namespace Proyecto.Pages_Projects
     [Authorize(Roles = IdentityData.AdminAndClient)]
     public class EditModel : PageModel
     {
+        /// <summary>
+        /// Referencia al contexto del proyecto
+        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
+        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
+        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public EditModel(Proyecto.Data.ProjectContext context)
@@ -38,25 +43,41 @@ namespace Proyecto.Pages_Projects
             {
                 return NotFound();
             }
-
+            
             Project = await _context.Project.
             Where(p=> p.ProjectID==id).
-            Include(a => a.Postulants).
+            Include(a => a.Postulations).
             ThenInclude(t => t.Technician).
              AsNoTracking().FirstOrDefaultAsync(m => m.ProjectID == id);
-
+             
+             try
+            {
+                Check.Precondition(Project !=null,"Error al cargar el Proyecto");
+            }
+            catch(Check.PreconditionException ex)
+            {
+                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+            }
             if (Project == null)
             {
                 return NotFound();
             }
-
+            
             // Populate the list of technicians in the viewmodel with the technician of the Project.
-            this.Technicians = Project.Postulants.Select(t => t.Technician);
+            this.Technicians = Project.Postulations.Select(t => t.Technician);
 
             string roleFilter ="";
             if(this.SearchString != null)
             {
                 roleFilter =this.SearchString.ToUpper();
+            }
+            try
+            {
+                Check.Precondition(Technicians !=null,"Error al cargar los técnicos");
+            }
+            catch(Check.PreconditionException ex)
+            {
+                return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
             }
             // Populate the list of all other Technicians with all technicians not included in the project's technician and
             // included in the search filter.
@@ -64,7 +85,14 @@ namespace Proyecto.Pages_Projects
             .Where(t => !Technicians.Contains(t)).
             Where(t =>! string.IsNullOrEmpty(roleFilter) ? t.Name.ToUpper().
             Contains(roleFilter) : true).ToListAsync();
-
+            try
+            {
+                Check.Precondition(OtherTechnicians !=null,"Error al cargar los otros técnicos");
+            }
+            catch(Check.PreconditionException ex)
+            {
+                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+            }
 
             return Page();
         }
@@ -76,7 +104,7 @@ namespace Proyecto.Pages_Projects
                 return Page();
             }
             var projToUpdate = await _context.Project.
-            Include(p => p.Postulants)
+            Include(p => p.Postulations)
             .ThenInclude(t => t.Technician).FirstOrDefaultAsync(p => p.ProjectID == id);
 
             if(await TryUpdateModelAsync<Project>(projToUpdate,"Project",i => i.Title,
@@ -104,19 +132,26 @@ namespace Proyecto.Pages_Projects
         public async Task<IActionResult> OnPostDeleteTechnicianAsync(string id, string technicianToDeleteID)
         {
             
-            Project projToUpdate = await _context.Project.
-            Include(p => p.Postulants)
+            Project projectToUpdate = await _context.Project.
+            Include(p => p.Postulations)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
-            await TryUpdateModelAsync<Project>(projToUpdate);
+            await TryUpdateModelAsync<Project>(projectToUpdate);
 
-            var technicianToDelete = projToUpdate.Postulants.
+            var technicianToDelete = projectToUpdate.Postulations.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
-            if(technicianToDelete != null)
-            {
-                projToUpdate.Postulants.Remove(technicianToDelete);
-            }
+            try
+                {
+                    Check.Precondition(projectToUpdate.Postulations.Remove(technicianToDelete),"Error al borrar al postulante");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+
+                }
+
+           
 
             try
             {
@@ -140,14 +175,12 @@ namespace Proyecto.Pages_Projects
         
         {
             Project projToUpdate = await _context.Project.
-            Include(p => p.Postulants)
+            Include(p => p.Postulations)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
             await TryUpdateModelAsync<Project>(projToUpdate);
             
-            
-
 
             if (technicianToAddID != null)
             {
@@ -162,7 +195,7 @@ namespace Proyecto.Pages_Projects
                         ProjectID =projToUpdate.ProjectID,
                         Project = projToUpdate
                     };
-                    projToUpdate.Postulants.Add(postulationToAdd);
+                    projToUpdate.Postulations.Add(postulationToAdd);
                        
                 }
             }

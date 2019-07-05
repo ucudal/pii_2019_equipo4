@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 namespace Proyecto.Data
 {
+    /// <summary>
+    /// El contexto del proyecto
+    /// </summary>
     public class ProjectContext : IdentityDbContext<ApplicationUser>
     {
         public ProjectContext (DbContextOptions<ProjectContext> options)
@@ -21,10 +23,9 @@ namespace Proyecto.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
             builder.Entity<Postulation>().HasKey(t => new {t.TechnicianID,t.ProjectID});
-            builder.Entity<Postulation>().HasOne (proj => proj.Project).WithMany(post => post.Postulants).HasForeignKey(proj => proj.ProjectID);
-            builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulants).HasForeignKey(tech => tech.TechnicianID);
+            builder.Entity<Postulation>().HasOne (proj => proj.Project).WithMany(post => post.Postulations).HasForeignKey(proj => proj.ProjectID);
+            builder.Entity<Postulation>().HasOne(tech => tech.Technician).WithMany(post => post.Postulations).HasForeignKey(tech => tech.TechnicianID);
         
-            
             
         }
         
@@ -62,7 +63,6 @@ namespace Proyecto.Data
                 .AsNoTracking()
                 .ToListAsync();
         }
-
 
         public Task<Technician> GetTechnicianByIdAsync(string id)
         {
@@ -108,17 +108,6 @@ namespace Proyecto.Data
         {
             this.Project.Remove(Project);
             return this.SaveChangesAsync();
-        }
-        public Task<int> AddClientAsync(Client Client)
-        {
-            this.Client.Add(Client);
-            return this.SaveChangesAsync();
-        }
-        public async virtual Task<List<Client>> GetClientAsync()
-        {
-            return await this.Client
-                .AsNoTracking()
-                .ToListAsync();
         }
          
     }

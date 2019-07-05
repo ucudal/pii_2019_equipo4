@@ -33,7 +33,7 @@ namespace Proyecto.Tests
                 using (var context = new ProjectContext(options))
                 {
                     context.Database.EnsureCreated();
-                    SeedProjTech.Initialize(context);
+                    SeedProjectTechnician.Initialize(context);
 
                     await testAction(context);
                 }
@@ -50,7 +50,7 @@ namespace Proyecto.Tests
             // Arrange: seed database with test data
             await PrepareTestContext(async(context) =>
             {
-                    var expectedRoleLevels = SeedProjTech.GetSeedingRoleLevels(context);
+                    var expectedRoleLevels = SeedProjectTechnician.GetSeedingRoleLevels(context);
 
                     // Act: retrieve RoleLevels
                     var pageModel = new IndexModel(context);

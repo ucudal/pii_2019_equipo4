@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Proyecto.Models
 {
-    public static class SeedProjTech
+    public static class SeedProjectTechnician
     {
         public static void Initialize(ProjectContext context)
         {

@@ -36,8 +36,15 @@ namespace Proyecto.Pages_Technicians
             {
                 return Page();
             }
-
-            
+            Technician TechnicianInDB = _context.Technician.FirstOrDefault(t => t.Name == Technician.Name && t.BirthDate == Technician.BirthDate);
+            try
+            {
+                Check.Precondition(TechnicianInDB == null,"Ya existe un técnico con ese nombre");
+            }
+            catch(Check.PreconditionException ex)
+            {
+                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+            }
             await _context.AddTechnicianAsync(Technician);
 
             return RedirectToPage("./Index");
