@@ -9,8 +9,8 @@ using Proyecto.Data;
 namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20190705044955_proj")]
-    partial class proj
+    [Migration("20190705055143_NewInittialCreate")]
+    partial class NewInittialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
