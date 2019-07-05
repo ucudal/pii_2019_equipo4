@@ -37,7 +37,7 @@ namespace Proyecto.Pages.Roles
             {
                 return NotFound();
             }
-           ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
+           ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDescription");
             return Page();
         }
 

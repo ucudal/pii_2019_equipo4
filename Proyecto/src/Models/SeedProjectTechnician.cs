@@ -240,12 +240,12 @@ namespace Proyecto.Models
             context.RoleLevel.AddRange(
                     new RoleLevel
                     {
-                        RolLvlDsc = "Básico"
+                        RolLvlDescription = "Básico"
                     },
 
                     new RoleLevel
                     {
-                        RolLvlDsc = "Avanzado"
+                        RolLvlDescription = "Avanzado"
                     }
                 );
             context.SaveChanges();

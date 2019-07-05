@@ -11,6 +11,6 @@ namespace Proyecto.Models
 
         [Required]
         [Display(Name = "Descripción")]
-        public string RolLvlDsc{get; set;}
+        public string RolLvlDescription{get; set;}
     }
 }

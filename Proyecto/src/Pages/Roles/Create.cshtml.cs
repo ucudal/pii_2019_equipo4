@@ -21,7 +21,7 @@ namespace Proyecto.Pages.Roles
 
         public IActionResult OnGet()
         {
-        ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDsc");
+        ViewData["RolLvlId"] = new SelectList(_context.RoleLevel, "RolLvlId", "RolLvlDescription");
             return Page();
         }
 
