@@ -4,11 +4,11 @@ namespace Proyecto.Areas.Identity.Data
 {
     public static class IdentityData
     {
-        public const string AdminUserName = "admin@contoso.com";
+        public const string AdminUserName = "admin@ignis.com";
 
         public const string AdminName = "Administrator";
 
-        public const string AdminMail = "admin@contoso.com";
+        public const string AdminMail = "admin@ignis.com";
 
         public static DateTime AdminDOB = new DateTime(1967, 3, 31);
 

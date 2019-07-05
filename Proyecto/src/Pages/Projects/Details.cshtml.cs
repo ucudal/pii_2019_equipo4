@@ -112,7 +112,10 @@ namespace Proyecto.Pages_Projects
                         ProjectID =ProjectToUpdate.ProjectID,
                         Project = ProjectToUpdate
                     };
-                    //
+                    
+                    
+                
+                    ProjectToUpdate.Postulations.Add(postulationToAdd);
                     try
                     {
                         Check.Postcondition(ProjectToUpdate.Postulations.Contains(postulationToAdd),"Estas postulado en el proyecto seleccionado");
@@ -121,8 +124,6 @@ namespace Proyecto.Pages_Projects
                     {
                         return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
                     }
-                    ProjectToUpdate.Postulations.Add(postulationToAdd);
-                    
                 }
             }
 

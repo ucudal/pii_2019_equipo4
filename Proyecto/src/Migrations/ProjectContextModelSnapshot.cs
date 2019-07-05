@@ -244,7 +244,7 @@ namespace Proyecto.Migrations
                     b.Property<int>("RolLvlId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("RolLvlDsc")
+                    b.Property<string>("RolLvlDescription")
                         .IsRequired();
 
                     b.HasKey("RolLvlId");

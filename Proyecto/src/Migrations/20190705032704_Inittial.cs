@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proyecto.Migrations
 {
-    public partial class proj : Migration
+    public partial class Inittial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@ namespace Proyecto.Migrations
                 {
                     RolLvlId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RolLvlDsc = table.Column<string>(nullable: false)
+                    RolLvlDescription = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

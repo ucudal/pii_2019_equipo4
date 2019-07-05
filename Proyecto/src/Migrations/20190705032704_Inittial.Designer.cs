@@ -9,8 +9,8 @@ using Proyecto.Data;
 namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20190705030535_proj")]
-    partial class proj
+    [Migration("20190705032704_Inittial")]
+    partial class Inittial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -246,7 +246,7 @@ namespace Proyecto.Migrations
                     b.Property<int>("RolLvlId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("RolLvlDsc")
+                    b.Property<string>("RolLvlDescription")
                         .IsRequired();
 
                     b.HasKey("RolLvlId");
