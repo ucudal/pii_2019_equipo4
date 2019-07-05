@@ -1,10 +1,41 @@
 ﻿@page
-@model IndexModel
-@{
-    ViewData["Title"] = "Home page";
+@model IgnisMercadoModel
+
+    <center>
+    <h1>
+        <b><p style="color:rgb(255,88,53);"><font face="Calibri">Ignis Mercado</font></p></b>
+    </h1>
+    <h4>
+        <p style="color:rgb(255,88,53);">¿Qué es Ignis Mercado?<br></p>
+    </h4>
+    <body><font size=4>Es un programa universitario para incentivar el desarrollo del sector audiovisual y la inserción laboral de estudiantes, egresados y docentes.</font></body>
+            <p style="color:rgb(255,88,53);"><font size=3>Se estructura en seis líneas de trabajo:</font><br><br></p>
+    </center>
+
+    <div class="row">
+        <div class="col-md-5">
+            <section>
+                
+                <p style="color:rgb(255,88,53);"><b>base de técnicos audiovisuales:</b></p> Es un mecanismo por el cual estudiantes y egresados se postulan para ingresar a una base de datos de técnicos disponibles para proyectos coordinados por Ignis. (<a href="https://localhost:5001/Identity/Account/RegisterTechnician">Regístrate aquí</a>)<br><br>
+                <p style="color:rgb(255,88,53);"><b>base de empresas audiovisuales:</b></p> Es un mecanismo por el cual micro y pequeñas empresas se postulan para ingresar en una base de datos de casas productoras interesadas en participar en proyectos coordinados por Ignis. (<a href="https://localhost:5001/Identity/Account/RegisterClient">Regístrate aquí</a>)<br><br>
+                <p style="color:rgb(255,88,53);"><b>oportunidades de empleo:</b></p> Mecanismo por el cual organizaciones externas buscan profesionales del área. Ignis colabora en la definición de perfiles y difunde convocatoria en alianza con el <a href="https://ucu.edu.uy/es/portallaboral">Portal Laboral UCU</a>.<br><br>
+            </section>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-5">
+            <section>
+
+                    <body>
+                        <p style="color:rgb(255,88,53);"><b>oportunidades de negocios:</b></p> Mecanismo por el cual organizaciones externas, contactan a Ignis, quien ayuda a dimensionalizar sus necesidades y difunde el llamado para que los interesados se postulen y avancen en una contratación privada. En alianza con el <a href="https://www.ithaka.ucu.edu.uy/">Centro IthaKa</a>.<br><br>
+                        <p style="color:rgb(255,88,53);"><b>clínica de producción audiovisual:</b></p> Mecanismo por el cual estudiantes, docentes y egresados traen su idea o proyecto audiovisual personal para recibir un feedback y orientación para su desarrollo. En alianza con el Centro Ithaka.<br><br>  
+                        <p style="color:rgb(255,88,53);"><b>mercado nacional e internacional de proyectos audiovisuales:</b></p> Mecanismo por el cual estudiantes, docentes y egresados presentan su idea o proyecto audiovisual personal para ser promovido en redes internacionales. En alianza con el Centro Ithaka.<br><br>
+                    </body>
+            </section>
+        </div>
+    </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
 
-<div class="text-center">
-    <h1 class="display-4">Centro Ignis</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
