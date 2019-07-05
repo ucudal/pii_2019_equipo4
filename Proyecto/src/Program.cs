@@ -29,9 +29,9 @@ namespace Proyecto
                 {
 
                     var context=services.
-                        GetRequiredService<ProjectContext>();
+                    GetRequiredService<ProjectContext>();
                     context.Database.EnsureCreated();
-                    SeedProjectTechnician.Initialize(services);
+                    SeedProjTech.Initialize(services);
                     SeedIdentityData.Initialize(services);
                     context.Database.Migrate();
                 }

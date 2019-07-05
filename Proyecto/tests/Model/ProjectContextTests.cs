@@ -9,7 +9,7 @@ using Proyecto.Areas.Identity.Data;
 
 namespace Proyecto.Tests
 {
-    public class ProjectsApplicationContextTests
+    public class ProjsApplicationContextTests
     {
         [Fact]
         public async Task ProjectsAreRetrievedTest()
@@ -18,7 +18,7 @@ namespace Proyecto.Tests
             {
                 // Arrange: seed database with Technicians
            
-                var expectedProjects = SeedProjectTechnician.GetSeedingProjects();
+                var expectedProjects = SeedProjTech.GetSeedingProjects();
                 await db.AddRangeAsync(expectedProjects);
                 await db.SaveChangesAsync();
 
@@ -30,6 +30,24 @@ namespace Proyecto.Tests
                 Assert.Equal(
                     expectedProjects.OrderBy(a => a.ProjectID).Select(a => a.Title),
                     actualProjects.OrderBy(a => a.ProjectID).Select(a => a.Title));
+            }
+        }
+
+        [Fact]
+        public async Task AddProjectAsync_ProjectIsAdded()
+        {
+            using (var db = new ProjectContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = "10";
+                var expectedProject = new Project() { ProjectID = recId, Title = "Juana" };
+
+                // Act
+                await db.AddProjectAsync(expectedProject);
+
+                // Assert
+                var actualProject = await db.FindAsync<Project>(recId);
+                Assert.Equal(expectedProject, actualProject);
             }
         }
     }

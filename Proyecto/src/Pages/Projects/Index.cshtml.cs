@@ -40,7 +40,7 @@ namespace Proyecto.Pages_Projects
             IndexData = new ProjectIndexData();
             IndexData.ProjectsIndex = await _context.Project.Where(s=> !string.IsNullOrEmpty(SearchString)?
             s.Title.Contains(SearchString) : true)
-            .Include(c => c.Postulations).ThenInclude(c => c.Technician)
+            .Include(c => c.Postulants).ThenInclude(c => c.Technician)
             .AsNoTracking().ToListAsync();
             
         
@@ -48,7 +48,7 @@ namespace Proyecto.Pages_Projects
             {
                 ProjectId = id;
                 Project project = IndexData.ProjectsIndex.Where(p => p.ProjectID == id).Single();
-                IndexData.TechniciansIndex = project.Postulations.Select(t => t.Technician);
+                IndexData.TechniciansIndex = project.Postulants.Select(t => t.Technician);
             }
             if (TechniciaNID !=null )
             {

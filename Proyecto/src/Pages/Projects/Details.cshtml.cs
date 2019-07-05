@@ -9,17 +9,11 @@ using Proyecto.Data;
 using Proyecto.Models;
 using Microsoft.AspNetCore.Authorization;
 using Proyecto.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
 
 namespace Proyecto.Pages_Projects
 {
     public class DetailsModel : PageModel
     {
-        /// <summary>
-        /// Referencia al contexto del proyecto
-        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
-        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
-        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public DetailsModel(Proyecto.Data.ProjectContext context)
@@ -37,9 +31,6 @@ namespace Proyecto.Pages_Projects
                 return NotFound();
             }
 
-            string TechnicianID = CurrentUserID.GetUserID(this.User);
-
-            this.Technician = await _context.GetTechnicianByIdAsync(TechnicianID);
             Project = await _context.GetProjectByIdAsync(id);
 
             if (Project == null)
@@ -50,26 +41,12 @@ namespace Proyecto.Pages_Projects
         }
         public async Task<IActionResult> OnPostUnPostulateTechnicianAsync(string id, string technicianToDeleteID)
         {
-            Project ProjectToUpdate= await _context.Project.Include(p => p.Postulations)
-            .ThenInclude(t => t.Technician).
-            FirstOrDefaultAsync(p => p.ProjectID == id);
-                await TryUpdateModelAsync<Project>(ProjectToUpdate);
-
-            var technicianToDelete = ProjectToUpdate.Postulations.
+            Project = await _context.GetProjectByIdAsync(id);
+            var technicianToDelete = Project.Postulants.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
-            
-            try
-            {
-                Check.Precondition(ProjectToUpdate.Postulations.Remove(technicianToDelete),"ya no estas postulado");
-            }
-            catch (Check.PreconditionException ex)
-            {
-                return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
-            }
-            
             if(technicianToDelete != null)
             {
-                ProjectToUpdate.Postulations.Remove(technicianToDelete);
+                Project.Postulants.Remove(technicianToDelete);
             }
 
             try
@@ -95,13 +72,9 @@ namespace Proyecto.Pages_Projects
         {
             if (technicianToAddID != null)
             {
-                Project ProjectToUpdate = await _context.Project.Include(p => p.Postulations)
-            .ThenInclude(t => t.Technician).
-            FirstOrDefaultAsync(p => p.ProjectID == id);
-                await TryUpdateModelAsync<Project>(ProjectToUpdate);
-
-                Technician technicianToAdd = await _context.Technician.Where(a => a.Id == technicianToAddID).FirstOrDefaultAsync();
+                Project = await _context.GetProjectByIdAsync(id);
                 
+                Technician technicianToAdd = await _context.Technician.Where(a => a.Id == technicianToAddID).FirstOrDefaultAsync();
                 if (technicianToAdd != null)
                 {
                     //request 
@@ -109,20 +82,10 @@ namespace Proyecto.Pages_Projects
                     {
                         TechnicianID = technicianToAddID,
                         Technician = technicianToAdd,
-                        ProjectID =ProjectToUpdate.ProjectID,
-                        Project = ProjectToUpdate
+                        ProjectID =Project.ProjectID,
+                        Project = Project
                     };
-                    /*
-                    try
-                    {
-                        Check.Precondition(ProjectToUpdate.Postulations.Add(postulationToAdd)!=null,"Ya estas postulado en el proyecto seleccionado");
-                    }
-                    catch(Check.PostconditionException ex)
-                    {
-                        return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
-                    }
-                    ProjectToUpdate.Postulations.Add(postulationToAdd);
-                    */
+                    Project.Postulants.Add(postulationToAdd);
                 }
             }
 

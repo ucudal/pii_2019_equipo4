@@ -8,16 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Proyecto.Areas.Identity.Data
 {
-    /// <summary>
-    /// Representa un usuario de la aplicacion, esta clase hereda de IdentityUser, 
-    /// son clases de manejo de usuarios para ABM/login del sistema
-    /// 
-    /// Principios:
-    /// Liskov, polimorfismo 
-    /// Un ApplicationUser es un IdentityUser, esto le permite a esta clase comportarse como un IdentityUser.
-    /// SRP
-    /// Las responsabilidades de un usuario de la aplicacion estan unicamente encapsuladas en esta clase 
-    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         [PersonalData]

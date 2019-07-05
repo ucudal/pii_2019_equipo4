@@ -39,20 +39,14 @@
 </div>
 
 <div>
-    @if(Model.Technician != null)
+    @if(Model.Technician.Id != null)
     {
         string technicianToAddID = Model.Technician.Id;
-        string technicianToDeleteID = Model.Technician.Id;
-        <form method="post" asp-page-handler="AddPostulate"
+        <a method="post" asp-page-handler="AddTechnician"
         asp-route-id="@Model.Project.ProjectID" asp-route-technicianToAddID="@technicianToAddID">
-        <button class="btn btn-success">Postulate</button>
-        </form>
-        
-        <form method="post" asp-page-handler="UnPostulateTechnician"
-                                asp-route-id="@Model.Project.ProjectID" asp-route-technicianToDeleteID="@technicianToDeleteID">
-                                <button class="btn btn-danger">UnPostulate</button>
-                            </form>
+        <button class="btn btn-default">Add</button>
+        </a>
     }
-    
+    <a asp-page="./Edit" asp-route-id="@Model.Project.ProjectID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

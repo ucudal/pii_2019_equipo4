@@ -1,7 +1,6 @@
 @page
 @model Proyecto.Pages_Projects.IndexModel
 
-
 @{
     ViewData["Title"] = "Projects";
 }
@@ -23,6 +22,7 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
+            <th>Technician level</th>
             <th>Start Date</th>
             <th>End Date</th>
             
@@ -52,18 +52,10 @@
                 </td>
                 
                 <td>
-                    
-                    
-                        <a asp-page="./Index" asp-route-id="@item.ProjectID">Select </a>
-                        <a>|</a>
-                        <a asp-page="./Edit" asp-route-id="@item.ProjectID">Edit</a>
-                        <a>|</a>
-                        <a asp-page="./Delete" asp-route-id="@item.ProjectID">Delete</a>
-                        <a>|</a>
-    
-                    
-                    <a asp-page="./Details" asp-route-id="@item.ProjectID">Details</a>
-                    
+                    <a asp-page="./Index" asp-route-id="@item.ProjectID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ProjectID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ProjectID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ProjectID">Delete</a>
                 </td>
             </tr>
         }
@@ -85,10 +77,9 @@
             {
                 selectedRow = "table-success";
             }
-            string TechnicianId = item.Id;
             <tr class = "@selectedRow">
                 <td>
-                    <a href="https://localhost:5001/Identity/Users/Details?id="> @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BirthDate)

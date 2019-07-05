@@ -2,9 +2,6 @@ using System;
 
 namespace Proyecto.Models
 {
-    /// <summary>
-    /// Clase de manejo de excepciones
-    /// </summary>
     public class Check : Exception
     {
         public class PreconditionException : Exception

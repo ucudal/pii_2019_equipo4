@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Proyecto.Models;
+
 namespace Proyecto.Areas.Identity.Pages.Users
 {
     [Authorize(Roles=IdentityData.AdminRoleName)] // Solo los usuarios con rol administrador pueden acceder a este controlador
@@ -88,17 +88,9 @@ namespace Proyecto.Areas.Identity.Pages.Users
 
             // Es necesario tener acceso a RoleManager para poder buscar el rol de este usuario; se asigna aquí para poder
             // buscar por rol después cuando no hay acceso a RoleManager.
-            
             user.AssignRole(_userManager, roleToAdd.Name);
-            try
-            {
-                Check.Precondition(await _userManager.UpdateAsync(user) != null,"Error al actualizar al usuario");
-            }
-            catch(Check.PreconditionException ex)
-            {
-                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
-            }
-            
+
+            await _userManager.UpdateAsync(user);
 
             return RedirectToPage("./Index");
         }

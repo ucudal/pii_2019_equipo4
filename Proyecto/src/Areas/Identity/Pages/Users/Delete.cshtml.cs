@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto.Data;
 using Proyecto.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
-using Proyecto.Models;
 
 namespace Proyecto.Areas.Identity.Pages.Users
 {
@@ -52,15 +51,7 @@ namespace Proyecto.Areas.Identity.Pages.Users
 
             if (ApplicationUser != null)
             {
-                try
-                {
-                    Check.Precondition(_context.Users.Remove(ApplicationUser) !=null,"Error al borrar el usuario");
-                }
-                catch(Check.PreconditionException ex)
-                {
-                    return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
-                }
-                
+                _context.Users.Remove(ApplicationUser);
                 await _context.SaveChangesAsync();
             }
 

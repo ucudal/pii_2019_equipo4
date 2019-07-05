@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Proyecto.Data;
 using Proyecto.Models;
 using Microsoft.AspNetCore.Authorization;
 using Proyecto.Areas.Identity.Data;
@@ -15,11 +12,6 @@ namespace Proyecto.Pages_Technicians
     [Authorize(Roles=IdentityData.AdminRoleName)]
     public class DetailsModel : PageModel
     {
-        /// <summary>
-        /// Referencia al contexto del proyecto
-        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
-        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
-        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public DetailsModel(Proyecto.Data.ProjectContext context)
@@ -34,8 +26,8 @@ namespace Proyecto.Pages_Technicians
             var db = _context;
             IEnumerable<Project> e = Enumerable.Empty<Project>();
             try {
-                foreach(Postulation Postulations in db.Postulation.Where(p=> p.TechnicianID == Technician.Id)){
-                    e = e.Concat(db.Project.Where(t => t.ProjectID == Postulations.ProjectID).AsEnumerable());
+                foreach(Postulation Postulants in db.Postulation.Where(p=> p.TechnicianID == Technician.Id)){
+                    e = e.Concat(db.Project.Where(t => t.ProjectID == Postulants.ProjectID).AsEnumerable());
                 }
            }catch{}
             return e;
@@ -48,12 +40,7 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-           Technician = await _context.Technician.
-           Include(s=> s.TechnicianRoles).
-           ThenInclude(f=>f.Role).
-           ThenInclude(j=>j.level).
-           AsNoTracking().
-           FirstOrDefaultAsync(m => m.Id == id);
+           Technician = await _context.GetTechnicianByIdAsync(id);
            
            Projects = LoadProjects();
 

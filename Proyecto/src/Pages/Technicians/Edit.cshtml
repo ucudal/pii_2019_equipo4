@@ -5,15 +5,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Editar</h2>
+<h2>Edit</h2>
 
-<h4>Técnico</h4>
+<h4>Technician</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Technician.Id" />
+            
             <div class="form-group">
                 <label asp-for="Technician.Name" class="control-label"></label>
                 <input asp-for="Technician.Name" class="form-control" />
@@ -31,87 +31,9 @@
         </form>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8">
-        @if (Model.Roles != null)
-        {
-            <h4>Roles</h4>
-            <table class="table">
-                <tr>
-                    <th></th>
-                    <th>Rol</th>
-                    <th>Nivel</th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model.Roles)
-                {
-                    int roleToDeleteID = item.RoleId;
-                    <tr>
-                        <td>
-                            <form method="post" asp-page-handler="DeleteRole"
-                                asp-route-id="@Model.Technician.Id" asp-route-roleToDeleteID="@roleToDeleteID">
-                                <button class="btn btn-default">Quitar</button>
-                            </form>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RolDescription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.level.RolLvlDescription)
-                        </td>
-                        
-                    </tr>
-                }
-            </table>
-        }
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8">
-
-        @if (Model.otherRoles != null)
-        {
-            <h4>Otros Roles</h4>
-            <form>
-                <p>
-                    Name: <input type="text" asp-for="SearchString" />
-                    <input type="submit" value="Filter" />
-                </p>
-            </form>
-            <table class="table">
-                <tr>
-                    <th></th>
-                    <th>Descripción</th>
-                    <th>Nivel</th>
-                    
-                </tr>
-
-                @foreach (var item in Model.otherRoles)
-                {
-                    int roleToAddId = item.RoleId;
-                    <tr>
-                        <td>
-                            <form method="post" asp-page-handler="AddRole"
-                                asp-route-id="@Model.Technician.Id" asp-route-roleToAddId="@roleToAddId">
-                                <button class="btn btn-default">Agregar</button>
-                            </form>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RolDescription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.level.RolLvlDescription)
-                        </td>
-                        
-                    </tr>
-                }
-            </table>
-        }
-    </div>
-</div>
 <div>
-    <a asp-page="./Index">Volver</a>
+    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {

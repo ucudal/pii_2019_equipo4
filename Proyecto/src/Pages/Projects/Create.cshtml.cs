@@ -15,11 +15,6 @@ namespace Proyecto.Pages_Projects
     [Authorize(Roles = IdentityData.AdminAndClient)]
     public class CreateModel : PageModel
     {
-        /// <summary>
-        /// Referencia al contexto del proyecto
-        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
-        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
-        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public CreateModel(Proyecto.Data.ProjectContext context)
@@ -47,9 +42,9 @@ namespace Proyecto.Pages_Projects
             {
                 Check.Precondition(ProjectInDB == null,"Ya existe un proyecto con el mismo nombre");
             }
-            catch(Check.PreconditionException ex)
+            catch(Check.PreconditionException)
             {
-                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+                
             }
             await _context.AddProjectAsync(Project);
 

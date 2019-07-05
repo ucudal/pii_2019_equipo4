@@ -41,7 +41,7 @@ namespace Proyecto.Pages_Projects
 
             Project = await _context.Project.
             Where(p=> p.ProjectID==id).
-            Include(a => a.Postulations).
+            Include(a => a.Postulants).
             ThenInclude(t => t.Technician).
              AsNoTracking().FirstOrDefaultAsync(m => m.ProjectID == id);
 
@@ -51,7 +51,7 @@ namespace Proyecto.Pages_Projects
             }
 
             // Populate the list of technicians in the viewmodel with the technician of the Project.
-            this.Technicians = Project.Postulations.Select(t => t.Technician);
+            this.Technicians = Project.Postulants.Select(t => t.Technician);
 
             string roleFilter ="";
             if(this.SearchString != null)
@@ -76,7 +76,7 @@ namespace Proyecto.Pages_Projects
                 return Page();
             }
             var projToUpdate = await _context.Project.
-            Include(p => p.Postulations)
+            Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).FirstOrDefaultAsync(p => p.ProjectID == id);
 
             if(await TryUpdateModelAsync<Project>(projToUpdate,"Project",i => i.Title,
@@ -104,18 +104,18 @@ namespace Proyecto.Pages_Projects
         public async Task<IActionResult> OnPostDeleteTechnicianAsync(string id, string technicianToDeleteID)
         {
             
-            Project projectToUpdate = await _context.Project.
-            Include(p => p.Postulations)
+            Project projToUpdate = await _context.Project.
+            Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
-            await TryUpdateModelAsync<Project>(projectToUpdate);
+            await TryUpdateModelAsync<Project>(projToUpdate);
 
-            var technicianToDelete = projectToUpdate.Postulations.
+            var technicianToDelete = projToUpdate.Postulants.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
             if(technicianToDelete != null)
             {
-                projectToUpdate.Postulations.Remove(technicianToDelete);
+                projToUpdate.Postulants.Remove(technicianToDelete);
             }
 
             try
@@ -140,7 +140,7 @@ namespace Proyecto.Pages_Projects
         
         {
             Project projToUpdate = await _context.Project.
-            Include(p => p.Postulations)
+            Include(p => p.Postulants)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
             
@@ -162,7 +162,7 @@ namespace Proyecto.Pages_Projects
                         ProjectID =projToUpdate.ProjectID,
                         Project = projToUpdate
                     };
-                    projToUpdate.Postulations.Add(postulationToAdd);
+                    projToUpdate.Postulants.Add(postulationToAdd);
                        
                 }
             }

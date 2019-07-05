@@ -103,7 +103,7 @@ namespace Proyecto.Areas.Identity.Pages.Account
                 BirthDate = Input.BirthDate, 
                 UserName = Input.Email, 
                 Email = Input.Email };
-                
+                //user.AssignRole(_userManager,IdentityData.Technician);
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

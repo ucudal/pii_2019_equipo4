@@ -5,13 +5,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using Xunit;
 using Proyecto.Models;
-using Proyecto.Pages.RoleLevel;
+using Proyecto.Pages_Technicians;
 using Proyecto.Data;
-using Proyecto.Areas.Identity.Data;
-/*
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
+
+
 namespace Proyecto.Tests
 {
-    public class RoleLevelsIndexPageTests
+    public class TechniciansIndexPageTests
     {
         // A delegate to perform a test action using a pre-configured ProjectContext
         private delegate Task TestAction(ProjectContext context);
@@ -33,7 +40,7 @@ namespace Proyecto.Tests
                 using (var context = new ProjectContext(options))
                 {
                     context.Database.EnsureCreated();
-                    SeedProjectTechnician.Initialize(context);
+                    SeedProjTech.Initialize(context);
 
                     await testAction(context);
                 }
@@ -50,18 +57,18 @@ namespace Proyecto.Tests
             // Arrange: seed database with test data
             await PrepareTestContext(async(context) =>
             {
-                    var expectedRoleLevels = SeedProjectTechnician.GetSeedingRoleLevels(context);
+                    var expectedTechnicians = SeedProjTech.GetSeedingTechnicians();
 
-                    // Act: retrieve RoleLevels
+                    // Act: retrieve Technicians
                     var pageModel = new IndexModel(context);
                     await pageModel.OnGetAsync();
 
-                    // Assert: seeded and retrieved RoleLevels match
-                    var actualMessages = Assert.IsAssignableFrom<List<RoleLevel>>(pageModel.RoleLevel);
+                    // Assert: seeded and retrieved Technicians match
+                    var actualTechnicians = Assert.IsAssignableFrom<List<Technician>>(pageModel.Technician);
                     Assert.Equal(
-                        expectedRoleLevels.OrderBy(a => a.ProjectID).Select(a => a.roleLevel),
-                        actualMessages.OrderBy(a => a.ProjectID).Select(a => a.roleLevel));
-            }); 
+                        expectedTechnicians.Select(a => a.Name),
+                        actualTechnicians.Select(a => a.Name));
+            });
         }
     }
-}*/
+}
