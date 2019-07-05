@@ -6,6 +6,13 @@ Nuestro sistema aplica el patron MVC, Model View Controller, ya diferenciamos lo
 Por ejemplo, las clases en Models no dependen de las que se encuentran en Pages y viceversa. 
 El controller es el contexto del sistema, se encarga de procesar la información y de interpretar las acciones de la interfaz. Ejemplo, si en Pages se registra un click de un boton se le envia un mensaje al context, que tiene la responsabilidad de cumplir dicha acción.
 
+
+##Patrones
+
+Si bien hay muchos comentados en el código, agregamos acá otros
+DIP: se encuentra en Login, Logout y Register por ejemplo, ya que heredan de una clase abstracta PageModel. Esto es para que los detalles dependan de las abstracciones.
+ISP: PageModel a su vez, es IAsyncPageFilter, IFilterMetadata y IPageFilter. PageModel no es obligado a depender de interfaces que no utilice
+
 ## Identity user
 
 >IdentityUser() 
