@@ -45,12 +45,12 @@
         string technicianToDeleteID = Model.Technician.Id;
         <form method="post" asp-page-handler="AddPostulate"
         asp-route-id="@Model.Project.ProjectID" asp-route-technicianToAddID="@technicianToAddID">
-        <button class="btn btn-success">Postulate</button>
+        <button class="btn btn-success">Suscribe</button>
         </form>
         
         <form method="post" asp-page-handler="UnPostulateTechnician"
                                 asp-route-id="@Model.Project.ProjectID" asp-route-technicianToDeleteID="@technicianToDeleteID">
-                                <button class="btn btn-danger">UnPostulate</button>
+                                <button class="btn btn-danger">Unsuscribe</button>
                             </form>
     }
     

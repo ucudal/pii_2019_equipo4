@@ -85,6 +85,7 @@ namespace Proyecto.Pages_Projects
             .Where(t => !Technicians.Contains(t)).
             Where(t =>! string.IsNullOrEmpty(roleFilter) ? t.Name.ToUpper().
             Contains(roleFilter) : true).ToListAsync();
+            
             try
             {
                 Check.Precondition(OtherTechnicians !=null,"Error al cargar los otros técnicos");
@@ -141,6 +142,7 @@ namespace Proyecto.Pages_Projects
 
             var technicianToDelete = projectToUpdate.Postulations.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
+            //si hay un error al borrar un postulante de un proyecto aparece una excepcion
             try
                 {
                     Check.Precondition(projectToUpdate.Postulations.Remove(technicianToDelete),"Error al borrar al postulante");
