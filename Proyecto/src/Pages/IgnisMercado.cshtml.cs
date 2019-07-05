@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Proyecto.Areas.Identity.Pages.Account
+namespace Proyecto.Pages
 {
     [AllowAnonymous]
-    public class QuienesSomosModel : PageModel
+    public class IgnisMercadoModel : PageModel
     {
 
     }
