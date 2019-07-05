@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proyecto.Migrations
 {
-    public partial class NewInittialCreate : Migration
+    public partial class proj : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

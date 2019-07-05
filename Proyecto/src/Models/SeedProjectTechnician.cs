@@ -48,8 +48,8 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    Title = "When Harry Met Sally",
-                    Description ="prueba1 ",
+                    Title = "Proyecto radial",
+                    Description ="Para radio nacional del interior, se busca persona con disponibilidad de viajar",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
 
@@ -57,25 +57,24 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    Title = "Ghostbusters",
-                    Description ="prueba1 ",
+                    Title = "Proyecto cinematográfico nacional",
+                    Description ="Para empresa audiovisual nacional, se busca camarógrafo con experiencia",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 },
 
                 new Project
                 {
-                    Title = "Ghostbusters 2",
-                    Description ="prueba1 ",
+                    Title = "Proyecto cinematográfico internacional",
+                    Description ="Para empresa audiovisual internacional, se busca sonidista",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 },
 
                 new Project
                 {
-
-                    Title = "Rio Bravo",
-                    Description ="prueba1 ",
+                    Title = "Corto",
+                    Description ="Se buscan sonidistas",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 }
@@ -101,42 +100,42 @@ namespace Proyecto.Models
                 new Technician
                 {
 
-                    Name = "Billy Crystal",
+                    Name = "Mia Wallace",
                     BirthDate = DateTime.Parse("1948-3-14")
 
                 },
 
                 new Technician
                 {
-                    Name = "Meg Ryan",
+                    Name = "Morty Smith",
                     BirthDate = DateTime.Parse("1961-11-19")
 
                 },
 
                 new Technician
                 {
-                    Name = "Bill Murray",
+                    Name = "Vincent Vega",
                     BirthDate = DateTime.Parse("1950-9-21")
 
                 },
 
                 new Technician
                 {
-                    Name = "Dan Aykroyd",
+                    Name = "Jules Winnfield",
                     BirthDate = DateTime.Parse("1952-7-1")
 
                 },
 
                 new Technician
                 {
-                    Name = "Sigourney Weaver",
+                    Name = "Todd Chavez",
                     BirthDate = DateTime.Parse("1949-10-8")
 
                 },
 
                 new Technician
                 {
-                    Name = "John Wayne",
+                    Name = "Daisy Domergue",
                     BirthDate = DateTime.Parse("1907-5-26")
 
                 },
@@ -144,7 +143,7 @@ namespace Proyecto.Models
                 new Technician
 
                 {
-                    Name = "Dean Martin",
+                    Name = "Sarah Lynn",
                     BirthDate = DateTime.Parse("1917-7-7")
 
                 }
@@ -218,61 +217,61 @@ namespace Proyecto.Models
             {
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(t => t.Name == "Bill Murray").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID
+                    TechnicianID = context.Technician.Single(t => t.Name == "Mia Wallace").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto radial").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Meg Ryan").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "When Harry Met Sally").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Morty Smith").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto radial").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Vincent Vega").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto cinematográfico nacional").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Jules Winnfield").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto cinematográfico nacional").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Todd Chavez").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto cinematográfico nacional").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Bill Murray").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Daisy Domergue").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto cinematográfico internacional").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Dan Aykroyd").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Daisy Domergue").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto cinematográfico internacional").ProjectID
                 },
 
                 new Postulation
                 {
-                    TechnicianID = context.Technician.Single(a => a.Name == "Sigourney Weaver").Id,
-                    ProjectID = context.Project.Single(m => m.Title == "Ghostbusters 2").ProjectID
+                    TechnicianID = context.Technician.Single(a => a.Name == "Sarah Lynn").Id,
+                    ProjectID = context.Project.Single(m => m.Title == "Proyecto cinematográfico internacional").ProjectID
                 },
 
                  new Postulation
                  {
-                     TechnicianID = context.Technician.Single(a => a.Name == "John Wayne").Id,
-                     ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID
+                     TechnicianID = context.Technician.Single(a => a.Name == "Todd Chavez").Id,
+                     ProjectID = context.Project.Single(m => m.Title == "Corto").ProjectID
                  },
 
                  new Postulation {
-                     TechnicianID = context.Technician.Single(a => a.Name == "Dean Martin").Id,
-                     ProjectID = context.Project.Single(m => m.Title == "Rio Bravo").ProjectID
+                     TechnicianID = context.Technician.Single(a => a.Name == "Jules Winnfield").Id,
+                     ProjectID = context.Project.Single(m => m.Title == "Corto").ProjectID
                  }
             };
 
