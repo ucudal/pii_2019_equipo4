@@ -62,19 +62,14 @@ namespace Proyecto.Pages_Technicians
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            var tecToUpdate = await _context.Technician.
-            Include(p => p.TechnicianRoles).
-            ThenInclude(r => r.Role).
-            FirstOrDefaultAsync(p => p.Id == id);
-            if(await TryUpdateModelAsync<Technician>(tecToUpdate,"Technician",i => i.Name
-            ))
+            
+            _context.Attach(Technician).State = EntityState.Modified;
 
             try
             {
@@ -99,13 +94,12 @@ namespace Proyecto.Pages_Technicians
             Technician tecToUpdate = await _context.Technician.
            Include(s => s.TechnicianRoles).
            ThenInclude(f => f.Role).
-           ThenInclude(j => j.level).
            AsNoTracking().
            FirstOrDefaultAsync(m => m.Id == id);
 
             await TryUpdateModelAsync<Technician>(tecToUpdate);
 
-            if (roleToAddId > 0)
+            if (roleToAddId != 0)
             {
                 Role RoleToAdd = await _context.Role.Where(a => a.RoleId == roleToAddId).FirstOrDefaultAsync();
                 var TechnicianRole = new TechnicianRole()
