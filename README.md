@@ -10,8 +10,10 @@ El controller es el contexto del sistema, se encarga de procesar la información
 ##Patrones
 
 Si bien hay muchos comentados en el código, agregamos acá otros
-DIP: se encuentra en Login, Logout y Register por ejemplo, ya que heredan de una clase abstracta PageModel. Esto es para que los detalles dependan de las abstracciones.
-ISP: PageModel a su vez, es IAsyncPageFilter, IFilterMetadata y IPageFilter. PageModel no es obligado a depender de interfaces que no utilice
+>DIP: se encuentra en Login, Logout y Register por ejemplo, ya que heredan de una clase abstracta PageModel. Esto es para que los detalles dependan de las abstracciones.
+>ISP: PageModel a su vez, es IAsyncPageFilter, IFilterMetadata y IPageFilter. PageModel no es obligado a depender de interfaces que no utilice
+>OCP: Client, Technician y ApplicationUser. Client y Technician expanden la clase ApplicationUser. Por lo tanto, ApplicationUser está abierto a la expansión, y cerrado a la modificación.
+>Creator: RegisterTechnicianModels crea Technicians
 
 ## Identity user
 
