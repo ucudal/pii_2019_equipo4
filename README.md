@@ -7,7 +7,7 @@ Por ejemplo, las clases en Models no dependen de las que se encuentran en Pages 
 El controller es el contexto del sistema, se encarga de procesar la información y de interpretar las acciones de la interfaz. Ejemplo, si en Pages se registra un click de un boton se le envia un mensaje al context, que tiene la responsabilidad de cumplir dicha acción.
 
 
-##Patrones
+## Patrones
 
 Si bien hay muchos comentados en el código, agregamos acá otros
 >DIP: se encuentra en Login, Logout y Register por ejemplo, ya que heredan de una clase abstracta PageModel. Esto es para que los detalles dependan de las abstracciones.
