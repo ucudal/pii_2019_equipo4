@@ -1,5 +1,10 @@
 # pii_2019_equipo4
 
+## MVC
+
+Nuestro sistema aplica el patron MVC, Model View Controller, ya diferenciamos los modelos (la informacion), la interfaz (las paginas) y las operaciones que se realizan a la informacion (Controller). Los archivos del sistema estan organizados en diferentes directorios que reflejan este patron.
+Por ejemplo, las clases en Models no dependen de las que se encuentran en Pages y viceversa. 
+El controller es el contexto del sistema, se encarga de procesar la información y de interpretar las acciones de la interfaz. Ejemplo, si en Pages se registra un click de un boton se le envia un mensaje al context, que tiene la responsabilidad de cumplir dicha acción.
 
 ## Identity user
 
