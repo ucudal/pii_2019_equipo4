@@ -259,145 +259,145 @@ namespace Proyecto.Models
             context.Role.AddRange(
                     new Role
                     {
-                        RolDsc = "Foto fija",
+                        RolDescription = "Foto fija",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Asistente de cámara",
+                        RolDescription = "Asistente de cámara",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Asistente de producción",
+                        RolDescription = "Asistente de producción",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Asistente de dirección",
+                        RolDescription = "Asistente de dirección",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Asistente de arte (escenografía, vestuario, utilería)",
+                        RolDescription = "Asistente de arte (escenografía, vestuario, utilería)",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Sonidista",
+                        RolDescription = "Sonidista",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Editor",
+                        RolDescription = "Editor",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Redactor creativo",
+                        RolDescription = "Redactor creativo",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Presentador / conductor",
+                        RolDescription = "Presentador / conductor",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Ilustrador",
+                        RolDescription = "Ilustrador",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Diseñador gráfico",
+                        RolDescription = "Diseñador gráfico",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Operador de Cabina 02",
+                        RolDescription = "Operador de Cabina 02",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Operador de Cabina 03 y Estudio de Radio",
+                        RolDescription = "Operador de Cabina 03 y Estudio de Radio",
                         RolLvlId = 1
                     },
 
                     new Role
                     {
-                        RolDsc = "Foto fija",
+                        RolDescription = "Foto fija",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Cámara y asistente de cámara",
+                        RolDescription = "Cámara y asistente de cámara",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Cámara 360",
+                        RolDescription = "Cámara 360",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Postproductor de imagen",
+                        RolDescription = "Postproductor de imagen",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Editor",
+                        RolDescription = "Editor",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Sonidista",
+                        RolDescription = "Sonidista",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Postproductor de sonido",
+                        RolDescription = "Postproductor de sonido",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Redactor creativo",
+                        RolDescription = "Redactor creativo",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Presentador / conductor",
+                        RolDescription = "Presentador / conductor",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Animador / infografista",
+                        RolDescription = "Animador / infografista",
                         RolLvlId = 2
                     },
 
                     new Role
                     {
-                        RolDsc = "Operador de Cabina 01 Estudio de Grabación",
+                        RolDescription = "Operador de Cabina 01 Estudio de Grabación",
                         RolLvlId = 2
                     }
                 );
