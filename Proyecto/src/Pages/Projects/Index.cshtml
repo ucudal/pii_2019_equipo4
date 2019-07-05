@@ -1,5 +1,6 @@
 @page
 @model Proyecto.Pages_Projects.IndexModel
+@using Proyecto.Areas.Identity.Data;
 
 @{
     ViewData["Title"] = "Projects";
@@ -64,7 +65,7 @@
 @if (Model.IndexData.TechniciansIndex != null)
 {
     <h3>
-        Technician in Selected Project (tecnicos postulados en el proyecto)   </h3>
+        Technician in Selected Project </h3>
     <table class="table">
         <tr>
             <th>Name</th>
@@ -77,12 +78,17 @@
             {
                 selectedRow = "table-success";
             }
+            string TechnicianId =item.Id;
             <tr class = "@selectedRow">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    
+                        
+                        <a> @Html.DisplayFor(modelItem => item.Name)</a>
+                    
+                    
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
+                    <a>@Html.DisplayFor(modelItem => item.BirthDate)</a>
                 </td>
             </tr>
         }

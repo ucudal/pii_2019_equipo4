@@ -48,10 +48,19 @@ namespace Proyecto.Pages_Projects
             Project = await _context.GetProjectByIdAsync(id);
 
             if (Project != null)
-            {
+            {}
+               try
+               {
+                  //si no se borra correctamente el proyecto aparece una excepcion
+                   Check.Precondition(_context.RemoveProjectAsync(Project) !=null,"No se pudo borrar el Proyecto");
+                   Check.Postcondition(await _context.GetProjectByIdAsync(Project.ProjectID) ==null,"Borrado correctamente");
+               }
+               catch(Check.PreconditionException ex)
+               {
+                   return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+               }
                
-                await _context.RemoveProjectAsync(Project);
-            }
+            
 
             return RedirectToPage("./Index");
         }

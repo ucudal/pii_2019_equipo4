@@ -37,7 +37,7 @@ namespace Proyecto.Pages_Projects
                 return Page();
             }
             Project ProjectInDB = _context.Project.FirstOrDefault(p =>p.Title == Project.Title);
-            
+            //si hay un proyecto con el mismo nombre aparece una excepcion
             try
             {
                 Check.Precondition(ProjectInDB == null,"Ya existe un proyecto con el mismo nombre");
@@ -46,6 +46,7 @@ namespace Proyecto.Pages_Projects
             {
                 
             }
+            
             await _context.AddProjectAsync(Project);
 
             return RedirectToPage("./Index");

@@ -90,6 +90,7 @@ namespace Proyecto.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
         }
+        string EmailUCU ="correo.ucu.edu.uy";
         
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         { 
@@ -97,13 +98,37 @@ namespace Proyecto.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
+                //excepciones para que el correo sea de la universidad y un rango de la edad
+                try
+                {
+                    string[] emailInput = Input.Email.Split("@");
+                    string EmailVerificate = emailInput[1];
+                    
+                    Check.Precondition(EmailVerificate == EmailUCU,"El correo debe de ser de la Universidad");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
+                }
+                try
+                {
+                    int BirthDateInput = Input.BirthDate.Year;
+                    Check.Precondition(BirthDateInput>1950,"Edad Incorrecta");
+                    Check.Precondition(BirthDateInput<2010,"Edad incorrecta");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
+                }
                 var user = new Technician 
 
-                { Name = Input.Name, 
+                { 
+                Name = Input.Name, 
                 BirthDate = Input.BirthDate, 
                 UserName = Input.Email, 
                 Email = Input.Email };
-                //user.AssignRole(_userManager,IdentityData.Technician);
+                
+                
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

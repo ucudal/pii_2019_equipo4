@@ -64,7 +64,15 @@ namespace Proyecto.Pages_Projects
             .Where(t => !Technicians.Contains(t)).
             Where(t =>! string.IsNullOrEmpty(roleFilter) ? t.Name.ToUpper().
             Contains(roleFilter) : true).ToListAsync();
-
+            
+            try
+            {
+                Check.Precondition(OtherTechnicians !=null,"Error al cargar los otros técnicos");
+            }
+            catch(Check.PreconditionException ex)
+            {
+                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+            }
 
             return Page();
         }
@@ -113,10 +121,18 @@ namespace Proyecto.Pages_Projects
 
             var technicianToDelete = projToUpdate.Postulants.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
-            if(technicianToDelete != null)
-            {
-                projToUpdate.Postulants.Remove(technicianToDelete);
-            }
+            //si hay un error al borrar un postulante de un proyecto aparece una excepcion
+            try
+                {
+                    Check.Precondition(projectToUpdate.Postulations.Remove(technicianToDelete),"Error al borrar al postulante");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+
+                }
+
+           
 
             try
             {

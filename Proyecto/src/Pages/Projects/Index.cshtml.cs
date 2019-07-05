@@ -25,6 +25,7 @@ namespace Proyecto.Pages_Projects
         }
         public ProjectIndexData IndexData {get;set;}
         public string ProjectId{get;set;}
+        
         public string TechnicianId{get;set;}
 
         [BindProperty(SupportsGet = true)]

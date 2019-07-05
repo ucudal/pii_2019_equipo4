@@ -44,6 +44,16 @@ namespace Proyecto.Pages_Projects
             Project = await _context.GetProjectByIdAsync(id);
             var technicianToDelete = Project.Postulants.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
+            //si el tecnico no quiere participar del proyecto aparece una excepcion mostrando el mensaje "Ya no estas postulado en el proyecto"
+            try
+            {
+                Check.Precondition(ProjectToUpdate.Postulations.Remove(technicianToDelete),"Ya no estas postulado en el proyecto");
+            }
+            catch (Check.PreconditionException ex)
+            {
+                return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
+            }
+            
             if(technicianToDelete != null)
             {
                 Project.Postulants.Remove(technicianToDelete);
@@ -85,7 +95,18 @@ namespace Proyecto.Pages_Projects
                         ProjectID =Project.ProjectID,
                         Project = Project
                     };
-                    Project.Postulants.Add(postulationToAdd);
+                    
+                    
+                
+                    ProjectToUpdate.Postulations.Add(postulationToAdd);
+                    try
+                    {
+                        Check.Postcondition(ProjectToUpdate.Postulations.Contains(postulationToAdd),"Estas postulado en el proyecto seleccionado");
+                    }
+                    catch(Check.PostconditionException ex)
+                    {
+                        return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
+                    }
                 }
             }
 
