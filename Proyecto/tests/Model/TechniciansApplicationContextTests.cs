@@ -28,8 +28,26 @@ namespace Proyecto.Tests
                 // Assert: seeded and retrieved Technicians match
                 var actualTechnicians = Assert.IsAssignableFrom<List<Technician>>(result);
                 Assert.Equal(
-                    expectedTechnicians.OrderBy(a => a.ID).Select(a => a.Name),
-                    actualTechnicians.OrderBy(a => a.ID).Select(a => a.Name));
+                    expectedTechnicians.Select(a => a.Name),
+                    actualTechnicians.Select(a => a.Name));
+            }
+        }
+
+        [Fact]
+        public async Task AddTechnicianAsync_TechnicianIsAdded()
+        {
+            using (var db = new ProjectContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = "10";
+                var expectedTechnician = new Technician() { Id = recId, Name = "Juana" };
+
+                // Act
+                await db.AddTechnicianAsync(expectedTechnician);
+
+                // Assert
+                var actualTechnician = await db.FindAsync<Technician>(recId);
+                Assert.Equal(expectedTechnician, actualTechnician);
             }
         }
     }

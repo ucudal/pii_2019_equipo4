@@ -150,6 +150,52 @@ namespace Proyecto.Models
                 }
             };
         }
+        private static void SeedClient(ProjectContext context)
+        {
+            // Look for any actor.
+            if (context.Client.Any())
+            {
+                return;   // DB has been seeded
+            }
+            context.Client.AddRange(GetSeedingClients());
+            context.SaveChanges();
+        }
+
+        public static List<Client> GetSeedingClients()
+        {
+            return new List<Client>()
+            {
+                new Client
+                {
+                    
+                    Name = "Donald Draper",
+                    BirthDate = DateTime.Parse("1948-3-14")
+                   
+                },
+
+                new Client
+                {
+                    Name = "Peggy Olson",
+                    BirthDate = DateTime.Parse("1961-11-19")
+                   
+                },
+
+                new Client
+                {
+                    Name = "Roger Sterling",
+                    BirthDate = DateTime.Parse("1950-9-21")
+                    
+                },
+
+                new Client
+                {
+                    Name = "Peter Campbell",
+                    BirthDate = DateTime.Parse("1952-7-1")
+                    
+                },
+
+            };
+        }
 
         private static void SeedPostulations(ProjectContext context)
         {

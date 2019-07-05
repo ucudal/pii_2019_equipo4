@@ -59,8 +59,8 @@ namespace Proyecto.Tests
                     // Assert: seeded and retrieved Technicians match
                     var actualMessages = Assert.IsAssignableFrom<List<Technician>>(pageModel.Technician);
                     Assert.Equal(
-                        expectedTechnicians.OrderBy(a => a.ID).Select(a => a.Name),
-                        actualMessages.OrderBy(a => a.ID).Select(a => a.Name));
+                        expectedTechnicians.Select(a => a.Name),
+                        actualMessages.Select(a => a.Name));
             });
         }
     }

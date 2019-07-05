@@ -114,6 +114,17 @@ namespace Proyecto.Data
             this.Project.Remove(Project);
             return this.SaveChangesAsync();
         }
+        public async virtual Task<List<Client>> GetClientAsync()
+        {
+            return await this.Client
+                .AsNoTracking()
+                .ToListAsync();
+        }
+        public Task<int> AddClientAsync(Client Client)
+        {
+            this.Client.Add(Client);
+            return this.SaveChangesAsync();
+        }
          
     }
 }
