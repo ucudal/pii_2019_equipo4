@@ -37,5 +37,7 @@ namespace Proyecto.Models
         /// </summary>
         /// <value>Lista de Postulaciones</value>
         public List<Postulation> Postulations {get;set;}
+        [Display(Name = "Roles")]
+        public List <TechnicianRole> TechnicianRoles {get;set;}
     }
 }
