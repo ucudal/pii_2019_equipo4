@@ -16,11 +16,6 @@ namespace Proyecto.Pages_Projects
     [Authorize(Roles = IdentityData.AdminAndClient)]
     public class EditModel : PageModel
     {
-        /// <summary>
-        /// Referencia al contexto del proyecto
-        /// Se agrega esta variable para cumplir con la ley de Demeter, Don't talk with strangers
-        /// los mensajes se envian a un atributo de la clase, en vez de a un elemento ajeno.
-        /// </summary>
         private readonly Proyecto.Data.ProjectContext _context;
 
         public EditModel(Proyecto.Data.ProjectContext context)
@@ -43,26 +38,18 @@ namespace Proyecto.Pages_Projects
             {
                 return NotFound();
             }
-            
+
             Project = await _context.Project.
             Where(p=> p.ProjectID==id).
             Include(a => a.Postulations).
             ThenInclude(t => t.Technician).
              AsNoTracking().FirstOrDefaultAsync(m => m.ProjectID == id);
-             
-             try
-            {
-                Check.Precondition(Project !=null,"Error al cargar el Proyecto");
-            }
-            catch(Check.PreconditionException ex)
-            {
-                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
-            }
+
             if (Project == null)
             {
                 return NotFound();
             }
-            
+
             // Populate the list of technicians in the viewmodel with the technician of the Project.
             this.Technicians = Project.Postulations.Select(t => t.Technician);
 
@@ -71,20 +58,13 @@ namespace Proyecto.Pages_Projects
             {
                 roleFilter =this.SearchString.ToUpper();
             }
-            try
-            {
-                Check.Precondition(Technicians !=null,"Error al cargar los técnicos");
-            }
-            catch(Check.PreconditionException ex)
-            {
-                return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
-            }
             // Populate the list of all other Technicians with all technicians not included in the project's technician and
             // included in the search filter.
             this.OtherTechnicians = await _context.Technician
             .Where(t => !Technicians.Contains(t)).
             Where(t =>! string.IsNullOrEmpty(roleFilter) ? t.Name.ToUpper().
             Contains(roleFilter) : true).ToListAsync();
+            
             try
             {
                 Check.Precondition(OtherTechnicians !=null,"Error al cargar los otros técnicos");
@@ -141,6 +121,7 @@ namespace Proyecto.Pages_Projects
 
             var technicianToDelete = projectToUpdate.Postulations.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
+            //si hay un error al borrar un postulante de un proyecto aparece una excepcion
             try
                 {
                     Check.Precondition(projectToUpdate.Postulations.Remove(technicianToDelete),"Error al borrar al postulante");
@@ -181,6 +162,8 @@ namespace Proyecto.Pages_Projects
             
             await TryUpdateModelAsync<Project>(projToUpdate);
             
+            
+
 
             if (technicianToAddID != null)
             {

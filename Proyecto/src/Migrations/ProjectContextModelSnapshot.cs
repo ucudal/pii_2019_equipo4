@@ -222,6 +222,54 @@ namespace Proyecto.Migrations
                     b.ToTable("Project");
                 });
 
+            modelBuilder.Entity("Proyecto.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RolDescription")
+                        .IsRequired();
+
+                    b.Property<int>("RolLvlId");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex("RolLvlId");
+
+                    b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.RoleLevel", b =>
+                {
+                    b.Property<int>("RolLvlId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RolLvlDescription")
+                        .IsRequired();
+
+                    b.HasKey("RolLvlId");
+
+                    b.ToTable("RoleLevel");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.TechnicianRole", b =>
+                {
+                    b.Property<int>("TecRolId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<string>("TechnicianId");
+
+                    b.HasKey("TecRolId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("TechnicianId");
+
+                    b.ToTable("TechnicianRoles");
+                });
+
             modelBuilder.Entity("Proyecto.Models.Client", b =>
                 {
                     b.HasBaseType("Proyecto.Areas.Identity.Data.ApplicationUser");
@@ -232,6 +280,10 @@ namespace Proyecto.Migrations
             modelBuilder.Entity("Proyecto.Models.Technician", b =>
                 {
                     b.HasBaseType("Proyecto.Areas.Identity.Data.ApplicationUser");
+
+                    b.Property<int?>("RoleId");
+
+                    b.HasIndex("RoleId");
 
                     b.HasDiscriminator().HasValue("Technician");
                 });
@@ -292,6 +344,33 @@ namespace Proyecto.Migrations
                         .WithMany("Postulations")
                         .HasForeignKey("TechnicianID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Role", b =>
+                {
+                    b.HasOne("Proyecto.Models.RoleLevel", "level")
+                        .WithMany()
+                        .HasForeignKey("RolLvlId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Proyecto.Models.TechnicianRole", b =>
+                {
+                    b.HasOne("Proyecto.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Proyecto.Models.Technician", "Technician")
+                        .WithMany("TechnicianRoles")
+                        .HasForeignKey("TechnicianId");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Technician", b =>
+                {
+                    b.HasOne("Proyecto.Models.Role")
+                        .WithMany("Technicians")
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

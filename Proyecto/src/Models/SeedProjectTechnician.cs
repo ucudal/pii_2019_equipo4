@@ -11,9 +11,9 @@ namespace Proyecto.Models
     {
         public static void Initialize(ProjectContext context)
         {
-                SeedTechnician(context);
-                SeedProject(context);
-                SeedPostulations(context);
+            SeedTechnician(context);
+            SeedProject(context);
+            SeedPostulations(context);
         }
 
         public static void Initialize(IServiceProvider serviceProvider)
@@ -25,7 +25,9 @@ namespace Proyecto.Models
                 SeedTechnician(context);
                 SeedProject(context);
                 SeedPostulations(context);
-                
+                SeedRoleLevels(context);
+                SeedRoles(context);
+                SeedTechnicianRoles(context);
             }
         }
 
@@ -40,7 +42,7 @@ namespace Proyecto.Models
             context.SaveChanges();
         }
         public static List<Project> GetSeedingProjects()
-        {   
+        {
             return new List<Project>()
             {
 
@@ -50,7 +52,7 @@ namespace Proyecto.Models
                     Description ="prueba1 ",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
-                    
+
                 },
 
                 new Project
@@ -71,14 +73,14 @@ namespace Proyecto.Models
 
                 new Project
                 {
-                    
+
                     Title = "Rio Bravo",
                     Description ="prueba1 ",
                     StartDate = DateTime.Parse("1989-2-12"),
                     EndDate =DateTime.Parse("2000-2-12")
                 }
             };
-           
+
         }
 
         private static void SeedTechnician(ProjectContext context)
@@ -98,45 +100,45 @@ namespace Proyecto.Models
             {
                 new Technician
                 {
-                    
+
                     Name = "Billy Crystal",
                     BirthDate = DateTime.Parse("1948-3-14")
-                   
+
                 },
 
                 new Technician
                 {
                     Name = "Meg Ryan",
                     BirthDate = DateTime.Parse("1961-11-19")
-                   
+
                 },
 
                 new Technician
                 {
                     Name = "Bill Murray",
                     BirthDate = DateTime.Parse("1950-9-21")
-                    
+
                 },
 
                 new Technician
                 {
                     Name = "Dan Aykroyd",
                     BirthDate = DateTime.Parse("1952-7-1")
-                    
+
                 },
 
                 new Technician
                 {
                     Name = "Sigourney Weaver",
                     BirthDate = DateTime.Parse("1949-10-8")
-                    
+
                 },
 
                 new Technician
                 {
                     Name = "John Wayne",
                     BirthDate = DateTime.Parse("1907-5-26")
-                    
+
                 },
 
                 new Technician
@@ -144,7 +146,7 @@ namespace Proyecto.Models
                 {
                     Name = "Dean Martin",
                     BirthDate = DateTime.Parse("1917-7-7")
-                   
+
                 }
             };
         }
@@ -228,6 +230,206 @@ namespace Proyecto.Models
                  }
             };
 
+        }
+        private static void SeedRoleLevels(ProjectContext context)
+        {
+            if (context.RoleLevel.Any())
+            {
+                return;   // DB has been seeded
+            }
+            context.RoleLevel.AddRange(
+                    new RoleLevel
+                    {
+                        RolLvlDescription = "Básico"
+                    },
+
+                    new RoleLevel
+                    {
+                        RolLvlDescription = "Avanzado"
+                    }
+                );
+            context.SaveChanges();
+        }
+        private static void SeedRoles(ProjectContext context)
+        {
+            if (context.Role.Any())
+            {
+                return;   // DB has been seeded
+            }
+            context.Role.AddRange(
+                    new Role
+                    {
+                        RolDescription = "Foto fija",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Asistente de cámara",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Asistente de producción",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Asistente de dirección",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Asistente de arte (escenografía, vestuario, utilería)",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Sonidista",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Editor",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Redactor creativo",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Presentador / conductor",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Ilustrador",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Diseñador gráfico",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Operador de Cabina 02",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Operador de Cabina 03 y Estudio de Radio",
+                        RolLvlId = 1
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Foto fija",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Cámara y asistente de cámara",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Cámara 360",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Postproductor de imagen",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Editor",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Sonidista",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Postproductor de sonido",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Redactor creativo",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Presentador / conductor",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Animador / infografista",
+                        RolLvlId = 2
+                    },
+
+                    new Role
+                    {
+                        RolDescription = "Operador de Cabina 01 Estudio de Grabación",
+                        RolLvlId = 2
+                    }
+                );
+            context.SaveChanges();
+
+        }
+        private static void SeedTechnicianRoles(ProjectContext context)
+        {
+            if (context.TechnicianRoles.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            context.TechnicianRoles.AddRange
+            (
+             new TechnicianRole
+             {
+                 TechnicianId = context.Technician.Single(t => t.Name == "Bill Murray").Id,
+                 RoleId = 5
+             },
+             new TechnicianRole
+             {
+                 TechnicianId = context.Technician.Single(t => t.Name == "Bill Murray").Id,
+                 RoleId = 1
+             },
+             new TechnicianRole
+             {
+                 TechnicianId = context.Technician.Single(t => t.Name == "Bill Murray").Id,
+                 RoleId = 3
+             }     
+            );
+            context.SaveChanges();
         }
     }
 

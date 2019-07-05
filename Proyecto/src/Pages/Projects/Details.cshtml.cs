@@ -57,10 +57,10 @@ namespace Proyecto.Pages_Projects
 
             var technicianToDelete = ProjectToUpdate.Postulations.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
-            
+            //si el tecnico no quiere participar del proyecto aparece una excepcion mostrando el mensaje "Ya no estas postulado en el proyecto"
             try
             {
-                Check.Precondition(ProjectToUpdate.Postulations.Remove(technicianToDelete),"ya no estas postulado");
+                Check.Precondition(ProjectToUpdate.Postulations.Remove(technicianToDelete),"Ya no estas postulado en el proyecto");
             }
             catch (Check.PreconditionException ex)
             {
@@ -112,17 +112,18 @@ namespace Proyecto.Pages_Projects
                         ProjectID =ProjectToUpdate.ProjectID,
                         Project = ProjectToUpdate
                     };
-                    /*
+                    
+                    
+                
+                    ProjectToUpdate.Postulations.Add(postulationToAdd);
                     try
                     {
-                        Check.Precondition(ProjectToUpdate.Postulations.Add(postulationToAdd)!=null,"Ya estas postulado en el proyecto seleccionado");
+                        Check.Postcondition(ProjectToUpdate.Postulations.Contains(postulationToAdd),"Estas postulado en el proyecto seleccionado");
                     }
                     catch(Check.PostconditionException ex)
                     {
                         return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
                     }
-                    ProjectToUpdate.Postulations.Add(postulationToAdd);
-                    */
                 }
             }
 

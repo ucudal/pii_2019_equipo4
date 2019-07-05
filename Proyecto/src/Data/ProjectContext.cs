@@ -40,6 +40,9 @@ namespace Proyecto.Data
         public DbSet<Proyecto.Models.Technician> Technician{get;set;}
         public DbSet<Proyecto.Models.Client> Client {get;set;}
         public DbSet<Proyecto.Models.Postulation> Postulation{get;set;}
+        public DbSet<Proyecto.Models.RoleLevel> RoleLevel{get;set;}
+        public DbSet<Proyecto.Models.Role> Role{get;set;}
+        public DbSet<Proyecto.Models.TechnicianRole> TechnicianRoles{get;set;}
         public async virtual Task<List<Proyecto.Models.Technician>> GetTechniciansAsync()
         {
             return await this.Technician
@@ -86,6 +89,7 @@ namespace Proyecto.Data
         {
             return this.Project.Any(e => e.ProjectID == id);
         }
+        
 
         public async virtual Task<List<Project>> GetProjectAsync()
         {

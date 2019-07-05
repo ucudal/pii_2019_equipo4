@@ -97,6 +97,16 @@ namespace Proyecto.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
+                try
+                {
+                    int BirthDateInput = Input.BirthDate.Year;
+                    Check.Precondition(BirthDateInput>1950,"Edad Incorrecta");
+                    Check.Precondition(BirthDateInput<2010,"Edad incorrecta");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
+                }
                 var user = new Client 
 
                 { Name = Input.Name, 
