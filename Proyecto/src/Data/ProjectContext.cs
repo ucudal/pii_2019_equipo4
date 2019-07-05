@@ -110,7 +110,6 @@ namespace Proyecto.Data
             this.Project.Remove(Project);
             return this.SaveChangesAsync();
         }
-
          
     }
 }

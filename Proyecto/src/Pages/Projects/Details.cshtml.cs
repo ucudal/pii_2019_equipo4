@@ -50,26 +50,26 @@ namespace Proyecto.Pages_Projects
         }
         public async Task<IActionResult> OnPostUnPostulateTechnicianAsync(string id, string technicianToDeleteID)
         {
-            Project ProjectToUpdate= await _context.Project.Include(p => p.Postulants)
+            Project ProjectToUpdate= await _context.Project.Include(p => p.Postulations)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
                 await TryUpdateModelAsync<Project>(ProjectToUpdate);
 
-            var technicianToDelete = ProjectToUpdate.Postulants.
+            var technicianToDelete = ProjectToUpdate.Postulations.
             Where(t => t.TechnicianID == technicianToDeleteID).FirstOrDefault();
-            /*
+            
             try
             {
-                Check.Precondition(ProjectToUpdate.Postulants.Remove(technicianToDelete),"ya no estas postulado");
+                Check.Precondition(ProjectToUpdate.Postulations.Remove(technicianToDelete),"ya no estas postulado");
             }
             catch (Check.PreconditionException ex)
             {
                 return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
             }
-            */
+            
             if(technicianToDelete != null)
             {
-                ProjectToUpdate.Postulants.Remove(technicianToDelete);
+                ProjectToUpdate.Postulations.Remove(technicianToDelete);
             }
 
             try
@@ -95,7 +95,7 @@ namespace Proyecto.Pages_Projects
         {
             if (technicianToAddID != null)
             {
-                Project ProjectToUpdate = await _context.Project.Include(p => p.Postulants)
+                Project ProjectToUpdate = await _context.Project.Include(p => p.Postulations)
             .ThenInclude(t => t.Technician).
             FirstOrDefaultAsync(p => p.ProjectID == id);
                 await TryUpdateModelAsync<Project>(ProjectToUpdate);
@@ -115,13 +115,13 @@ namespace Proyecto.Pages_Projects
                     /*
                     try
                     {
-                        Check.Precondition(ProjectToUpdate.Postulants.Add(postulationToAdd),"Ya estas postulado en el proyecto seleccionado");
+                        Check.Precondition(ProjectToUpdate.Postulations.Add(postulationToAdd)!=null,"Ya estas postulado en el proyecto seleccionado");
                     }
                     catch(Check.PostconditionException ex)
                     {
                         return Redirect("https://localhost:5001/Exception?id=" + ex.Message);
                     }
-                    ProjectToUpdate.Postulants.Add(postulationToAdd);
+                    ProjectToUpdate.Postulations.Add(postulationToAdd);
                     */
                 }
             }

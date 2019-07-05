@@ -9,9 +9,17 @@ namespace Proyecto.Pages
 {
     public class ExceptionModel : PageModel
     {
+        public ExceptionModel()
+        {
+            
+        }
         public string Error{get;set;}
         public IActionResult OnGet(string id)
         {
+            if(id ==null)
+            {
+                return NotFound();
+            }
             Error = id;
             return Page();
         }

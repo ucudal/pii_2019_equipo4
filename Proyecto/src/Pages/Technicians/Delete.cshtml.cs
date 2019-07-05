@@ -63,8 +63,15 @@ namespace Proyecto.Pages_Technicians
 
             if (Technician != null)
             {
+                try
+                {
+                    Check.Precondition(_context.RemoveTechnicianAsync(Technician) !=null,"Error al borrar al Técnico");
+                }
+                catch(Check.PreconditionException ex)
+                {
+                    return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
+                }
                 
-                await _context.RemoveTechnicianAsync(Technician);
             }
 
             return RedirectToPage("./Index");

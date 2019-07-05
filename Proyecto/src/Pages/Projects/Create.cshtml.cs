@@ -47,9 +47,9 @@ namespace Proyecto.Pages_Projects
             {
                 Check.Precondition(ProjectInDB == null,"Ya existe un proyecto con el mismo nombre");
             }
-            catch(Check.PreconditionException)
+            catch(Check.PreconditionException ex)
             {
-                
+                return Redirect("https://localhost:5001/Exception?id=" +ex.Message);
             }
             await _context.AddProjectAsync(Project);
 
