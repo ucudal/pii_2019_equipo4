@@ -62,7 +62,7 @@ namespace Proyecto.Pages_Technicians
             
             this.otherRoles = await _context.Role
             .Where(t => !Roles.Contains(t)).
-            Where(t =>! string.IsNullOrEmpty(roleFilter) ? t.RolDsc.ToUpper().
+            Where(t =>! string.IsNullOrEmpty(roleFilter) ? t.RolDescription.ToUpper().
             Contains(roleFilter) : true).Include(p=>p.level).ToListAsync();
             return Page();
         }
