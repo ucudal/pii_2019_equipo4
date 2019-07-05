@@ -9,8 +9,8 @@ using Proyecto.Data;
 namespace Proyecto.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20190702234820_nuevomigra")]
-    partial class nuevomigra
+    [Migration("20190705005842_migranuevo")]
+    partial class migranuevo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -283,6 +283,10 @@ namespace Proyecto.Migrations
                 {
                     b.HasBaseType("Proyecto.Areas.Identity.Data.ApplicationUser");
 
+                    b.Property<int?>("RoleId");
+
+                    b.HasIndex("RoleId");
+
                     b.HasDiscriminator().HasValue("Technician");
                 });
 
@@ -362,6 +366,13 @@ namespace Proyecto.Migrations
                     b.HasOne("Proyecto.Models.Technician", "Technician")
                         .WithMany("TechnicianRoles")
                         .HasForeignKey("TechnicianId");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Technician", b =>
+                {
+                    b.HasOne("Proyecto.Models.Role")
+                        .WithMany("Technicians")
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

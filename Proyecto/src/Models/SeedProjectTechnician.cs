@@ -415,13 +415,18 @@ namespace Proyecto.Models
             (
              new TechnicianRole
              {
-                 TechnicianId = "475c6b64-374d-4a42-a969-976a84745685",
+                 TechnicianId = context.Technician.Single(t => t.Name == "Bill Murray").Id,
                  RoleId = 5
              },
              new TechnicianRole
              {
-                 TechnicianId = "475c6b64-374d-4a42-a969-976a84745685",
+                 TechnicianId = context.Technician.Single(t => t.Name == "Bill Murray").Id,
                  RoleId = 1
+             },
+             new TechnicianRole
+             {
+                 TechnicianId = context.Technician.Single(t => t.Name == "Bill Murray").Id,
+                 RoleId = 3
              }     
             );
             context.SaveChanges();

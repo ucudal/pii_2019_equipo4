@@ -19,6 +19,6 @@ namespace Proyecto.Models
     {
         public List<Postulation> Postulants {get;set;}
         [Display(Name = "Roles")]
-        public IEnumerable <TechnicianRole> TechnicianRoles {get;set;}
+        public List <TechnicianRole> TechnicianRoles {get;set;}
     }
 }

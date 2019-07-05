@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
-
+using System.Collections.Generic;
 namespace Proyecto.Models
 {
     public class Role 
@@ -18,5 +18,7 @@ namespace Proyecto.Models
         public int RolLvlId {get;set;}
         [Display(Name = "Nivel")]
         public RoleLevel level {get;set;}
+
+        public IList<Technician> Technicians{get;set;}
     }
 }

@@ -281,6 +281,10 @@ namespace Proyecto.Migrations
                 {
                     b.HasBaseType("Proyecto.Areas.Identity.Data.ApplicationUser");
 
+                    b.Property<int?>("RoleId");
+
+                    b.HasIndex("RoleId");
+
                     b.HasDiscriminator().HasValue("Technician");
                 });
 
@@ -360,6 +364,13 @@ namespace Proyecto.Migrations
                     b.HasOne("Proyecto.Models.Technician", "Technician")
                         .WithMany("TechnicianRoles")
                         .HasForeignKey("TechnicianId");
+                });
+
+            modelBuilder.Entity("Proyecto.Models.Technician", b =>
+                {
+                    b.HasOne("Proyecto.Models.Role")
+                        .WithMany("Technicians")
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }
