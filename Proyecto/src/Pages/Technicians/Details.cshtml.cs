@@ -48,7 +48,12 @@ namespace Proyecto.Pages_Technicians
                 return NotFound();
             }
 
-           Technician = await _context.GetTechnicianByIdAsync(id);
+           Technician = await _context.Technician.
+           Include(s=> s.TechnicianRoles).
+           ThenInclude(f=>f.Role).
+           ThenInclude(j=>j.level).
+           AsNoTracking().
+           FirstOrDefaultAsync(m => m.Id == id);
            
            Projects = LoadProjects();
 
